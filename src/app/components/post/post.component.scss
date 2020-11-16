@@ -1,0 +1,79 @@
+@import "./src/styles";
+
+.post {
+  background-color: $background-color-post;
+  padding: .5rem;
+  border-radius: 8px;
+
+  &__header {
+    &__timestamp {
+      float: right;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+
+    &__user {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+
+      &__photo {
+        height: 6rem;
+        width: 13rem;
+        display: flex;
+        flex-grow: 1;
+        align-self: flex-start;
+
+        clip-path: circle(50%);
+
+        & > * {
+          height: 100%;
+          object-fit: contain;
+          vertical-align: middle;
+        }
+      }
+
+      &__text {
+        display: flex;
+
+        flex-direction: column;
+        color: white;
+        flex-grow: 2;
+        margin-left: 3rem;
+
+      }
+    }
+
+    &__content {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+      width: 40rem;
+      height: 20rem;
+      float: left;
+      clip-path: polygon(50% 50% 50% 50%);
+    }
+  }
+
+  &__footer {
+    margin: .5rem 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & > .btn {
+      background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+      height: 3rem;
+      width: 10rem;
+      border-radius: 5px;
+      border: none;
+      font-size: medium;
+    }
+  }
+}
