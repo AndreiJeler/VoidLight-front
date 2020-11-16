@@ -9,8 +9,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  public username: string;
+  public password: string;
   private _returnUrl: string;
 
   constructor(
