@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="container__info">
+        <img class="container__info__image" src='../assets/1.jpg'/>
+        <div class="container__info__data">
+            <p class="container__info__data__nickname">oopsieFckThisCSSup203</p>
+            <p class="container__info__data__age">21</p>
+            <p class="container__info__data__country">RO</p>
+            <div class="container__info__data__currently-playing">Currently playing
+                <p class="container__info__data__currently-playing__game"> why is this not inlnie </p>
+            </div>
+        </div>
+    </div>
+    <div class="container__achievements">
+        <p class="container__achievements__edit-profile">Edit Profile</p>
+        <div class="container__achievements__stars">
+        </div>
+        <p class="container__achievements__see-all-achievements">See All Achievements</p>
+        <!-- TODO change from p to a a or idk they are links but this is easily solvable ??!?!?!?!? -->
+    </div>
+    <div class="container__posts">
+            <p class="container__posts__title">Posts</p>
+            <gallery id="posts" class="container__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
+
+            <!-- Add custom template to image items -->
+            <ng-template #itemTemplate
+                        let-index="index"
+                        let-type="type"
+                        let-data="data"
+                        let-currIndex="currIndex">
+            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
+                {{data?.title}}
+            </span>
+            </ng-template>
+    </div>
+    <div class="container__games">
+        <p class="container__games__title">Favorite Games</p>
+        <div class="container__games__list">
+            <ul class="container__games__list__ul">
+                <li class="container__games__list__ul__li">
+                    <favorite-game class="container__games__list__ul__li__item">
+                    </favorite-game>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
