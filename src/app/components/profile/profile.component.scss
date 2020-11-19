@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     width: 85%;
-    height: 85%;
+    height: fit-content;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -15,13 +15,15 @@
     border-radius: 43px;
 
     &__info {
-        width: 85rem;
+        width: 80rem;
         height: 30rem;
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex-wrap: wrap;
 
-        &__image {
+
+      &__image {
             width: 14.2rem;
             height: 13.4rem;
             border-radius: 67px;
@@ -41,7 +43,7 @@
                 margin-left: 1rem;
             }
 
-            &__nickname{ 
+            &__nickname{
                 font-size: 36px;
                 font-weight: bold;
             }
@@ -65,7 +67,7 @@
         }
     }
     &__achievements {
-        width: 85rem;
+        width: 80rem;
         height: 30rem;
         display: flex;
         flex-direction: column;
@@ -96,7 +98,7 @@
     }
 
     &__posts {
-        width: 85rem;
+        width: 80rem;
         height: 60rem;
 
         &__title {
@@ -109,7 +111,7 @@
 
     }
     &__games {
-        width: 85rem;
+        width: 80rem;
         height: 60rem;
         display: flex;
         flex-direction: column;
@@ -122,17 +124,17 @@
             margin-left: 6rem;
             margin-bottom: 0.3rem;
         }
-        
+
         &__list {
             width: 74.3rem;
-            height: 51.5rem;
+            height: 50rem;
             margin-left: 5rem;
             background: $background-color-post;
             border-radius: 28px;
 
             &__ul {
                 list-style: none;
-                
+
                 &__li {
                     display: flex;
                     flex-direction: row;
