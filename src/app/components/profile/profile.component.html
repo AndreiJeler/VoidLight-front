@@ -1,12 +1,12 @@
 <div class="container">
     <div class="container__info">
-        <img class="container__info__image" src='../assets/1.jpg'/>
+        <img class="container__info__image" [src]="user.avatarPath"/>
         <div class="container__info__data">
-            <p class="container__info__data__nickname">oopsieFckThisCSSup203</p>
+            <p class="container__info__data__nickname">{{user.username}}</p>
             <p class="container__info__data__age">21</p>
             <p class="container__info__data__country">RO</p>
             <div class="container__info__data__currently-playing">Currently playing
-                <p class="container__info__data__currently-playing__game"> why is this not inlnie </p>
+                <p class="container__info__data__currently-playing__game"> browsing the internet </p>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="container__games__list">
             <ul class="container__games__list__ul">
                 <li class="container__games__list__ul__li">
-                    <favorite-game class="container__games__list__ul__li__item">
+                    <favorite-game *ngFor="let game of games" [game]="game" class="container__games__list__ul__li__item">
                     </favorite-game>
                 </li>
             </ul>

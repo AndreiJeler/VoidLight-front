@@ -32,7 +32,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationService.logout();
           this.router.navigate([Constants.NOT_AUTHORIZED_URL]);
         } else {
-          this.swalService.showErrorNotification(err.error.Details);
+          console.log(err);
+          this.swalService.showErrorNotification(err.error.Detail);
         }
 
         const error = err.error.message || err.statusText;

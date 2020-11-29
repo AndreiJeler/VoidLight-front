@@ -1,0 +1,18 @@
+<div class="modal">
+  <div class="modal-header header-modal-container">
+    <h4 class="modal-title pull-left">Create new Post</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <input id="post-text" [(ngModel)]="post.text" type="text" class="form__input--text">
+    <label for="post-text" class="form__input__label">Your message</label>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default save-button-modal" (click)="onSave()">Post it</button>
+    <button type="button" class="btn btn-default cancel-button-modal" (click)="onCancel()">Cancel</button>
+  </div>
+</div>

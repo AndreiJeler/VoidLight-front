@@ -21,17 +21,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/newsfeed']);
     }
 
-    this._returnUrl = '/home';
+    this._returnUrl = '/newsfeed';
     this.route.queryParams
       .pipe(filter((params) => params.returnUrl))
       .subscribe((params) => {
         if (params != null) {
           this._returnUrl = params.returnUrl;
         } else {
-          this._returnUrl = '/home';
+          this._returnUrl = '/newsfeed';
         }
       });
   }
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .login(this.username, this.password)
       .subscribe((_) => {
-        this.router.navigate([this._returnUrl]);
+        this.router.navigate(['/newsfeed']);
       });
   }
 }

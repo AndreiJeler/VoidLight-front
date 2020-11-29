@@ -1,4 +1,7 @@
+import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
