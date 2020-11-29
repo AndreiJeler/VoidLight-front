@@ -43,4 +43,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/newsfeed']);
       });
   }
+
+  public register() {
+    this.router.navigate(['/register']);
+  }
 }
