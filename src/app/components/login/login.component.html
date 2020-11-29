@@ -1,10 +1,14 @@
 <div class="card">
     <form class="card__form">
-        <h1 class="card__form__title">Log In</h1>
+        <img src="../../../assets/Images/logo.png" alt="logo" class="card__form__logo">
+        <h1 class="card__form__title">Login</h1>
+
         <label class="card__form__username-label label" for="username">Username</label>
         <input type="text" [(ngModel)]="username" class="card__form__username input-field" name="username">
+
         <label class="card__form__password-label label" for="password">Password</label>
         <input type="password" [(ngModel)]="password" class="card__form__password input-field" name="password">
+        
         <button (click)="login()" class="card__form__submit-btn" id="button">Login</button>
     </form>
 </div>

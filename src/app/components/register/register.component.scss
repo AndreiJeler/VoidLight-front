@@ -7,7 +7,7 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 50rem;
-    height: 70rem;
+    height: 90rem;
     border-radius: 2.5rem;
     background-color: $color-form-card;
 
@@ -24,12 +24,12 @@
 
         & > * {
             margin: 0.5rem;
-            color: $color-white;
+            color:$color-white;
         }
-        
+ 
         &__logo {
-            height: 20%;
             width: 20%;
+            height: 20%;
         }
 
         &__title {

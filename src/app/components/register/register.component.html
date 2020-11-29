@@ -1,0 +1,20 @@
+<div class="card">
+  <form class="card__form">
+      <img src="../../../assets/Images/logo.png" alt="logo" class="card__form__logo">
+      <h1 class="card__form__title">Registration</h1>
+
+      <label class="card__form__username-label label" for="username">Username</label>
+      <input type="text" class="card__form__username input-field" name="username">
+
+      <label class="card__form__email-label label" for="email">Email address</label>
+      <input type="text" class="card__form__email input-field" name="email">
+
+      <label class="card__form__password-label label" for="password">Password</label>
+      <input type="password" class="card__form__password input-field" name="password">
+
+      <label class="card__form__password-confirm-label label" for="confirm-password">Confirm password</label>
+      <input type="password" class="card__form__confirm-password input-field" name="confirm-password">
+
+      <button (click)="register()" class="card__form__submit-btn" id="button">Create account</button>
+  </form>
+</div>
