@@ -60,18 +60,19 @@
       width: 27rem;
       position: relative;
       z-index: 1;
-    }
-    .card:before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to right, $background-color-post, $color-card-gradient-grey);
-      border-radius: 25px;
-      opacity: .5;
+
+      &::before{
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to right, $background-color-post, $color-card-gradient-grey);
+        border-radius: 25px;
+        opacity: .5;
+      }
     }
 
     &__categories {
@@ -94,11 +95,13 @@
           margin-top: .3rem;
           padding-left: 3rem;
           cursor: pointer;
+          transition: all 0.2s ease-in-out;
         }
 
         & > li:hover {
           background-color: $color-list-element-hover;
           padding-left: 4.5rem;
+          transition: all 0.2s ease-in-out;
         }
       }
     }
@@ -120,10 +123,12 @@
           margin-top: .3rem;
           padding-left: 3rem;
           cursor: pointer;
+          transition: all 0.2s ease-in-out;
         }
 
         & > li:hover {
           background-color: $color-list-element-hover;
+          transition: all 0.2s ease-in-out;
         }
       }
     }
