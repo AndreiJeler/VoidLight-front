@@ -9,13 +9,14 @@
 
   <div class="newsfeed__body">
     <div class="newsfeed__body__categories card">
-      <h1 class="paragraph newsfeed__categories__title">Games</h1>
-      <ul class="paragraph newsfeed__categories__list">
-        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)">{{game.name}}</li>
+      <h1 class="paragraph newsfeed__body__categories__title">Games </h1>
+      <ul class="paragraph newsfeed__body__categories__list">
+        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" id="game{{game.id}}">{{game.name}}</li>
       </ul>
-      <h1 class="paragraph newsfeed__categories__title">Publisher</h1>
-      <ul class="paragraph newsfeed__categories__list">
-        <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)">{{publisher.name}}</li>
+
+      <h1 class="paragraph newsfeed__body__categories__title">Publisher</h1>
+      <ul class="paragraph newsfeed__body__categories__list">
+        <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)" id="publisher{{publisher.id}}">{{publisher.name}}</li>
       </ul>
     </div>
 
@@ -31,8 +32,8 @@
     </div>
 
     <div class="newsfeed__body__friends card">
-        <h1 class="paragraph">Friends</h1>
-      <ul>
+        <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
+      <ul class="paragraph newsfeed__body__friends__list">
         <li *ngFor="let friend of friends"><app-friend [friend]="friend"></app-friend></li>
       </ul>
     </div>
