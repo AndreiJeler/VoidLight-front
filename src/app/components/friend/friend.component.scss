@@ -3,9 +3,11 @@
 .friend {
   margin-top: 1rem;
   display: flex;
+  font-size: large;
 
   &__profile_pic {
     width: 4rem;
+    border-radius: 5px;
   }
 
   &__info {

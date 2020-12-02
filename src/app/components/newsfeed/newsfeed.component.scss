@@ -39,7 +39,7 @@
       background: linear-gradient(to right, $color-newsfeed-background 20%, $color-button-top-gradient);
       border-radius: 5px;
       border: none;
-      font-size: small;
+      font-size: medium;
     }
 
     &__logout_button:hover{
@@ -56,8 +56,8 @@
     .card {
       margin: 3rem 4rem;
       padding: 1rem 0;
-      height: 50rem;
-      width: 18rem;
+      height: 80rem;
+      width: 27rem;
       position: relative;
       z-index: 1;
     }
@@ -88,11 +88,12 @@
       &__list {
         list-style-type: none;
         padding-top: 0.5rem;
-        font-size: medium;
+        font-size: large;
 
         & > li {
           margin-top: .3rem;
           padding-left: 3rem;
+          cursor: pointer;
         }
 
         & > li:hover {
@@ -113,16 +114,16 @@
       &__list {
         list-style-type: none;
         padding-top: 0.5rem;
-        font-size: medium;
+        font-size: large;
 
         & > li {
           margin-top: .3rem;
           padding-left: 3rem;
+          cursor: pointer;
         }
 
         & > li:hover {
           background-color: $color-list-element-hover;
-          padding-left: 4.5rem;
         }
       }
     }
