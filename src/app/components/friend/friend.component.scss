@@ -4,6 +4,7 @@
   margin-top: 1rem;
   display: flex;
   font-size: large;
+  transition: all 0.2s ease-in-out;
 
   &__profile_pic {
     width: 4rem;
@@ -12,6 +13,7 @@
 
   &__info {
     margin-left: 1rem;
+    
     &__username {
       font-size: medium;
     }
@@ -22,7 +24,9 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
   }
-}
-.friend:hover{
-  background-color: $color-list-element-hover;
+
+  &:hover{
+    background-color: $color-list-element-hover;
+    transition: all 0.2s ease-in-out;
+  }
 }
