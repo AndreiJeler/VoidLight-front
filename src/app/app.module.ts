@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,6 +17,7 @@ import { CreatePostComponent } from './components/newsfeed/modals/create-post/cr
 import { FavoriteGameComponent } from './components/profile/favorite-game/favorite-game.component';
 import { FriendComponent } from './components/friend/friend.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -33,12 +35,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NewsfeedComponent,
     PostComponent,
     ProfileComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     GalleryModule,
     HttpClientModule,
     BrowserAnimationsModule,

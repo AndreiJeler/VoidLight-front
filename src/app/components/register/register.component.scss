@@ -6,7 +6,7 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    width: 55rem;
+    width: 50rem;
     height: 90rem;
     border-radius: 2.5rem;
     background: transparent;
@@ -25,6 +25,7 @@
 
     }
     &::after{
+        z-index: -2;
         transform: translateX(-2.5rem) translateY(-1.5rem);
     }
     &__form {
@@ -53,6 +54,7 @@
             &__logo {
                 -webkit-filter: drop-shadow(0.6rem 0.7rem 1rem  $color-button-top-gradient);
                 filter: drop-shadow(0.6rem 0.7rem 1rem  $color-button-top-gradient);
+                margin-top: 5rem;
             }
         }
 
@@ -74,6 +76,10 @@
             color: $color-white;
             margin: 2.5rem;
             transition: all 0.5s;
+        }
+
+        &__error {
+            font-size: medium;
         }
     }
 }
@@ -108,4 +114,5 @@
 
 #register-button{
     margin-top: 5rem;
+    margin-bottom: 3rem;
 }
