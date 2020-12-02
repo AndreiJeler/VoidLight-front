@@ -38,7 +38,7 @@ export class PostComponent implements OnInit {
     this.timeString = new Date(this.post.time)
       .toString()
       .split(' ')
-      .slice(0, 5)
+      .slice(0, 4)
       .join(' ');
   }
 

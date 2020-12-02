@@ -1,21 +1,18 @@
 <div class="post">
   <div class="post__header">
-    <div class="post__header__timestamp paragraph">
-      {{timeString}}
+    <div class="post__header__user">
+      <div class="post__header__user__photo">
+        <img [src]="post.avatarPath" alt="profile picture" />
+      </div>
+      <div class="post__header__user__text">
+        <p class="post__header__user__text__username paragraph">{{post.username}}</p>
+        <p class="post__header__user__text__timestamp paragraph">{{timeString}}</p>
+      </div>
     </div>
   </div>
   <div class="post__body">
-    <div class="post__body__user">
-      <div class="post__body__user__photo">
-        <img [src]="post.avatarPath" alt="profile picture" />
-      </div>
-      <div class="post__body__user__text">
-        <p class="post__body__user__text__username paragraph">{{post.username}}</p>
-        <p class="post__body__user__text__post-text paragraph">{{post.text}}</p>
-      </div>
-    </div>
-
     <div class="post__body__content" *ngIf="post.contents">
+      <p class="post__body__content__text paragraph">{{post.text}}</p>
       <img *ngFor="let content of images" [src]="content" alt="Post Image" class="post__body__content__image">
       <video *ngFor="let content of videos" [src]="content" alt="Post Image" class="post__body__content__image" controls=true> </video>
     </div>

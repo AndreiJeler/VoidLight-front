@@ -106,9 +106,16 @@ export class NewsfeedComponent implements OnInit {
 
   // REGION BUTTON FUNCTIONS
 
-  //start: Filter Posts
+  // start: Filter Posts
 
   public getPostsForGame(id: number): void {
+    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+      if (document.getElementsByClassName('active')[0] !== undefined) {
+        document.getElementsByClassName('active')[0].classList.remove('active');
+      }
+    }
+    document.getElementById('game' + id).classList.add('active');
+
     this._postService.getPostsForGame(id).subscribe(
       (result) => {
         this.posts = result;
@@ -129,6 +136,13 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public getPostsForPublisher(id: number): void {
+    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+      if (document.getElementsByClassName('active')[0] !== undefined) {
+        document.getElementsByClassName('active')[0].classList.remove('active');
+      }
+    }
+    document.getElementById('publisher' + id).classList.add('active');
+
     this._postService.getPostsForPublisher(id).subscribe(
       (result) => {
         this.posts = result;

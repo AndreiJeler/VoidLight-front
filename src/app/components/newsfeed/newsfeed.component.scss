@@ -6,7 +6,7 @@
   flex-direction: column;
 
   &__header {
-    background-color: $color-newsfeed-background;
+    background-color: $color-header;
     width: 100%;
     height: 7rem;
     display: flex;
@@ -32,13 +32,18 @@
         margin-left: 1rem;
       }
     }
+
     &__logout_button {
       margin-right: 4rem;
-      padding: 0.5rem 2rem;
-      background-color: $color-newsfeed-buttons;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(to right, $color-newsfeed-background 20%, $color-button-top-gradient);
       border-radius: 5px;
       border: none;
       font-size: medium;
+    }
+
+    &__logout_button:hover{
+      background: $color-newsfeed-button-hover;
     }
   }
 
@@ -50,27 +55,82 @@
 
     .card {
       margin: 3rem 4rem;
-      padding: 1rem 1.5rem;
-      height: 50rem;
-      background-color: $color-newsfeed-background;
-      width: 20rem;
+      padding: 1rem 0;
+      height: 80rem;
+      width: 27rem;
+      position: relative;
+      z-index: 1;
+
+      &::before{
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to right, $background-color-post, $color-card-gradient-grey);
+        border-radius: 25px;
+        opacity: .5;
+      }
     }
 
     &__categories {
-      ul {
+      
+      .active {
+        background-color: $color-list-element-hover;
+        padding-left: 4.5rem;
+      }
+
+      &__title {
+        margin-top: 1rem;
+        padding-left: 1.5rem;
+      }
+
+      &__list {
         list-style-type: none;
-        margin: 0.5rem 2rem;
-        font-size: medium;
+        padding-top: 0.5rem;
+        font-size: large;
+
+        & > li {
+          margin-top: .3rem;
+          padding-left: 3rem;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+
+        & > li:hover {
+          background-color: $color-list-element-hover;
+          padding-left: 4.5rem;
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
 
     &__friends {
       margin: 2rem;
 
-      & > ul {
+      &__title {
+        margin-top: 1rem;
+        padding-left: 1.5rem;;
+      }
+
+      &__list {
         list-style-type: none;
-        margin: 0.5rem 2rem;
-        font-size: medium;
+        padding-top: 0.5rem;
+        font-size: large;
+
+        & > li {
+          margin-top: .3rem;
+          padding-left: 3rem;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+
+        & > li:hover {
+          background-color: $color-list-element-hover;
+          transition: all 0.2s ease-in-out;
+        }
       }
     }
 
@@ -90,6 +150,7 @@
           height: 100%;
           background-repeat: no-repeat;
           background-size: 5rem;
+          border: 0;
           border-radius: 5px;
         }
 
@@ -98,11 +159,13 @@
             height: 3rem;
           }
         }
+
         &__video {
           & > img {
             height: 3rem;
           }
         }
+
         &__text {
           font-size: large;
           font-weight: bold;
