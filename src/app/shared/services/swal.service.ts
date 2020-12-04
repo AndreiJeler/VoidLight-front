@@ -37,4 +37,20 @@ export class SwalService {
       title: success
     });
   }
+
+  public showSuccessResult(title: string, message: string): any {
+    return Swal.fire({
+      icon: 'success', title: title, text: message, customClass: {
+        popup: 'notification-swal',
+      }
+    });
+  }
+
+  public showErrorResult(title: string, message: string): any {
+    return Swal.fire({
+      icon: 'error', title: title, text: message, customClass: {
+        popup: 'notification-swal',
+      }
+    });
+  }
 }
