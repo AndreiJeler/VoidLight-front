@@ -12,7 +12,7 @@ import { Post } from '../models/post';
 export class PostService {
   private _postUrl = `${Constants.SERVER_URL}/posts`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Returns all the posts for a given user id as an Observable<Post[]>
@@ -34,7 +34,7 @@ export class PostService {
    * Creates a new post
    * @param post => the post to be added
    */
-  public createPost(post: Post) {
+  public createPost(post: Post): Observable<Post> {
     return this.http.post<Post>(`${this._postUrl}`, post);
   }
 

@@ -30,4 +30,11 @@ export class SwalService {
       title: error,
     });
   }
+
+  public showSuccessNotification(success = 'Success'): void {
+    this._swalNotificationCorner.fire({
+      icon: 'success',
+      title: success
+    });
+  }
 }
