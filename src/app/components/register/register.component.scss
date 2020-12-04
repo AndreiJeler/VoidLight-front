@@ -7,7 +7,7 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 50rem;
-    height: 90rem;
+    height: 100rem;
     border-radius: 2.5rem;
     background: transparent;
     &::before,
@@ -42,9 +42,9 @@
         width: 100%;
         border-radius: 2.5rem;
         background-color: $color-form-card;
+
         & > * {
-            margin: 0.5rem;
-            color:$color-white;
+            color: $color-white;
         }
  
         &__logo-container {
@@ -59,9 +59,9 @@
         }
 
         &__title {
-            margin-top: 10%;
             font-weight: 500;
             font-size: 3.5rem;
+            margin-top: -5rem;
             padding-bottom: 7.5rem;
         }
 
@@ -76,43 +76,51 @@
             color: $color-white;
             margin: 2.5rem;
             transition: all 0.5s;
+            margin-top: 5rem;
+            margin-bottom: 3rem;
+            min-height: 5rem;
         }
 
-        &__error {
-            font-size: medium;
+        &__input {
+            &__input-field {
+                margin-left: 4.5rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                width: 40rem;
+                height: 6rem;
+                position: relative;
+                background-color: $color-form-input;
+                font-size: 2rem; 
+                transition: all 0.3s ease;
+                touch-action: manipulation;
+                &:-webkit-autofill {
+                    background-color: transparent !important;
+                    -webkit-text-fill-color: white !important;
+                }
+                &:focus {
+                    outline: 0;
+                    border: 0.6rem solid $color-button-top-gradient ;
+                }
+            }
+
+            &__label {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 2rem;
+                align-self: flex-start;
+                align-content: space-around;
+                padding-top: 1.5rem;
+                padding-left: 4.5rem;
+                margin-bottom: 1rem;
+            }
+
+            &__error {
+                font-size: medium;
+                margin-right: 5rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                float: right;
+            }
         }
     }
-}
-
-.input-field{
-    width: 40rem;
-    height: 6rem;
-    position: relative;
-    background-color: $color-form-input;
-    font-size: 2rem; 
-    transition: all 0.3s ease;
-    touch-action: manipulation;
-    &:-webkit-autofill {
-        background-color: transparent !important;
-        -webkit-text-fill-color: white !important;
-    }
-    &:focus {
-        outline: 0;
-        border: 0.6rem solid $color-button-top-gradient ;
-    }
-}
-
-.label {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 2rem;
-    align-self: flex-start;
-    align-content: space-around;
-    padding-top: 1.5rem;
-    padding-left: 4.5rem;
-}
-
-#register-button{
-    margin-top: 5rem;
-    margin-bottom: 3rem;
 }

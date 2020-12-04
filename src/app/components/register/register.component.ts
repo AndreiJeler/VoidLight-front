@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SwalService } from '../../shared/services/swal.service';
 
 @Component({
@@ -12,48 +12,55 @@ export class RegisterComponent implements OnInit {
   public password: string;
   public confirmPassword: string;
   public email: string;
-  public form: FormGroup;
-  private _swalService: SwalService;
+  public registerForm: FormGroup;
+  public isSubmitted: boolean = false;
 
-  constructor(swalService: SwalService)
-  {
-    this._swalService = swalService;
-  }
+  constructor(private _formBuilder: FormBuilder, swalService: SwalService) {}
 
   ngOnInit(): void {
-    
-  }
-
-  public register() {
-    if (this.password != this.confirmPassword || this.password == null)
-    {
-      this._swalService.showErrorNotification("Passwords do not match!");
-    }
-    this.form = new FormGroup({
+    this.registerForm = this._formBuilder.group({
       username: new FormControl(this.username, [
         Validators.required,
-        Validators.minLength(4)
+        Validators.pattern("^.{4,}$")
       ]),
       password: new FormControl(this.password, [
         Validators.required,
-        Validators.minLength(8)
+        Validators.pattern("^.{8,}$")
       ]),
       email: new FormControl(this.email, [
         Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-      ])
-    });
+      ]),
+      confirm: new FormControl('', [Validators.required]),
+    },
+    {
+      validator: this.mustMatch('password', 'confirm')
+    }
+    );
   }
 
-  get usernameCheck() {
-    return this.form.get('username');
+  get form() {
+    return this.registerForm.controls;
   }
 
-  get emailCheck() {
-    return this.form.get('email');
+  public mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
-  get passwordCheck() {
-    return this.form.get('password');
+  public register() {
+    this.isSubmitted = true;
   }
 }
