@@ -168,7 +168,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public openProfile(): void {
-    this._router.navigate(['/profile']);
+    this._router.navigate([`/profile/${this.user.id}`]);
   }
 
   //start: Modal Operations Region
@@ -328,6 +328,10 @@ export class NewsfeedComponent implements OnInit {
       alert('Post added');
       //TODO replace alert with swal2
     }
+  }
+
+  public gotToFriendProfile(id: number): void {
+    this._router.navigate([`/profile/${id}`]);
   }
 
   // END REGION BUTTON FUNCTIONS

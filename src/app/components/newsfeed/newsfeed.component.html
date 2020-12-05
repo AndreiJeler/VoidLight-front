@@ -34,7 +34,7 @@
     <div class="newsfeed__body__friends card">
         <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
       <ul class="paragraph newsfeed__body__friends__list">
-        <li *ngFor="let friend of friends"><app-friend [friend]="friend"></app-friend></li>
+        <li *ngFor="let friend of friends" (click)="gotToFriendProfile(friend.id)"><app-friend [friend]="friend"></app-friend></li>
       </ul>
     </div>
   </div>

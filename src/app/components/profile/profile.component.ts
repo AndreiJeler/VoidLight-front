@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
+import { ActivatedRoute } from '@angular/router';
+import {ProfileService} from "../../services/profile.service";
 
 @Component({
   selector: 'app-profile',
@@ -20,29 +22,36 @@ export class ProfileComponent implements OnInit {
   posts: Post[];
   images: string[] = [];
   videos: string[] = [];
+  userId: number;
 
   constructor(
+    private route: ActivatedRoute,
     private gallery: Gallery,
     private router: Router,
     private authenticationService: AuthenticationService,
     private gameService: GameService,
-    private postService: PostService
+    private postService: PostService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    this.userId = +this.route.snapshot.paramMap.get('id');
 
-    this.authenticationService.currentUser.subscribe(
-      (user) => (this.user = user)
+    this.profileService.getUserById(+this.route.snapshot.paramMap.get('id')).subscribe(
+      (user) => {
+        this.user = user;
+        this.user.avatarPath = 'https://localhost:44324/' + user.avatarPath;
+      }
     );
 
     this.gameService
-      .getFavoriteGamesForUser(this.user.id)
+      .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
 
-    this.postService.getPostsByUser(this.user.id).subscribe(
+    this.postService.getPostsByUser(this.userId).subscribe(
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
