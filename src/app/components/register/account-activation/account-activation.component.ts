@@ -24,7 +24,7 @@ export class AccountActivationComponent implements OnInit {
       this.userService.activateUserAccount(this._token).subscribe(
         (_) => this.swalService.showSuccessResult("Success", "Your account has been activated ;)")
           .then(() => { this.router.navigate(["/login"]) }),
-        (error) => this.swalService.showErrorResult("Error", "Oopsie Daisy we have encounter a problem X(")
+        (error) => this.swalService.showErrorResult("Error", "Oopsie Daisy we have encountered a problem X(")
           .then(() => { this.router.navigate(["/login"]) }),
       );
     });
