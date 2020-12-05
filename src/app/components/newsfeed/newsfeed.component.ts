@@ -16,7 +16,6 @@ import { PostService } from '../../services/post.service';
 import { GameService } from '../../services/game.service';
 import { PublisherService } from '../../services/publisher.service';
 import { FriendsService } from '../../services/friends.service';
-import { DomService } from '../../services/dom.service';
 
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
@@ -45,7 +44,6 @@ export class NewsfeedComponent implements OnInit {
     private _friendsService: FriendsService,
     private _authenticationService: AuthenticationService,
     private _modalService: BsModalService,
-    private _domService: DomService,
     private _router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -179,7 +177,6 @@ export class NewsfeedComponent implements OnInit {
   //start: Modal Operations Region
 
   public async openModalCreatePost(selectedModal: TemplateRef<any>) {
-    //this._domService.appendComponentToBody(CreatePostComponent);
     this.chosenModal = this._modalService.show(selectedModal);
   }
 
