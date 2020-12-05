@@ -8,35 +8,41 @@
 
 @mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
     &:after {
-      position: absolute;
-      content: "";
-      top: $y;
-      left: $x;
-      right: 0;
-      z-index: -1;
-      height: 100%;
-      width: 100%;
-      margin: 0 auto;
-      transform: scale($size);
-      -webkit-filter: blur($spread);
-      -moz-filter: blur($spread);
-      -ms-filter: blur($spread);
-      filter: blur($spread);
-      background: linear-gradient(270deg, $colorA, $colorB);
-      background-size: 200% 200%;
-      animation: animateGlow $duration ease infinite;
-      @keyframes animateGlow {
-        0%{background-position:0% 50%}
-        50%{background-position:100% 50%}
-        100%{background-position:0% 50%}
-      }
+        position: absolute;
+        content: "";
+        top: $y;
+        left: $x;
+        right: 0;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        transform: scale($size);
+        -webkit-filter: blur($spread);
+        -moz-filter: blur($spread);
+        -ms-filter: blur($spread);
+        filter: blur($spread);
+        background: linear-gradient(270deg, $colorA, $colorB);
+        background-size: 200% 200%;
+        animation: animateGlow $duration ease infinite;
+        @keyframes animateGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
     }
 }
-  
+
 html {
     // This defines what 1rem is
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
-    background-color: darken(#252B37, 4%);
+    background-color: darken($background-color, 4%);
     background-repeat: no-repeat;
     background-size: cover;
     @include backlight(0, 25rem, 25rem, 0.75, $color-form-card, $color-button-top-gradient, 10s);
@@ -48,14 +54,14 @@ img {
     max-height: 100%;
 }
 
-.submit-button span{
+.submit-button span {
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
 .submit-button span:after {
-    content: '\00bb';
+    content: "\00bb";
     position: absolute;
     opacity: 0;
     top: 0;
@@ -64,9 +70,13 @@ img {
 }
 .submit-button:hover span {
     padding-right: 2.5rem;
-  }
-  
-.submit-button:hover span:after{
+}
+
+.submit-button:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+.notification-swal {
+    font-size: 15px !important;
 }
