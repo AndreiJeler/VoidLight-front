@@ -8,7 +8,7 @@
   </div>
 
   <div class="newsfeed__body">
-    <div class="newsfeed__body__categories card">
+    <div class="newsfeed__body__categories side-card">
       <h1 class="paragraph newsfeed__body__categories__title">Games </h1>
       <ul class="paragraph newsfeed__body__categories__list">
         <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" id="game{{game.id}}">{{game.name}}</li>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="newsfeed__body__friends card">
+    <div class="newsfeed__body__friends side-card">
         <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
       <ul class="paragraph newsfeed__body__friends__list">
         <li *ngFor="let friend of friends"><app-friend [friend]="friend"></app-friend></li>
@@ -39,7 +39,6 @@
     </div>
   </div>
 </div>
-
 
 <ng-template #createPostModal>
   <create-post-modal (close)="closeModal($event)"></create-post-modal>

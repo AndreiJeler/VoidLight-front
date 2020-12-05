@@ -1,18 +1,26 @@
 @import "../../../../../styles.scss";
 
 .modal {
-    display: block;
-    height: 30rem;
+    background-color: pink;
+    height: 50rem;
+    width: 50rem;
+    
 }
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal-content {
+    margin: 2px auto;
+    z-index: 1100 !important;
+}
+// .modal-body:before,
+// .modal-body:after {
+//     display: table;
+//     content: " ";
+// }
 
-.modal-body:before,
-.modal-body:after {
-    display: table;
-    content: " ";
-}
-
-.modal-header:before,
-.modal-header:after {
-    display: table;
-    content: " ";
-}
+// .modal-header:before,
+// .modal-header:after {
+//     display: table;
+//     content: " ";
+// }

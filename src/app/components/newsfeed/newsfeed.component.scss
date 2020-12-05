@@ -1,10 +1,12 @@
-@import "./src/styles";
+@import "../../../styles.scss";
+@import "../../../scss/typography.scss";
+@import "../../../scss/base.scss";
+
 
 .newsfeed {
   display: flex;
   align-items: center;
   flex-direction: column;
-
   &__header {
     background-color: $color-header;
     width: 100%;
@@ -53,7 +55,7 @@
     display: flex;
     justify-content: space-between;
 
-    .card {
+    .side-card {
       margin: 3rem 4rem;
       padding: 1rem 0;
       height: 80rem;
@@ -63,7 +65,7 @@
 
       &::before{
         content: "";
-        position: absolute;
+       position: absolute;
         z-index: -1;
         top: 0;
         bottom: 0;

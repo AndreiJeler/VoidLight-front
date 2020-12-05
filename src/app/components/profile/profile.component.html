@@ -1,25 +1,25 @@
-<div class="container">
-    <div class="container__info">
-        <img class="container__info__image" [src]="user.avatarPath"/>
-        <div class="container__info__data">
-            <p class="container__info__data__nickname">{{user.username}}</p>
-            <p class="container__info__data__age">21</p>
-            <p class="container__info__data__country">RO</p>
-            <div class="container__info__data__currently-playing">Currently playing
-                <p class="container__info__data__currently-playing__game"> browsing the internet </p>
+<div class="profile-container">
+    <div class="profile-container__info">
+        <img class="profile-container__info__image" [src]="user.avatarPath"/>
+        <div class="profile-container__info__data">
+            <p class="profile-container__info__data__nickname">{{user.username}}</p>
+            <p class="profile-container__info__data__age">21</p>
+            <p class="profile-container__info__data__country">RO</p>
+            <div class="profile-container__info__data__currently-playing">Currently playing
+                <p class="profile-container__info__data__currently-playing__game"> browsing the internet </p>
             </div>
         </div>
     </div>
-    <div class="container__achievements">
-        <p class="container__achievements__edit-profile">Edit Profile</p>
-        <div class="container__achievements__stars">
+    <div class="profile-container__achievements">
+        <p class="profile-container__achievements__edit-profile">Edit Profile</p>
+        <div class="profile-container__achievements__stars">
         </div>
-        <p class="container__achievements__see-all-achievements">See All Achievements</p>
+        <p class="profile-container__achievements__see-all-achievements">See All Achievements</p>
         <!-- TODO change from p to a a or idk they are links but this is easily solvable ??!?!?!?!? -->
     </div>
-    <div class="container__posts">
-            <p class="container__posts__title">Posts</p>
-            <gallery id="posts" class="container__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
+    <div class="profile-container__posts">
+            <p class="profile-container__posts__title">Posts</p>
+            <gallery id="posts" class="profile-container__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
 
             <!-- Add custom template to image items -->
             <ng-template #itemTemplate
@@ -32,12 +32,12 @@
             </span>
             </ng-template>
     </div>
-    <div class="container__games">
-        <p class="container__games__title">Favorite Games</p>
-        <div class="container__games__list">
-            <ul class="container__games__list__ul">
-                <li class="container__games__list__ul__li">
-                    <favorite-game *ngFor="let game of games" [game]="game" class="container__games__list__ul__li__item">
+    <div class="profile-container__games">
+        <p class="profile-container__games__title">Favorite Games</p>
+        <div class="profile-container__games__list">
+            <ul class="profile-container__games__list__ul">
+                <li class="profile-container__games__list__ul__li">
+                    <favorite-game *ngFor="let game of games" [game]="game" class="profile-container__games__list__ul__li__item">
                     </favorite-game>
                 </li>
             </ul>
