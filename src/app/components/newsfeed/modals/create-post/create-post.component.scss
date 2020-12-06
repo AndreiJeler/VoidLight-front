@@ -1,26 +1,109 @@
 @import "../../../../../styles.scss";
+@import "../../../../../scss/variables.scss";
 
-.modal {
-    background-color: pink;
-    height: 50rem;
-    width: 50rem;
-    
+.modal-header {
+    width: 100%;
+    height: 5rem;
+    background-color:  $color-newsfeed-buttons;
+    border: none;
 }
-.modal-backdrop {
-    z-index: 1040 !important;
-}
-.modal-content {
-    margin: 2px auto;
-    z-index: 1100 !important;
-}
-// .modal-body:before,
-// .modal-body:after {
-//     display: table;
-//     content: " ";
-// }
 
-// .modal-header:before,
-// .modal-header:after {
-//     display: table;
-//     content: " ";
-// }
+.modal-title{
+    margin-top: 2%;
+    margin-left: 35%;
+    font-size: 2rem;
+    color: $color-white;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: $color-black;
+    color: $color-white;
+}
+.modal-body {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-black;
+    opacity: 0.8;
+    border: none;
+}
+
+.form__input {
+  width: 90%;
+  border: 0;
+  border-bottom: 0.2rem solid $color-gray;
+  outline: 0;
+  font-size: 1.5rem;
+  color: $color-white;
+  padding: 0.7rem 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  bottom: 10%;
+  position: absolute;
+  margin-left: 3rem;
+  &::placeholder {
+    color: transparent;
+  }
+  &:placeholder-shown ~ .form__label {
+    font-size: 2rem;
+    cursor: text;
+    bottom: 2rem;
+  }
+}
+.form__label {
+  position: absolute;
+  bottom: 10%;
+  display: block;
+  margin-left: 3rem;
+  transition: 0.2s;
+  font-size: 2rem;
+  color: $color-gray;
+}
+.form__input:focus {
+  ~ .form__label {
+    position: absolute;
+    bottom: 65%;
+    display: block;
+    transition: 0.2s;
+    font-size: 1.5rem;
+    color: $color-newsfeed-buttons;
+    font-weight: 700;    
+  }
+  padding-bottom: 0.6rem;  
+  font-weight: 700;
+  border-width: 0.3rem;
+  border-image: linear-gradient(to right, $color-newsfeed-buttons,$color-gray);
+  border-image-slice: 1;
+}
+
+.form__input{
+  &:required,&:invalid { box-shadow:none; }
+}
+
+.modal-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    background-color: $color-black;
+    opacity: 0.8;
+    border: none;
+
+}
+
+.save-button-modal, .cancel-button-modal{
+    background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+    width: 10rem;
+    height: 4rem;
+    border-radius: 5rem;
+    border: none;
+    font-size: 2rem;
+    color: $color-white;
+    transition: all 0.5s;
+}
