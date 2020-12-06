@@ -86,6 +86,22 @@ img {
     top: 50%;
     left: 50%;
     width: 50rem;
-    height: 20rem;
+    height: 25rem;
     transform: translate(-50%, -50%);
+}
+
+.ng-select.custom { 
+    font-size: 1.3rem;
+    top: 55%;
+    position: absolute;
+    width: 90%;
+    margin-left: 3rem;
+    height: 3rem;
+  }
+
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: $color-black;
+    color: $color-white;
+
 }

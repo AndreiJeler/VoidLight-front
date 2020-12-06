@@ -11,20 +11,26 @@
     <div class="newsfeed__body__categories side-card">
       <h1 class="paragraph newsfeed__body__categories__title">Games </h1>
       <ul class="paragraph newsfeed__body__categories__list">
-        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" id="game{{game.id}}">{{game.name}}</li>
+        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" 
+        id="game{{game.id}}">{{game.name}}</li>
       </ul>
 
       <h1 class="paragraph newsfeed__body__categories__title">Publisher</h1>
       <ul class="paragraph newsfeed__body__categories__list">
-        <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)" id="publisher{{publisher.id}}">{{publisher.name}}</li>
+        <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)" 
+        id="publisher{{publisher.id}}">{{publisher.name}}</li>
       </ul>
     </div>
 
     <div class="newsfeed__body__middle">
       <div class="newsfeed__body__middle__sections">
-        <button class="newsfeed__body__middle__sections__text" (click)="openModalCreatePost(createPostModal)">Aa</button>
-        <button class="newsfeed__body__middle__sections__image" (click)="openPhotoPostModal()"><img src="../../../assets/Images/image.png" alt="image" ></button>
-        <button class="newsfeed__body__middle__sections__video" (click)="openVideoPostModal()"><img src="../../../assets/Images/video.png" alt="video"></button>
+        <button class="newsfeed__body__middle__sections__text" 
+        (click)="openModalCreatePost(createPostModal)">Aa</button>
+        <button class="newsfeed__body__middle__sections__image" 
+        (click)="openPhotoPostModal(createPostModalPhoto)">
+        <img src="../../../assets/Images/image.png" alt="image" ></button>
+        <button class="newsfeed__body__middle__sections__video" 
+        (click)="openVideoPostModal()"><img src="../../../assets/Images/video.png" alt="video"></button>
       </div>
       <div class="newsfeed__body__middle__posts">
         <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
@@ -41,5 +47,12 @@
 </div>
 
 <ng-template #createPostModal>
-  <create-post-modal (close)="closeModal($event)"></create-post-modal>
+  <create-post-modal [games]="games" [userId]="user.id" [userName]="user.username" 
+  (close)="closeModal($event)"></create-post-modal>
 </ng-template>
+
+<ng-template #createPostModalPhoto>
+  <create-post-modal [games]="games" [userId]="user.id" [withPhoto]="true" [userName]="user.username" 
+  (close)="closeModal($event)"></create-post-modal>
+</ng-template>
+

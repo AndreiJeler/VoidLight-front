@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Game } from 'src/app/models/game';
 
 import { PostService } from 'src/app/services/post.service';
 import { Post } from '../../../../models/post';
@@ -11,8 +12,18 @@ import { Post } from '../../../../models/post';
 export class CreatePostComponent implements OnInit {
 
   public post: Post;
+  public file: string;
+  public isLoading: boolean = false;
+  public selectedGame: Game = null;
+ // public withPhoto: boolean = false;
+  public withVideo: boolean = false;
 
-  @Output() close = new EventEmitter<boolean>();
+  @Input() withPhoto: boolean = false;
+  @Input() userId: number;
+  @Input() userName: string;
+  @Input() games: Game[];
+
+  @Output() close = new EventEmitter<Post>();
 
   constructor(private _postService: PostService) { }
 
@@ -21,19 +32,28 @@ export class CreatePostComponent implements OnInit {
   }
 
   public onSave(): void {
+    this.post.userId = this.userId;
+    this.post.username = this.userName;
+    this.post.game = this.selectedGame.name;
+    if (this.withPhoto){
+      const value = this.file.split('\\');
+      this.post.contents = [value[value.length - 1]];
+    }
     this._postService.createPost(this.post).subscribe(
-      () => {
-        alert("GJ FAM");
-        console.log(this.post);
-      }, // here we will add the swalpart
+      (res) => {
+        this.close.emit(res);
+      },
       (error) => {
+        //TODO swalla
         console.log(error);
       },
+      
     );
+    
   }
 
   public onCancel(): void {
-    this.close.emit(false);
+    this.close.emit(undefined);
   }
 
 }

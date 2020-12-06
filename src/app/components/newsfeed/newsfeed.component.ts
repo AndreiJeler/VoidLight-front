@@ -180,10 +180,8 @@ export class NewsfeedComponent implements OnInit {
     this.chosenModal = this._modalService.show(selectedModal);
   }
 
-  //selectedModal: TemplateRef<any>
-  public async openPhotoPostModal() {
-    alert('TODO')
-    //this.chosenModal = this._modalService.show(selectedModal);
+  public async openPhotoPostModal(selectedModal: TemplateRef<any>) {
+    this.chosenModal = this._modalService.show(selectedModal);
   }
 
   public async openVideoPostModal() {
@@ -191,13 +189,19 @@ export class NewsfeedComponent implements OnInit {
     //this.chosenModal = this._modalService.show(selectedModal);
   }
 
-  public closeModal(data: boolean): void {
+  public closeModal(post: Post): void {
     this.chosenModal.hide();
-    if (data) {
-      alert('Post added');
-      //TODO replace alert with swal2
+    if (post) {
+      post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+      let contents = [];
+      post.contents.forEach((content) => {
+      content = 'https://localhost:44324/' + content;
+        contents.push(content);
+      });
+      post.contents = contents;
+      this.posts.unshift(post);
+      this.cdr.detectChanges();
     }
   }
-
   // END REGION BUTTON FUNCTIONS
 }
