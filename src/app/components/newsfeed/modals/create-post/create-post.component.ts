@@ -19,7 +19,7 @@ export class CreatePostComponent implements OnInit {
   public file: string;
   public isLoading: boolean = false;
   public selectedGame: Game = null; 
-
+  public labelText: string = 'Upload File'
   @Input() withContent: boolean = false;
   @Input() userId: number;
   @Input() userName: string;
@@ -37,7 +37,7 @@ export class CreatePostComponent implements OnInit {
     this.post.username = this.userName;
     this.post.game = this.selectedGame.name;
     if (this.withContent){
-      var value = this.file.replace("C:\\fakepath\\", "");
+      const value = this.file.split('\\');
       this.post.contents = [value[value.length - 1]];
     }
     this._postService.createPost(this.post).subscribe(
@@ -50,7 +50,15 @@ export class CreatePostComponent implements OnInit {
     );
   }
 
+  public changeLabel(input: any): void {
+    if (this.file){
+      const value = this.file.split('\\');
+      this.labelText = value[value.length-1];
+    }
+  }
+
   public onCancel(): void {
+    this.labelText = 'Upload File'
     this.close.emit(undefined);
   }
 

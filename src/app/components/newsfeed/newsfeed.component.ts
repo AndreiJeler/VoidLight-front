@@ -21,8 +21,6 @@ import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { Publisher } from 'src/app/models/publisher';
-import Swal from 'sweetalert2';
-import { CreatePostComponent } from './modals/create-post/create-post.component';
 
 @Component({
   selector: 'app-newsfeed',

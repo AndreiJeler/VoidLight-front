@@ -13,15 +13,15 @@
     <ng-select class="games-select custom" [editableSearchTerm]="true" [items]="games" bindLabel="name" 
     [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game" >
     </ng-select>
-    <label class="custom-file-upload" [style.visibility]="withContent? 'visible': 'hidden'">
-      <input type="file" class="custom-file-upload" id="file" [(ngModel)]="file">
-      Upload file
+    <label class="label-file-upload" [style.visibility]="withContent? 'visible': 'hidden'">
+      <input type="file" class="custom-file-upload" id="file" [(ngModel)]="file" (change)="changeLabel($event)">
+      {{labelText}}
     </label>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default save-button-modal submit-button"
      (click)="onSave()"><span>Post</span></button>
-    <button type="button" class="btn btn-default cancel-button-modal submit-button
-    " (click)="onCancel()"><span>Cancel</span></button>
+    <button type="button" class="btn btn-default cancel-button-modal submit-button" 
+    (click)="onCancel()"><span>Cancel</span></button>
   </div>

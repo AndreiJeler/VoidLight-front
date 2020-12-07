@@ -86,7 +86,7 @@ input[type="file"] {
   display: none;
 }
 
-.custom-file-upload{
+.label-file-upload{
   bottom: 0;
   position: absolute;
   height: 1.5rem;
@@ -99,6 +99,12 @@ input[type="file"] {
   margin-top: rem;
   border-radius: 0.5rem;
 }
+
+.label-file-upload:focus, .label-file-upload:hover  {
+    cursor: pointer;
+    background-color: $color-newsfeed-buttons;
+}
+
 .modal-footer{
     display: flex;
     flex-direction: row;
