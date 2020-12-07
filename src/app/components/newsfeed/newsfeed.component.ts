@@ -184,9 +184,8 @@ export class NewsfeedComponent implements OnInit {
     this.chosenModal = this._modalService.show(selectedModal);
   }
 
-  public async openVideoPostModal() {
-    alert('TODO')
-    //this.chosenModal = this._modalService.show(selectedModal);
+  public async openVideoPostModal(selectedModal: TemplateRef<any>) {
+    this.chosenModal = this._modalService.show(selectedModal);
   }
 
   public closeModal(post: Post): void {

@@ -3,6 +3,9 @@ import { Game } from 'src/app/models/game';
 
 import { PostService } from 'src/app/services/post.service';
 import { Post } from '../../../../models/post';
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
+
+const URL = 'https://localhost:44324/';
 
 @Component({
   selector: 'create-post-modal',
@@ -11,18 +14,16 @@ import { Post } from '../../../../models/post';
 })
 export class CreatePostComponent implements OnInit {
 
+  
   public post: Post;
   public file: string;
   public isLoading: boolean = false;
-  public selectedGame: Game = null;
- // public withPhoto: boolean = false;
-  public withVideo: boolean = false;
+  public selectedGame: Game = null; 
 
-  @Input() withPhoto: boolean = false;
+  @Input() withContent: boolean = false;
   @Input() userId: number;
   @Input() userName: string;
   @Input() games: Game[];
-
   @Output() close = new EventEmitter<Post>();
 
   constructor(private _postService: PostService) { }
@@ -35,8 +36,8 @@ export class CreatePostComponent implements OnInit {
     this.post.userId = this.userId;
     this.post.username = this.userName;
     this.post.game = this.selectedGame.name;
-    if (this.withPhoto){
-      const value = this.file.split('\\');
+    if (this.withContent){
+      var value = this.file.replace("C:\\fakepath\\", "");
       this.post.contents = [value[value.length - 1]];
     }
     this._postService.createPost(this.post).subscribe(
@@ -44,12 +45,9 @@ export class CreatePostComponent implements OnInit {
         this.close.emit(res);
       },
       (error) => {
-        //TODO swalla
-        console.log(error);
+        Swal.fire('An error occured: ' + error);
       },
-      
     );
-    
   }
 
   public onCancel(): void {

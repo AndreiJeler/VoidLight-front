@@ -27,10 +27,11 @@
         <button class="newsfeed__body__middle__sections__text" 
         (click)="openModalCreatePost(createPostModal)">Aa</button>
         <button class="newsfeed__body__middle__sections__image" 
-        (click)="openPhotoPostModal(createPostModalPhoto)">
+        (click)="openPhotoPostModal(createPostModalWithContent)">
         <img src="../../../assets/Images/image.png" alt="image" ></button>
         <button class="newsfeed__body__middle__sections__video" 
-        (click)="openVideoPostModal()"><img src="../../../assets/Images/video.png" alt="video"></button>
+        (click)="openVideoPostModal(createPostModalWithContent)">
+        <img src="../../../assets/Images/video.png" alt="video"></button>
       </div>
       <div class="newsfeed__body__middle__posts">
         <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
@@ -51,8 +52,7 @@
   (close)="closeModal($event)"></create-post-modal>
 </ng-template>
 
-<ng-template #createPostModalPhoto>
-  <create-post-modal [games]="games" [userId]="user.id" [withPhoto]="true" [userName]="user.username" 
+<ng-template #createPostModalWithContent>
+  <create-post-modal [games]="games" [userId]="user.id" [withContent]="true" [userName]="user.username" 
   (close)="closeModal($event)"></create-post-modal>
 </ng-template>
-

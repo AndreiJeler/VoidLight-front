@@ -13,8 +13,8 @@
     <ng-select class="games-select custom" [editableSearchTerm]="true" [items]="games" bindLabel="name" 
     [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game" >
     </ng-select>
-    <label class="custom-file-upload" [style.visibility]="withPhoto? 'visible': 'hidden'">
-      <input type="file" class="form__file" [(ngModel)]="file">
+    <label class="custom-file-upload" [style.visibility]="withContent? 'visible': 'hidden'">
+      <input type="file" class="custom-file-upload" id="file" [(ngModel)]="file">
       Upload file
     </label>
   </div>
