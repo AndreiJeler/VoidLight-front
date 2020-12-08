@@ -25,6 +25,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     NoopAnimationsModule,
     ModalModule.forRoot(),
+    NgSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
