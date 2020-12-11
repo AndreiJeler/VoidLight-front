@@ -20,20 +20,21 @@
     </div>
   </div>
   <div class="container__content">
+<!--    TODO: add a breadcrumb maybe?-->
     <div class="container__content__posts">
-<!--            <p class="container__content__posts__title paragraph">Posts</p>-->
-            <gallery id="posts" class="container__content__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
+<!--            <gallery id="posts" class="container__content__posts__gallery" [itemTemplate]="itemTemplate"></gallery>-->
+<!--            &lt;!&ndash; Add custom template to image items &ndash;&gt;-->
+<!--            <ng-template #itemTemplate-->
+<!--                        let-index="index"-->
+<!--                        let-type="type"-->
+<!--                        let-data="data"-->
+<!--                        let-currIndex="currIndex">-->
+<!--            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">-->
+<!--                {{data?.title}}-->
+<!--            </span>-->
+<!--            </ng-template>-->
 
-            <!-- Add custom template to image items -->
-            <ng-template #itemTemplate
-                        let-index="index"
-                        let-type="type"
-                        let-data="data"
-                        let-currIndex="currIndex">
-            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
-                {{data?.title}}
-            </span>
-            </ng-template>
+      <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
     </div>
     <div class="container__content__games paragraph">
         <p class="container__content__games__title">Favorite Games</p>
