@@ -90,12 +90,19 @@
     }
 
     & > .btn {
-      background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+      background-color: $color-newsfeed-buttons;
+      color: $color-white;
       height: 3rem;
       width: 10rem;
       border-radius: 5px;
       border: none;
       font-size: medium;
     }
+  }
+}
+
+.btn-flip:hover{
+  svg{
+    animation: heartPulse .25s $bezier both;
   }
 }

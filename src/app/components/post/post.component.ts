@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   public images: string[] = [];
   public videos: string[] = [];
   public user: User;
+  public isLiked: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -26,6 +27,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.currentUser.subscribe(
       (user) => (this.user = user)
+      
     );
     this.post.contents.forEach((content) => {
       const value = content.split('.');
@@ -46,7 +48,8 @@ export class PostComponent implements OnInit {
     this.postService
       .likePost(this.post.id, this.user.id)
       .subscribe((res: number) => {
-        this.post.likes = res;
+        this.isLiked = !this.isLiked;
+        this.post.likes = res;      
       });
   }
 }
