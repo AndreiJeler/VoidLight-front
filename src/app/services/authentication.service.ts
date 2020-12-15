@@ -46,6 +46,20 @@ export class AuthenticationService {
       );
   }
 
+  public authenticateId(id: number): Observable<User> {
+    return this.http.get<User>(`${this._authUrl}/authenticateId/${id}`).pipe(
+      map((user) => {
+        localStorage.setItem(
+          Constants.AUTH_CURRENT_USER_KEY,
+          JSON.stringify(user)
+        );
+        localStorage.setItem('token', user.token);
+        this._currentUserSubject.next(user);
+        return user;
+      })
+    );
+  }
+
   public logout(): void {
     localStorage.removeItem(Constants.AUTH_CURRENT_USER_KEY);
     localStorage.removeItem('token');
