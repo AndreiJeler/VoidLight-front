@@ -5,6 +5,8 @@
 @import "./scss/typography.scss";
 
 @import "~@sweetalert2/theme-dark/dark.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 
 .modalAddPost {
   background: $color-newsfeed-background !important;
@@ -23,6 +25,4 @@
   }
 }
 
-.notification-swal {
-  font-size: 15px !important;
-}
+

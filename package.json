@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~10.0.5",
     "@angular/platform-browser-dynamic": "~10.0.5",
     "@angular/router": "~10.0.5",
+    "@ng-select/ng-select": "^5.0.9",
     "@sweetalert2/theme-dark": "^4.0.1",
     "angular-gallery": "^1.0.2",
     "bootstrap": "^4.5.3",
@@ -30,6 +31,7 @@
     "ng-gallery": "^5.0.0",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "~6.5.5",
+    "rxjs-compat": "^6.6.3",
     "sweetalert2": "^10.10.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

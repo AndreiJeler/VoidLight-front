@@ -1,111 +1,210 @@
 @import "../../../styles.scss";
 
 .card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 25vw;
+  min-width: 50rem;
+  height: 90vh;
+  border-radius: 2.5rem;
+  background: transparent;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease;
+  }
+
+  &::before {
+    transform: translateX(-2rem) translateY(-1.5rem);
+    border: 0.6rem solid $color-button-top-gradient;
+    border-radius: 2.5rem;
+  }
+
+  &::after {
+    z-index: -2;
+    transform: translateX(-2.5rem) translateY(-1.5rem);
+  }
+
+  &__form {
+    &__group:not(:last-child) {
+      width: 95%;
+    }
+
+    &__input {
+      font-size: 1.5rem;
+      font-family: inherit;
+      color: inherit;
+      padding: 1.5rem 2rem;
+      border-radius: 2px;
+      background-color: rgba($color-white, 0.5);
+      border: none;
+      border-bottom: 3px solid transparent;
+      width: 90%;
+      display: block;
+      transition: all 0.3s;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+        border-bottom: 3px solid $color-form-input;
+      }
+
+      &:focus:invalid {
+        border-bottom: 3px solid $color-button-bottom-gradient;
+      }
+
+      &::-webkit-input-placeholder {
+        color: $color-card-gradient-grey;
+      }
+    }
+
+    &__label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-left: 2rem;
+      margin-top: 0.7rem;
+      display: block;
+      transition: all 0.3s;
+    }
+
+    &__input:placeholder-shown + &__label {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4rem);
+    }
+
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    width: 55rem;
-    height: 90rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     border-radius: 2.5rem;
-    background: transparent;
-    &::before,
-    &::after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        transition: all 0.5s ease;
-    }
-    &::before {
-        transform: translateX(-2rem) translateY(-1.5rem);
-        border: 0.6rem solid $color-button-top-gradient;
-        border-radius: 2.5rem;
+    background-color: $color-form-card;
 
+    & > * {
+      color: $color-white;
     }
-    &::after{
-        transform: translateX(-2.5rem) translateY(-1.5rem);
+
+    &__logo-container {
+      height: 15%;
+      width: 15%;
+      background: none;
+      margin-bottom: 2rem;
+
+      &__logo {
+        -webkit-filter: drop-shadow(0.6rem 0.7rem 1rem $color-button-top-gradient);
+        filter: drop-shadow(0.6rem 0.7rem 1rem $color-button-top-gradient);
+        margin-top: 2rem;
+      }
     }
-    &__form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        border-radius: 2.5rem;
-        background-color: $color-form-card;
-        & > * {
-            margin: 0.5rem;
-            color:$color-white;
-        }
- 
-        &__logo-container {
-            height: 20%;
-            width: 20%;
-            background: none;
-            &__logo {
-                -webkit-filter: drop-shadow(0.6rem 0.7rem 1rem  $color-button-top-gradient);
-                filter: drop-shadow(0.6rem 0.7rem 1rem  $color-button-top-gradient);
+
+    &__alternatives {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      justify-content: space-around;
+
+      width: 50rem;
+
+      &__container {
+        &__logo {
+          height: 5rem;
+          width: 5rem;
+
+          &__icon {
+            width: 100%;
+            height: 100%;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+              fill: $color-white;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
             }
+          }
         }
+      }
+    }
 
-        &__title {
-            margin-top: 10%;
-            font-weight: 500;
-            font-size: 3.5rem;
-            padding-bottom: 7.5rem;
+    &__title {
+      font-weight: 500;
+      font-size: 3.5rem;
+      margin: 2.25rem;
+    }
+
+    &__register-btn {
+      background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+      width: 16rem;
+      height: 5rem;
+      border-radius: 5rem;
+      border: none;
+      font-weight: 500;
+      font-size: 2rem;
+      color: $color-white;
+      margin: 2.5rem;
+      transition: all 0.5s;
+      margin-top: 5rem;
+      margin-bottom: 3rem;
+      min-height: 5rem;
+    }
+
+    &__input {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      &__input-field {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        height: 4rem;
+        position: relative;
+        background-color: $color-form-input;
+        font-size: 2rem;
+        transition: all 0.3s ease;
+        border-radius: 3px;
+        border: none;
+        touch-action: manipulation;
+        &:-webkit-autofill {
+          background-color: transparent !important;
+          -webkit-text-fill-color: white !important;
         }
-
-        &__register-btn {
-            background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
-            width: 16rem;
-            height: 5rem;
-            border-radius: 5rem;
-            border: none;
-            font-weight: 500;
-            font-size: 2rem;
-            color: $color-white;
-            margin: 2.5rem;
-            transition: all 0.5s;
+        &:focus {
+          outline: 0;
+          border: 0.6rem solid $color-button-top-gradient;
         }
-    }
-}
+      }
 
-.input-field{
-    width: 40rem;
-    height: 6rem;
-    position: relative;
-    background-color: $color-form-input;
-    font-size: 2rem; 
-    transition: all 0.3s ease;
-    touch-action: manipulation;
-    &:-webkit-autofill {
-        background-color: transparent !important;
-        -webkit-text-fill-color: white !important;
-    }
-    &:focus {
-        outline: 0;
-        border: 0.6rem solid $color-button-top-gradient ;
-    }
-}
+      &__label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 2rem;
+        align-self: flex-start;
+        align-content: space-around;
+        padding-top: 1.5rem;
+        margin-bottom: 1rem;
+      }
 
-.label {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 2rem;
-    align-self: flex-start;
-    align-content: space-around;
-    padding-top: 1.5rem;
-    padding-left: 4.5rem;
-}
-
-#register-button{
-    margin-top: 5rem;
+      &__error {
+        font-size: medium;
+        margin-right: 5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        float: right;
+      }
+    }
+  }
 }
