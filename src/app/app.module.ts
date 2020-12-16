@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ProfileComponent,
     RegisterComponent,
     AccountActivationComponent,
+    FriendRequestsComponent,
   ],
   imports: [
     AppRoutingModule,
