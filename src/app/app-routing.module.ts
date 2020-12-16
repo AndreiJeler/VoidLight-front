@@ -1,3 +1,4 @@
+import { SteamReturnComponent } from './components/steam-return/steam-return.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -14,12 +15,12 @@ const routes: Routes = [
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account-activation', component: AccountActivationComponent }
+  { path: 'account-activation', component: AccountActivationComponent },
+  { path: 'steam-return', component: SteamReturnComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

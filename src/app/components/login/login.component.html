@@ -1,19 +1,61 @@
 <div class="card">
-    <form class="card__form">
-        <div class="card__form__logo-container">
-            <img src="../../../assets/Images/logo.png" alt="logo" class="card__form__logo-container__logo">
+  <form class="card__form" action="#">
+    <div class="card__form__logo-container">
+      <img src="../../../assets/Images/logo.png" alt="logo" class="card__form__logo-container__logo">
+    </div>
+
+    <section>
+      <div class="card__form__alternatives">
+        <div class="card__form__alternatives__container__logo">
+          <svg class="card__form__alternatives__container__logo__icon">
+            <use xlink:href="../../../assets/logos/sprite.svg#discord"></use>
+          </svg>
         </div>
-        <h1 class="card__form__title">Welcome</h1>
-
-        <label class="card__form__username-label label" for="username">Username</label>
-        <input type="text" [(ngModel)]="username" class="card__form__username input-field" name="username">
-
-        <label class="card__form__password-label label" for="password">Password</label>
-        <input type="password" [(ngModel)]="password" class="card__form__password input-field" name="password">
-
-        <div class="card__form__buttons">
-            <button (click)="login()" class="card__form__button__login-btn submit-button"><span>Login</span></button>
-            <button (click)="register()" class="card__form__button__register-btn submit-button"><span>Register</span></button>
+        <div class="card__form__alternatives__container__logo">
+          <svg class="card__form__alternatives__container__logo__icon">
+            <use xlink:href="../../../assets/logos/sprite.svg#facebook"></use>
+          </svg>
         </div>
-    </form>
+        <div class="card__form__alternatives__container__logo">
+          <svg class="card__form__alternatives__container__logo__icon">
+            <use xlink:href="../../../assets/logos/sprite.svg#google"></use>
+          </svg>
+        </div>
+        <div class="card__form__alternatives__container__logo">
+          <svg class="card__form__alternatives__container__logo__icon">
+            <use xlink:href="../../../assets/logos/sprite.svg#twitch"></use>
+          </svg>
+        </div>
+        <div class="card__form__alternatives__container__logo" (click)="steamLogin()">
+          <svg class="card__form__alternatives__container__logo__icon">
+            <use xlink:href="../../../assets/logos/sprite.svg#steam"></use>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <h1 class="card__form__title">Welcome</h1>
+
+
+    <section>
+      <div class="card__form__group">
+        <input type="text" class="card__form__input" name="username" placeholder="Username" id="username" required
+          [(ngModel)]="username">
+        <label for="username" class="card__form__label">Username</label>
+      </div>
+
+      <div class="card__form__group">
+        <input type="password" class="card__form__input" name="password" placeholder="Password" id="password" required
+          [(ngModel)]="password">
+        <label for="password" class="card__form__label">Password</label>
+      </div>
+
+      <div class="card__form__buttons">
+        <button (click)="login()" class="card__form__button__login-btn submit-button"><span>Login</span></button>
+        <button (click)="register()"
+          class="card__form__button__register-btn submit-button"><span>Register</span></button>
+      </div>
+    </section>
+
+  </form>
 </div>
