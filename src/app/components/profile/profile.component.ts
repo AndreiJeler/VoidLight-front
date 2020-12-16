@@ -8,7 +8,8 @@ import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { ActivatedRoute } from '@angular/router';
-import {ProfileService} from "../../services/profile.service";
+import {ProfileService} from '../../services/profile.service';
+import {FriendsService} from '../../services/friends.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +17,11 @@ import {ProfileService} from "../../services/profile.service";
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  galleryId = 'posts';
+  galleryId = 'gallery';
   user: User;
   games: Game[];
   posts: Post[];
+  friends: User[];
   images: string[] = [];
   videos: string[] = [];
   userId: number;
@@ -31,7 +33,8 @@ export class ProfileComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private gameService: GameService,
     private postService: PostService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private friendsService: FriendsService,
   ) {}
 
   ngOnInit(): void {
@@ -91,6 +94,20 @@ export class ProfileComponent implements OnInit {
       }
     );
 
+    this.friendsService.getFriendsForUser(this.userId).subscribe(
+      (result) => {
+        this.friends = result;
+        this.friends.forEach((friend: User) => {
+          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    console.log(this.friends);
+
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
     const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
@@ -107,5 +124,18 @@ export class ProfileComponent implements OnInit {
     galleryRef.addYoutube({
       src: 'NGH5YN2cMRg',
     });
+  }
+
+  setActive(id: string): void {
+    document.getElementsByClassName('active')[0]?.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+  }
+
+  isActive(id: string): boolean {
+    return document.getElementById(id).classList.contains('active');
+  }
+
+  gotToFriendProfile(id: number): void {
+    this.router.navigate([`/profile/${id}`]);
   }
 }

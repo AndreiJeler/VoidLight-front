@@ -200,5 +200,8 @@ export class NewsfeedComponent implements OnInit {
       this.cdr.detectChanges();
     }
   }
-  // END REGION BUTTON FUNCTIONS
+
+  public gotToFriendProfile(id: number): void {
+    this._router.navigate([`/profile/${id}`]);
+  }
 }

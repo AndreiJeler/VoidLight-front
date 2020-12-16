@@ -7,6 +7,7 @@ import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
+import {SteamReturnComponent} from "./components/steam-return/steam-return.component";
 
 const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent},

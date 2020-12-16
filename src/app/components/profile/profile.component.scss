@@ -3,7 +3,7 @@
 body {
   align-items: center;
 }
-.container {
+.profile-container {
   margin: 1% 7.5%;
   padding: 1% 3%;
   height: fit-content;
@@ -26,7 +26,6 @@ body {
   }
 
   &__header {
-    //flex-direction: row;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
@@ -51,11 +50,6 @@ body {
         flex-wrap: nowrap;
         color: $color-white;
         margin-bottom: 4.5rem;
-
-        > * {
-          //margin: 0.3rem;
-          //margin-left: 1rem;
-        }
 
         &__nickname {
           font-size: x-large;
@@ -100,8 +94,6 @@ body {
       }
 
       &__see-all-achievements {
-        //line-height: 2.8rem;
-        //align-self: flex-end;
         color: $color-white;
         margin-top: 0.2rem;
         margin-right: 1rem;
@@ -127,6 +119,23 @@ body {
         display: none;
       }
 
+      .breadcrumb {
+        margin-bottom: 2rem;
+        background-color: $color-profile-card;
+        font-size: x-large;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        padding: 1rem;
+        color: $color-inactive;
+
+        & > li:hover {
+          cursor: pointer;
+        }
+
+        .active{
+          color: $color-white;
+        }
+      }
+
       &__title {
         font-size: larger;
         line-height: 4.2rem;
@@ -138,7 +147,13 @@ body {
         border-radius: 25px;
         background-color: $color-form-card;
         width: 100%;
-        height: 67rem;
+        height: 65rem;
+      }
+
+      &__friends {
+        & > li{
+          cursor: pointer;
+        }
       }
     }
 
@@ -178,6 +193,11 @@ body {
           }
         }
 
+        & > hr {
+          border-color: $color-white;
+          padding: 0;
+        }
+
         &__ul {
           list-style: none;
 
@@ -197,8 +217,3 @@ body {
     }
   }
 }
-
-//gallery {
-//  background-color: $color-form-card;
-//}
-//TODO ive no idea why i cant style divs picked with inspect from the gallery
