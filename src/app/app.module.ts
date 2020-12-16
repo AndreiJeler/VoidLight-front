@@ -48,7 +48,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     GalleryModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     NoopAnimationsModule,
     ModalModule.forRoot(),
     NgSelectModule,

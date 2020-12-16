@@ -2,7 +2,6 @@
 @import "../../../scss/typography.scss";
 @import "../../../scss/base.scss";
 
-
 .newsfeed {
   display: flex;
   align-items: center;
@@ -44,7 +43,7 @@
       font-size: medium;
     }
 
-    &__logout_button:hover{
+    &__logout_button:hover {
       background: $color-newsfeed-button-hover;
     }
   }
@@ -54,7 +53,7 @@
     align-self: flex-start;
     display: flex;
     justify-content: space-between;
-
+    background-color: currentColor;
     .side-card {
       margin: 3rem 4rem;
       padding: 1rem 0;
@@ -63,9 +62,9 @@
       position: relative;
       z-index: 1;
 
-      &::before{
+      &::before {
         content: "";
-       position: absolute;
+        position: absolute;
         z-index: -1;
         top: 0;
         bottom: 0;
@@ -73,12 +72,23 @@
         right: 0;
         background: linear-gradient(to right, $background-color-post, $color-card-gradient-grey);
         border-radius: 25px;
-        opacity: .5;
+        opacity: 0.5;
       }
     }
 
     &__categories {
-      
+      height: 80rem;
+      background: linear-gradient(to right, $background-color-post, $color-card-gradient-grey);
+      border-radius: 15px;
+      overflow-y: scroll;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
       .active {
         background-color: $color-list-element-hover;
         padding-left: 4.5rem;
@@ -95,7 +105,7 @@
         font-size: large;
 
         & > li {
-          margin-top: .3rem;
+          margin-top: 0.3rem;
           padding-left: 3rem;
           cursor: pointer;
           transition: all 0.2s ease-in-out;
@@ -114,7 +124,7 @@
 
       &__title {
         margin-top: 1rem;
-        padding-left: 1.5rem;;
+        padding-left: 1.5rem;
       }
 
       &__list {
@@ -123,7 +133,7 @@
         font-size: large;
 
         & > li {
-          margin-top: .3rem;
+          margin-top: 0.3rem;
           padding-left: 3rem;
           cursor: pointer;
           transition: all 0.2s ease-in-out;

@@ -1,9 +1,18 @@
+import { Comment } from './../../models/comment';
 import { User } from './../../models/user';
 import { AuthenticationService } from './../../services/authentication.service';
 import { PostService } from 'src/app/services/post.service';
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  EventEmitter,
+} from '@angular/core';
+
 
 import { Post } from '../../models/post';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post',
@@ -12,16 +21,19 @@ import { Post } from '../../models/post';
 })
 export class PostComponent implements OnInit {
   @Input() post: Post;
+  @Input() event: EventEmitter<Post>;
   timeString: string;
   public images: string[] = [];
   public videos: string[] = [];
   public user: User;
+  public commentText: string;
+  public areCommentsVisible: boolean = false;
 
   constructor(
     private postService: PostService,
     private authenticationService: AuthenticationService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authenticationService.currentUser.subscribe(
@@ -47,6 +59,37 @@ export class PostComponent implements OnInit {
       .likePost(this.post.id, this.user.id)
       .subscribe((res: number) => {
         this.post.likes = res;
+      });
+  }
+
+  viewComments() {
+    this.areCommentsVisible = !this.areCommentsVisible;
+  }
+
+  comment(): void {
+    const comm = new Comment(
+      this.post.id,
+      this.user.id,
+      undefined,
+      this.commentText
+    );
+    console.log(comm);
+    this.postService
+      .postComment(comm)
+      .pipe(first())
+      .subscribe((res) => { 
+        res.user.avatarPath = 'https://localhost:44324/' + res.user.avatarPath;
+        this.post.comments.unshift(res); 
+      });
+  }
+
+  share(): void {
+    this.postService
+      .postShare(this.post.id, this.user.id)
+      .pipe(first())
+      .subscribe((res) => {
+        console.log(res);
+        this.event.emit(res);
       });
   }
 }

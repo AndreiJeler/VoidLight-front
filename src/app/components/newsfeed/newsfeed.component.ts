@@ -44,7 +44,7 @@ export class NewsfeedComponent implements OnInit {
     private _modalService: BsModalService,
     private _router: Router,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
@@ -67,6 +67,12 @@ export class NewsfeedComponent implements OnInit {
             contents.push(content);
           });
           post.contents = contents;
+          let comments = [];
+          post.comments.forEach((content) => {
+            content.user.avatarPath = 'https://localhost:44324/' + content.user.avatarPath;
+            comments.push(content);
+          });
+          post.comments = comments;
         });
       },
       (error) => {
@@ -192,7 +198,7 @@ export class NewsfeedComponent implements OnInit {
       post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
       let contents = [];
       post.contents.forEach((content) => {
-      content = 'https://localhost:44324/' + content;
+        content = 'https://localhost:44324/' + content;
         contents.push(content);
       });
       post.contents = contents;
@@ -201,4 +207,9 @@ export class NewsfeedComponent implements OnInit {
     }
   }
   // END REGION BUTTON FUNCTIONS
+
+
+  public newPost(post) {
+    this.posts.unshift(post);
+  }
 }

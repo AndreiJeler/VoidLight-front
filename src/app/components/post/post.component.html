@@ -14,12 +14,30 @@
     <div class="post__body__content" *ngIf="post.contents">
       <p class="post__body__content__text paragraph">{{post.text}}</p>
       <img *ngFor="let content of images" [src]="content" alt="Post Image" class="post__body__content__image">
-      <video *ngFor="let content of videos" [src]="content" alt="Post Image" class="post__body__content__image" controls=true> </video>
+      <video *ngFor="let content of videos" [src]="content" alt="Post Image" class="post__body__content__image"
+        controls=true> </video>
     </div>
   </div>
   <div class="post__footer">
     <button class="btn" (click)="likeAction()">Like <span class="post__footer__likes">{{post.likes}}</span></button>
-    <button class="btn">Comment</button>
-    <button class="btn">Share</button>
+    <button class="btn" (click)="viewComments()">Comment</button>
+    <button class="btn" (click)="share()">Share</button>
   </div>
+  <div *ngIf="areCommentsVisible" class="post__comments">
+    <div class="wrapper__input">
+      <input type="text" class="wrapper__input__text" [(ngModel)]="commentText">
+      <button class="btn" (click)="comment()">Add Comment</button>
+    </div>
+    <ul>
+      <li *ngFor="let comment of post.comments" class="post__comments__item">
+        <img [src]="comment.user.avatarPath" alt="image user" class="post__comments__item__picture" />
+        <div class="wrapper">
+          <strong class="post__comments__item__username">{{comment.user.username}}</strong>
+          <p class="post__comments__item__message">{{comment.commentText}}</p>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
 </div>
