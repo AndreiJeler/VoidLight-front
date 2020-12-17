@@ -74,20 +74,8 @@ export class ProfileComponent implements OnInit {
             }
           });
         });
-        const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
 
-        this.images.forEach((image) => {
-          galleryRef.addImage({
-            src: image,
-            thumb: image,
-          });
-        });
-
-        this.videos.forEach((video) => {
-          galleryRef.addVideo({
-            src: video,
-          });
-        });
+        this._initGallery();
       },
       (error) => {
         console.log(error);
@@ -126,9 +114,30 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  _initGallery(): void {
+    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+
+    this.images.forEach((image) => {
+      galleryRef.addImage({
+        src: image,
+        thumb: image,
+      });
+    });
+
+    this.videos.forEach((video) => {
+      galleryRef.addVideo({
+        src: video,
+      });
+    });
+  }
+
   setActive(id: string): void {
     document.getElementsByClassName('active')[0]?.classList.remove('active');
     document.getElementById(id).classList.add('active');
+
+    if (this.isActive('home')) {
+      this._initGallery();
+    }
   }
 
   isActive(id: string): boolean {
@@ -136,6 +145,6 @@ export class ProfileComponent implements OnInit {
   }
 
   gotToFriendProfile(id: number): void {
-    this.router.navigate([`/profile/${id}`]);
+    this.router.navigate([`/profile/${id}`]).then(() => location.reload());
   }
 }
