@@ -10,7 +10,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-
 import { Post } from '../../models/post';
 import { first } from 'rxjs/operators';
 
@@ -28,12 +27,13 @@ export class PostComponent implements OnInit {
   public user: User;
   public commentText: string;
   public areCommentsVisible: boolean = false;
+  public isLiked: boolean;
 
   constructor(
     private postService: PostService,
     private authenticationService: AuthenticationService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.authenticationService.currentUser.subscribe(
@@ -52,12 +52,15 @@ export class PostComponent implements OnInit {
       .split(' ')
       .slice(0, 4)
       .join(' ');
+
+    this.isLiked = this.post.isLiked;
   }
 
   likeAction(): void {
     this.postService
       .likePost(this.post.id, this.user.id)
       .subscribe((res: number) => {
+        this.isLiked = !this.isLiked;
         this.post.likes = res;
       });
   }
@@ -77,9 +80,9 @@ export class PostComponent implements OnInit {
     this.postService
       .postComment(comm)
       .pipe(first())
-      .subscribe((res) => { 
+      .subscribe((res) => {
         res.user.avatarPath = 'https://localhost:44324/' + res.user.avatarPath;
-        this.post.comments.unshift(res); 
+        this.post.comments.unshift(res);
       });
   }
 
