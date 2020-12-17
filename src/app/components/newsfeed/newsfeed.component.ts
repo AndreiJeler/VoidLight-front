@@ -1,4 +1,3 @@
-import { FriendsService } from './../../services/friends.service';
 import { FriendsHubService } from './../../shared/services/friends-hub.service';
 import { SwalService } from './../../shared/services/swal.service';
 import { Constants } from './../../shared/utils/constants';
@@ -36,7 +35,7 @@ export class NewsfeedComponent implements OnInit {
   public publishers: Publisher[];
   public friends: User[];
   protected chosenModal: BsModalRef;
-  public areRequestsPending = false;
+  public numberOfRequests = 0;
 
   constructor(
     private _postService: PostService,
@@ -49,8 +48,7 @@ export class NewsfeedComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private friendsHub: FriendsHubService,
     private swalService: SwalService,
-    private friendsService: FriendsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -97,13 +95,13 @@ export class NewsfeedComponent implements OnInit {
       }
     );
 
-    this.friendsService
+    this._friendsService
       .getFriendRequestsForUser(this.user.id)
       .subscribe((res) => {
-        if (res.length != 0) {
-          this.areRequestsPending = true;
-          this.cdr.detectChanges();
-        }
+
+        this.numberOfRequests = res.length;
+        this.cdr.detectChanges();
+
       });
 
     this.getUserFriends();
@@ -240,7 +238,7 @@ export class NewsfeedComponent implements OnInit {
   public startFriendRequestConnection() {
     const callback = (data) => {
       this.swalService.showFriendNotification(data);
-      this.areRequestsPending = true;
+      this.numberOfRequests += 1;
       this.cdr.detectChanges();
     };
     this.friendsHub.addFriendRequestListener(this.user.id, callback);

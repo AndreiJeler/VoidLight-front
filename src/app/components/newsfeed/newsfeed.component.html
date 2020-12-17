@@ -4,35 +4,42 @@
       <img (click)="openProfile()" [src]="user.avatarPath" alt="profile pic">
       <p class="newsfeed__header__profile__username paragraph">{{user.username}}</p>
     </div>
-    <button class="newsfeed__header__logout_button paragraph" (click)="openVideoPostModal(friendRequestsModal)">Friend requests</button>
-    <button class="newsfeed__header__logout_button paragraph" (click)="logout()">Logout</button>
+    <div class="wrapper">
+      <div class="newsfeed__header__friend-requests">
+        <p class="newsfeed__header__friend-requests__number" *ngIf="numberOfRequests > 0">{{numberOfRequests}}</p>
+        <svg class="newsfeed__header__friend-requests__icon" (click)="openVideoPostModal(friendRequestsModal)">
+          <use xlink:href="../../../assets/logos/sprite.svg#friends"></use>
+        </svg>
+      </div>
+
+      <button class="newsfeed__header__logout_button paragraph" (click)="logout()">Logout</button>
+    </div>
   </div>
 
   <div class="newsfeed__body">
     <div class="newsfeed__body__categories side-card">
       <h1 class="paragraph newsfeed__body__categories__title">Games </h1>
       <ul class="paragraph newsfeed__body__categories__list">
-        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)"
-        id="game{{game.id}}">{{game.name}}</li>
+        <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" id="game{{game.id}}">{{game.name}}</li>
       </ul>
 
       <h1 class="paragraph newsfeed__body__categories__title">Publisher</h1>
       <ul class="paragraph newsfeed__body__categories__list">
         <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)"
-        id="publisher{{publisher.id}}">{{publisher.name}}</li>
+          id="publisher{{publisher.id}}">{{publisher.name}}</li>
       </ul>
     </div>
 
     <div class="newsfeed__body__middle">
       <div class="newsfeed__body__middle__sections">
         <button class="newsfeed__body__middle__sections__text"
-        (click)="openModalCreatePost(createPostModal)">Aa</button>
+          (click)="openModalCreatePost(createPostModal)">Aa</button>
         <button class="newsfeed__body__middle__sections__image"
-        (click)="openPhotoPostModal(createPostModalWithContent)">
-        <img src="../../../assets/Images/image.png" alt="image" ></button>
+          (click)="openPhotoPostModal(createPostModalWithContent)">
+          <img src="../../../assets/Images/image.png" alt="image"></button>
         <button class="newsfeed__body__middle__sections__video"
-        (click)="openVideoPostModal(createPostModalWithContent)">
-        <img src="../../../assets/Images/video.png" alt="video"></button>
+          (click)="openVideoPostModal(createPostModalWithContent)">
+          <img src="../../../assets/Images/video.png" alt="video"></button>
       </div>
       <div class="newsfeed__body__middle__posts">
         <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
@@ -40,25 +47,26 @@
     </div>
 
     <div class="newsfeed__body__friends side-card">
-        <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
+      <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
       <ul class="paragraph newsfeed__body__friends__list">
-        <li *ngFor="let friend of friends"><app-friend [friend]="friend"></app-friend></li>
+        <li *ngFor="let friend of friends">
+          <app-friend [friend]="friend"></app-friend>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 
 <ng-template #createPostModal>
-  <create-post-modal [games]="games" [userId]="user.id" [userName]="user.username"
-  (close)="closeModal($event)"></create-post-modal>
+  <create-post-modal [games]="games" [userId]="user.id" [userName]="user.username" (close)="closeModal($event)">
+  </create-post-modal>
 </ng-template>
 
 <ng-template #createPostModalWithContent>
   <create-post-modal [games]="games" [userId]="user.id" [withContent]="true" [userName]="user.username"
-  (close)="closeModal($event)"></create-post-modal>
+    (close)="closeModal($event)"></create-post-modal>
 </ng-template>
 
 <ng-template #friendRequestsModal>
-  <app-friend-requests [userId]="user.id"
-  (close)="closeFriendRequests($event)"></app-friend-requests>
+  <app-friend-requests [userId]="user.id" (close)="closeFriendRequests($event)"></app-friend-requests>
 </ng-template>
