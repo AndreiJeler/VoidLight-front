@@ -1,3 +1,5 @@
+import { FriendsService } from './../../services/friends.service';
+import { FriendsHubService } from './../../shared/services/friends-hub.service';
 import { SwalService } from './../../shared/services/swal.service';
 import { Constants } from './../../shared/utils/constants';
 import {
@@ -34,6 +36,7 @@ export class NewsfeedComponent implements OnInit {
   public publishers: Publisher[];
   public friends: User[];
   protected chosenModal: BsModalRef;
+  public areRequestsPending = false;
 
   constructor(
     private _postService: PostService,
@@ -43,9 +46,11 @@ export class NewsfeedComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private _modalService: BsModalService,
     private _router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private friendsHub: FriendsHubService,
+    private swalService: SwalService,
+    private friendsService: FriendsService
   ) {}
-
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -92,6 +97,24 @@ export class NewsfeedComponent implements OnInit {
       }
     );
 
+    this.friendsService
+      .getFriendRequestsForUser(this.user.id)
+      .subscribe((res) => {
+        if (res.length != 0) {
+          this.areRequestsPending = true;
+          this.cdr.detectChanges();
+        }
+      });
+
+    this.getUserFriends();
+
+    this.friendsHub.startConnection();
+    this.startFriendRequestConnection();
+    this.startConfirmRequestConnection();
+    this.startDeclineRequestConnection();
+  }
+
+  public getUserFriends() {
     this._friendsService.getFriendsForUser(this.user.id).subscribe(
       (result) => {
         this.friends = result;
@@ -110,7 +133,10 @@ export class NewsfeedComponent implements OnInit {
   // start: Filter Posts
 
   public getPostsForGame(id: number): void {
-    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+    if (
+      document.getElementsByClassName('active') !== null &&
+      document.getElementsByClassName('active') !== undefined
+    ) {
       if (document.getElementsByClassName('active')[0] !== undefined) {
         document.getElementsByClassName('active')[0].classList.remove('active');
       }
@@ -137,7 +163,10 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public getPostsForPublisher(id: number): void {
-    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+    if (
+      document.getElementsByClassName('active') !== null &&
+      document.getElementsByClassName('active') !== undefined
+    ) {
       if (document.getElementsByClassName('active')[0] !== undefined) {
         document.getElementsByClassName('active')[0].classList.remove('active');
       }
@@ -165,10 +194,12 @@ export class NewsfeedComponent implements OnInit {
 
   public logout(): void {
     this._authenticationService.logout();
+    this.friendsHub.closeConnection();
     this._router.navigate(['/login']);
   }
 
   public openProfile(): void {
+    this.friendsHub.closeConnection();
     this._router.navigate(['/profile']);
   }
 
@@ -192,13 +223,45 @@ export class NewsfeedComponent implements OnInit {
       post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
       let contents = [];
       post.contents.forEach((content) => {
-      content = 'https://localhost:44324/' + content;
+        content = 'https://localhost:44324/' + content;
         contents.push(content);
       });
       post.contents = contents;
       this.posts.unshift(post);
       this.cdr.detectChanges();
     }
+  }
+
+  public closeFriendRequests(event: boolean): void {
+    this.getUserFriends();
+    this.cdr.detectChanges();
+  }
+
+  public startFriendRequestConnection() {
+    const callback = (data) => {
+      this.swalService.showFriendNotification(data);
+      this.areRequestsPending = true;
+      this.cdr.detectChanges();
+    };
+    this.friendsHub.addFriendRequestListener(this.user.id, callback);
+  }
+
+  public startConfirmRequestConnection() {
+    const callback = (data) => {
+      this.swalService.showFriendNotification(data);
+      this.getUserFriends();
+      this.cdr.detectChanges();
+    };
+    this.friendsHub.addConfirmRequestListener(this.user.id, callback);
+  }
+
+  public startDeclineRequestConnection() {
+    const callback = (data) => {
+      this.swalService.showFriendNotification(data);
+      this.getUserFriends();
+      this.cdr.detectChanges();
+    };
+    this.friendsHub.addDeclineRequestListener(this.user.id, callback);
   }
   // END REGION BUTTON FUNCTIONS
 }

@@ -29,9 +29,9 @@ export class FriendRequestsComponent implements OnInit {
         );
 
         this.friends = friends;
-        console.log(friends);
       });
   }
+
   public confirm(friendId: number) {
     const request = new FriendRequest(friendId, this.userId);
     this.friendsService.acceptFriendRequest(request).subscribe((_) => {
