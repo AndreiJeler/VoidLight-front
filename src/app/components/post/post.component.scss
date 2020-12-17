@@ -82,6 +82,7 @@
     margin: 0.5rem 4rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 
     &__likes {
@@ -90,12 +91,25 @@
     }
 
     & > .btn {
-      background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
-      height: 3rem;
-      width: 10rem;
-      border-radius: 5px;
-      border: none;
-      font-size: medium;
+      color: $color-white !important;
+      width: 25rem;
+      height: 3rem;;
+      font-size: 2rem;
+      transition: all 0.4s ease 0s;
+      border-radius: 1rem;
     }
   }
+}
+
+.btn-flip:hover{
+  svg{
+    animation: heartPulse .25s $bezier both;
+  }
+}
+
+.btn-flip:hover {
+  color: $color-white !important;
+  background: darken($color-gray, 25%);
+  transition: all 0.4s ease 0s;
+  border: none;
 }
