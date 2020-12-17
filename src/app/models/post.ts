@@ -8,6 +8,7 @@ export class Post {
     public username: string;
     public avatarPath: string;
     public userId: number;
+    public isLiked: boolean;
 }
 
 //TODO add foking constructor GULII

@@ -16,7 +16,7 @@ export class PostComponent implements OnInit {
   public images: string[] = [];
   public videos: string[] = [];
   public user: User;
-  public isLiked: boolean = false;
+  public isLiked: boolean;
 
   constructor(
     private postService: PostService,
@@ -42,6 +42,8 @@ export class PostComponent implements OnInit {
       .split(' ')
       .slice(0, 4)
       .join(' ');
+
+    this.isLiked = this.post.isLiked;
   }
 
   likeAction(): void {
