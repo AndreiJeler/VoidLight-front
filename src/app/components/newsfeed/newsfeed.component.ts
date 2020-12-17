@@ -21,6 +21,7 @@ import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { Publisher } from 'src/app/models/publisher';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-newsfeed',
@@ -45,7 +46,6 @@ export class NewsfeedComponent implements OnInit {
     private _router: Router,
     private cdr: ChangeDetectorRef
   ) {}
-
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -169,7 +169,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public openProfile(): void {
-    this._router.navigate(['/profile']);
+    this._router.navigate([`/profile/${this.user.id}`]);
   }
 
   //start: Modal Operations Region
@@ -200,5 +200,8 @@ export class NewsfeedComponent implements OnInit {
       this.cdr.detectChanges();
     }
   }
-  // END REGION BUTTON FUNCTIONS
+
+  public gotToFriendProfile(id: number): void {
+    this._router.navigate([`/profile/${id}`]);
+  }
 }

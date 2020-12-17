@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
+import { ActivatedRoute } from '@angular/router';
+import {ProfileService} from '../../services/profile.service';
+import {FriendsService} from '../../services/friends.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,35 +17,44 @@ import { Game } from 'src/app/models/game';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  galleryId = 'posts';
+  galleryId = 'gallery';
   user: User;
   games: Game[];
   posts: Post[];
+  friends: User[];
   images: string[] = [];
   videos: string[] = [];
+  userId: number;
 
   constructor(
+    private route: ActivatedRoute,
     private gallery: Gallery,
     private router: Router,
     private authenticationService: AuthenticationService,
     private gameService: GameService,
-    private postService: PostService
+    private postService: PostService,
+    private profileService: ProfileService,
+    private friendsService: FriendsService,
   ) {}
 
   ngOnInit(): void {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    this.userId = +this.route.snapshot.paramMap.get('id');
 
-    this.authenticationService.currentUser.subscribe(
-      (user) => (this.user = user)
+    this.profileService.getUserById(+this.route.snapshot.paramMap.get('id')).subscribe(
+      (user) => {
+        this.user = user;
+        this.user.avatarPath = 'https://localhost:44324/' + user.avatarPath;
+      }
     );
 
     this.gameService
-      .getFavoriteGamesForUser(this.user.id)
+      .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
 
-    this.postService.getPostsByUser(this.user.id).subscribe(
+    this.postService.getPostsByUser(this.userId).subscribe(
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
@@ -62,25 +74,27 @@ export class ProfileComponent implements OnInit {
             }
           });
         });
-        const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
 
-        this.images.forEach((image) => {
-          galleryRef.addImage({
-            src: image,
-            thumb: image,
-          });
-        });
+        this._initGallery();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
-        this.videos.forEach((video) => {
-          galleryRef.addVideo({
-            src: video,
-          });
+    this.friendsService.getFriendsForUser(this.userId).subscribe(
+      (result) => {
+        this.friends = result;
+        this.friends.forEach((friend: User) => {
+          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
         });
       },
       (error) => {
         console.log(error);
       }
     );
+
+    console.log(this.friends);
 
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
@@ -98,5 +112,39 @@ export class ProfileComponent implements OnInit {
     galleryRef.addYoutube({
       src: 'NGH5YN2cMRg',
     });
+  }
+
+  _initGallery(): void {
+    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+
+    this.images.forEach((image) => {
+      galleryRef.addImage({
+        src: image,
+        thumb: image,
+      });
+    });
+
+    this.videos.forEach((video) => {
+      galleryRef.addVideo({
+        src: video,
+      });
+    });
+  }
+
+  setActive(id: string): void {
+    document.getElementsByClassName('active')[0]?.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+
+    if (this.isActive('home')) {
+      this._initGallery();
+    }
+  }
+
+  isActive(id: string): boolean {
+    return document.getElementById(id).classList.contains('active');
+  }
+
+  gotToFriendProfile(id: number): void {
+    this.router.navigate([`/profile/${id}`]).then(() => location.reload());
   }
 }
