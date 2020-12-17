@@ -49,7 +49,6 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     GalleryModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     NoopAnimationsModule,
     ModalModule.forRoot(),
     NgSelectModule,

@@ -51,7 +51,7 @@ $bezier: cubic-bezier(.175, .885, .32, 1.275);
     }
 }
 
-html, body {
+html {
     // This defines what 1rem is
     font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
     background-color: darken($background-color, 4%);

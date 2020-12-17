@@ -67,6 +67,13 @@ export class NewsfeedComponent implements OnInit {
             contents.push(content);
           });
           post.contents = contents;
+          let comments = [];
+          post.comments.forEach((content) => {
+            content.user.avatarPath =
+              'https://localhost:44324/' + content.user.avatarPath;
+            comments.push(content);
+          });
+          post.comments = comments;
         });
       },
       (error) => {
@@ -110,7 +117,10 @@ export class NewsfeedComponent implements OnInit {
   // start: Filter Posts
 
   public getPostsForGame(id: number): void {
-    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+    if (
+      document.getElementsByClassName('active') !== null &&
+      document.getElementsByClassName('active') !== undefined
+    ) {
       if (document.getElementsByClassName('active')[0] !== undefined) {
         document.getElementsByClassName('active')[0].classList.remove('active');
       }
@@ -137,7 +147,10 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public getPostsForPublisher(id: number): void {
-    if (document.getElementsByClassName('active') !== null && document.getElementsByClassName('active') !== undefined) {
+    if (
+      document.getElementsByClassName('active') !== null &&
+      document.getElementsByClassName('active') !== undefined
+    ) {
       if (document.getElementsByClassName('active')[0] !== undefined) {
         document.getElementsByClassName('active')[0].classList.remove('active');
       }
@@ -192,13 +205,18 @@ export class NewsfeedComponent implements OnInit {
       post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
       let contents = [];
       post.contents.forEach((content) => {
-      content = 'https://localhost:44324/' + content;
+        content = 'https://localhost:44324/' + content;
         contents.push(content);
       });
       post.contents = contents;
       this.posts.unshift(post);
       this.cdr.detectChanges();
     }
+  }
+  // END REGION BUTTON FUNCTIONS
+
+  public newPost(post) {
+    this.posts.unshift(post);
   }
 
   public gotToFriendProfile(id: number): void {
