@@ -1,47 +1,74 @@
 <div class="profile-container">
-    <div class="profile-container__info">
-        <img class="profile-container__info__image" [src]="user.avatarPath"/>
-        <div class="profile-container__info__data">
-            <p class="profile-container__info__data__nickname">{{user.username}}</p>
-            <p class="profile-container__info__data__age">21</p>
-            <p class="profile-container__info__data__country">RO</p>
-            <div class="profile-container__info__data__currently-playing">Currently playing
-                <p class="profile-container__info__data__currently-playing__game"> browsing the internet </p>
+  <div class="profile-container__header">
+    <div class="profile-container__header__info">
+        <img class="profile-container__header__info__image" [src]="user.avatarPath"/>
+        <div class="profile-container__header__info__data paragraph">
+            <p class="profile-container__header__info__data__nickname">{{user.username}}</p>
+            <p class="profile-container__header__info__data__age">21</p>
+            <p class="profile-container__header__info__data__country">RO</p>
+            <div class="profile-container__header__info__data__currently-playing">Currently playing
+                <p class="profile-container__header__info__data__currently-playing__game"> browsing the internet </p>
             </div>
         </div>
     </div>
-    <div class="profile-container__achievements">
-        <p class="profile-container__achievements__edit-profile">Edit Profile</p>
-        <div class="profile-container__achievements__stars">
+    <div class="profile-container__header__achievements">
+        <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
+        <div class="profile-container__header__achievements__stars">
         </div>
-        <p class="profile-container__achievements__see-all-achievements">See All Achievements</p>
-        <!-- TODO change from p to a a or idk they are links but this is easily solvable ??!?!?!?!? -->
+        <p class="profile-container__header__achievements__see-all-achievements">See All Achievements</p>
     </div>
-    <div class="profile-container__posts">
-            <p class="profile-container__posts__title">Posts</p>
-            <gallery id="posts" class="profile-container__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
+  </div>
+  <div class="profile-container__content">
+    <div class="profile-container__content__posts">
 
-            <!-- Add custom template to image items -->
-            <ng-template #itemTemplate
-                        let-index="index"
-                        let-type="type"
-                        let-data="data"
-                        let-currIndex="currIndex">
-            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
-                {{data?.title}}
-            </span>
-            </ng-template>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" (click)="setActive('home')" id="home">Home</li>
+          <li class="breadcrumb-item" (click)="setActive('posts')" id="posts">Posts</li>
+          <li class="breadcrumb-item" (click)="setActive('friends')" id="friends">Friends</li>
+        </ol>
+      </nav>
+
+      <span *ngIf="isActive('home')">
+        <gallery id="gallery" class="profile-container__content__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
+        <!-- Add custom template to image items -->
+        <ng-template #itemTemplate
+                    let-index="index"
+                    let-type="type"
+                    let-data="data"
+                    let-currIndex="currIndex">
+        <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
+            {{data?.title}}
+        </span>
+        </ng-template>
+      </span>
+
+      <span *ngIf="isActive('posts')" ><app-post *ngFor="let post of this.posts" [post]="post"></app-post></span>
+
+      <span *ngIf="isActive('friends')" ><ul class="paragraph profile-container__content__posts__friends">
+        <li *ngFor="let friend of this.friends" (click)="gotToFriendProfile(friend.id)"><app-friend [friend]="friend">
+        </app-friend>
+        </li>
+      </ul></span>
     </div>
-    <div class="profile-container__games">
-        <p class="profile-container__games__title">Favorite Games</p>
-        <div class="profile-container__games__list">
-            <ul class="profile-container__games__list__ul">
-                <li class="profile-container__games__list__ul__li">
-                    <favorite-game *ngFor="let game of games" [game]="game" class="profile-container__games__list__ul__li__item">
-                    </favorite-game>
-                </li>
-            </ul>
+
+    <div class="profile-container__content__games paragraph">
+        <p class="profile-container__content__games__title">Favorite Games</p>
+        <div class="profile-container__content__games__list">
+          <div class="profile-container__content__games__list__heading">
+            <p class="profile-container__content__games__list__heading__name">NAME</p>
+            <p class="profile-container__content__games__list__heading__element">TIME PLAYED</p>
+            <p class="profile-container__content__games__list__heading__element">ACHIEVEMENTS</p>
+          </div>
+          <hr>
+          <ul class="profile-container__content__games__list__ul">
+              <li class="profile-container__content__games__list__ul__li">
+                  <favorite-game *ngFor="let game of games" [game]="game" class="profile-container__games__list__ul__li__item">
+                  </favorite-game>
+              </li>
+          </ul>
         </div>
 
     </div>
+  </div>
 </div>

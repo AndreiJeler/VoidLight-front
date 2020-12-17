@@ -1,5 +1,7 @@
-
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -27,6 +29,7 @@ import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,10 +53,10 @@ import { FriendRequestsComponent } from './components/newsfeed/modals/friend-req
     ReactiveFormsModule,
     GalleryModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     NoopAnimationsModule,
     ModalModule.forRoot(),
     NgSelectModule,
+    CommonModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -61,4 +64,4 @@ import { FriendRequestsComponent } from './components/newsfeed/modals/friend-req
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

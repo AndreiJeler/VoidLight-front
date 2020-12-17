@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Constants } from '../shared/utils/constants';
 import { Post } from '../models/post';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root',
@@ -65,5 +66,13 @@ export class PostService {
    */
   public getPostsForPublisher(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${this._postUrl}/publisher/${id}`);
+  }
+
+  public postComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${this._postUrl}/comment`, comment);
+  }
+
+  public postShare(postId: number, userId: number): Observable<Post> {
+    return this.http.get<Post>(`${this._postUrl}/share/${postId}/${userId}`);
   }
 }

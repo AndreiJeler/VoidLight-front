@@ -23,11 +23,11 @@
         <li *ngFor="let game of games" (click)="getPostsForGame(game.id)" id="game{{game.id}}">{{game.name}}</li>
       </ul>
 
-      <h1 class="paragraph newsfeed__body__categories__title">Publisher</h1>
+      <!-- <h1 class="paragraph newsfeed__body__categories__title">Publisher</h1>
       <ul class="paragraph newsfeed__body__categories__list">
         <li *ngFor="let publisher of publishers" (click)="getPostsForPublisher(publisher.id)"
-          id="publisher{{publisher.id}}">{{publisher.name}}</li>
-      </ul>
+        id="publisher{{publisher.id}}">{{publisher.name}}</li>
+      </ul> -->
     </div>
 
     <div class="newsfeed__body__middle">
@@ -42,16 +42,14 @@
           <img src="../../../assets/Images/video.png" alt="video"></button>
       </div>
       <div class="newsfeed__body__middle__posts">
-        <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
+        <app-post *ngFor="let post of this.posts" [post]="post" (event)="newPost($event)"></app-post>
       </div>
     </div>
 
     <div class="newsfeed__body__friends side-card">
       <h1 class="paragraph newsfeed__body__friends__title">Friends</h1>
       <ul class="paragraph newsfeed__body__friends__list">
-        <li *ngFor="let friend of friends">
-          <app-friend [friend]="friend"></app-friend>
-        </li>
+        <li *ngFor="let friend of friends" (click)="gotToFriendProfile(friend.id)"><app-friend [friend]="friend"></app-friend></li>
       </ul>
     </div>
   </div>

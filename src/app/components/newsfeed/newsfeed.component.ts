@@ -22,6 +22,7 @@ import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { Publisher } from 'src/app/models/publisher';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-newsfeed',
@@ -47,8 +48,8 @@ export class NewsfeedComponent implements OnInit {
     private _router: Router,
     private cdr: ChangeDetectorRef,
     private friendsHub: FriendsHubService,
-    private swalService: SwalService,
-  ) { }
+    private swalService: SwalService
+  ) {}
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -70,6 +71,13 @@ export class NewsfeedComponent implements OnInit {
             contents.push(content);
           });
           post.contents = contents;
+          let comments = [];
+          post.comments.forEach((content) => {
+            content.user.avatarPath =
+              'https://localhost:44324/' + content.user.avatarPath;
+            comments.push(content);
+          });
+          post.comments = comments;
         });
       },
       (error) => {
@@ -98,10 +106,8 @@ export class NewsfeedComponent implements OnInit {
     this._friendsService
       .getFriendRequestsForUser(this.user.id)
       .subscribe((res) => {
-
         this.numberOfRequests = res.length;
         this.cdr.detectChanges();
-
       });
 
     this.getUserFriends();
@@ -198,7 +204,7 @@ export class NewsfeedComponent implements OnInit {
 
   public openProfile(): void {
     this.friendsHub.closeConnection();
-    this._router.navigate(['/profile']);
+    this._router.navigate([`/profile/${this.user.id}`]);
   }
 
   //start: Modal Operations Region
@@ -262,4 +268,12 @@ export class NewsfeedComponent implements OnInit {
     this.friendsHub.addDeclineRequestListener(this.user.id, callback);
   }
   // END REGION BUTTON FUNCTIONS
+
+  public newPost(post) {
+    this.posts.unshift(post);
+  }
+
+  public gotToFriendProfile(id: number): void {
+    this._router.navigate([`/profile/${id}`]);
+  }
 }
