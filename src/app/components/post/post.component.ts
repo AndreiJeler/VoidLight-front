@@ -9,6 +9,7 @@ import {
   Input,
   OnInit,
   EventEmitter,
+  Output,
 } from '@angular/core';
 
 import { Post } from '../../models/post';
@@ -21,7 +22,7 @@ import { first } from 'rxjs/operators';
 })
 export class PostComponent implements OnInit {
   @Input() post: Post;
-  @Input() event: EventEmitter<Post>;
+  @Output() event = new EventEmitter<Post>();
   timeString: string;
   public images: string[] = [];
   public videos: string[] = [];
@@ -100,6 +101,7 @@ export class PostComponent implements OnInit {
       .postShare(this.post.id, this.user.id)
       .pipe(first())
       .subscribe((res) => {
+        res.avatarPath = 'https://localhost:44324/' + res.avatarPath;
         this.event.emit(res);
       });
   }

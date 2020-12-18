@@ -297,7 +297,9 @@ export class NewsfeedComponent implements OnInit {
   // END REGION BUTTON FUNCTIONS
 
   public newPost(post) {
+    console.log(post);
     this.posts.unshift(post);
+    this.cdr.detectChanges();
   }
 
   public gotToFriendProfile(id: number): void {
