@@ -10,6 +10,10 @@
                 <p class="profile-container__header__info__data__currently-playing__game"> browsing the internet </p>
             </div>
         </div>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==0" (click)="sendFriendRequest()" class="btn">Add friend</button>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==1" (click)="deleteFriend()" class="btn">Delete friend</button>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==2" (click)="deleteFriendRequest()" class="btn">Delete request</button>
+
     </div>
     <div class="profile-container__header__achievements">
         <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>

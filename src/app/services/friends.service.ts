@@ -38,4 +38,23 @@ export class FriendsService {
   public declineFriendRequest(friendRequest: FriendRequest): Observable<any> {
     return this.http.post<any>(`${this._friendsUrl}/decline`, friendRequest);
   }
+
+  public removeFriend(initId: number, recId: number): Observable<any> {
+    return this.http.delete<any>(`${this._friendsUrl}/${initId}/${recId}`);
+  }
+
+  public removeFriendRequest(initId: number, recId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${this._friendsUrl}/request/${initId}/${recId}`
+    );
+  }
+
+  public getFriendshipStatus(
+    initId: number,
+    recId: number
+  ): Observable<number> {
+    return this.http.get<number>(
+      `${this._friendsUrl}/status/${initId}/${recId}`
+    );
+  }
 }

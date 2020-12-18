@@ -13,7 +13,7 @@ import { Comment } from '../models/comment';
 export class PostService {
   private _postUrl = `${Constants.SERVER_URL}/posts`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Returns all the posts for a given user id as an Observable<Post[]>
@@ -27,8 +27,10 @@ export class PostService {
    * Returns all the posts by a given user id as an Observable<Post[]>
    * @param id => the user id
    */
-  public getPostsByUser(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this._postUrl}/user/posted/${id}`);
+  public getPostsByUser(id: number, feedUserId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      `${this._postUrl}/user/posted/${id}/${feedUserId}`
+    );
   }
 
   /**

@@ -1,3 +1,4 @@
+import { PostsHubService } from './../../shared/services/posts-hub.service';
 import { Comment } from './../../models/comment';
 import { User } from './../../models/user';
 import { AuthenticationService } from './../../services/authentication.service';
@@ -32,7 +33,8 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private authenticationService: AuthenticationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private postsHubService: PostsHubService
   ) {}
 
   ngOnInit(): void {
@@ -52,15 +54,23 @@ export class PostComponent implements OnInit {
       .split(' ')
       .slice(0, 4)
       .join(' ');
+    this.post.originalUserAvatar =
+      'https://localhost:44324/' + this.post.originalUserAvatar;
 
     this.isLiked = this.post.isLiked;
+    this.postsHubService.startConnection();
+    const callback = (data) => {
+      this.post.likes = data;
+      this.isLiked = !this.isLiked;
+    };
+    this.postsHubService.addLikeListener(this.post.id, callback);
   }
 
   likeAction(): void {
     this.postService
       .likePost(this.post.id, this.user.id)
       .subscribe((res: number) => {
-        this.isLiked = !this.isLiked;
+        // this.isLiked = !this.isLiked;
         this.post.likes = res;
       });
   }
@@ -76,7 +86,6 @@ export class PostComponent implements OnInit {
       undefined,
       this.commentText
     );
-    console.log(comm);
     this.postService
       .postComment(comm)
       .pipe(first())
@@ -91,7 +100,6 @@ export class PostComponent implements OnInit {
       .postShare(this.post.id, this.user.id)
       .pipe(first())
       .subscribe((res) => {
-        console.log(res);
         this.event.emit(res);
       });
   }
