@@ -58,8 +58,8 @@ export class PostService {
    * Will return all the post filtered by a certain game id as an Observable<Post[]>
    * @param id => the game id
    */
-  public getPostsForGame(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this._postUrl}/game/${id}`);
+  public getPostsForGame(id: number, userId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this._postUrl}/game/${id}/${userId}`);
   }
 
   /**

@@ -35,6 +35,10 @@ export class FriendsHubService {
     this.hubConnection.on('decline-' + userId, callback);
   };
 
+  public addRemovedFriendRequestListener = (userId: number, callback) => {
+    this.hubConnection.on('remove-' + userId, callback);
+  };
+
   public closeConnection = () => {
     this.hubConnection.stop().then();
   };

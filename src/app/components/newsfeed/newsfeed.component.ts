@@ -124,6 +124,7 @@ export class NewsfeedComponent implements OnInit {
     this.startFriendRequestConnection();
     this.startConfirmRequestConnection();
     this.startDeclineRequestConnection();
+    this.startRemovedRequestConnection();
   }
 
   public getUserFriends() {
@@ -155,7 +156,7 @@ export class NewsfeedComponent implements OnInit {
     }
     document.getElementById('game' + id).classList.add('active');
 
-    this._postService.getPostsForGame(id).subscribe(
+    this._postService.getPostsForGame(id, this.user.id).subscribe(
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
@@ -283,6 +284,16 @@ export class NewsfeedComponent implements OnInit {
     };
     this.friendsHub.addDeclineRequestListener(this.user.id, callback);
   }
+
+  public startRemovedRequestConnection() {
+    const callback = (data) => {
+      this.swalService.showFriendNotification(data);
+      this.numberOfRequests -= 1;
+      this.cdr.detectChanges();
+    };
+    this.friendsHub.addRemovedFriendRequestListener(this.user.id, callback);
+  }
+
   // END REGION BUTTON FUNCTIONS
 
   public newPost(post) {

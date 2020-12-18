@@ -71,39 +71,6 @@ export class ProfileComponent implements OnInit {
       .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
 
-    this.postService
-      .getPostsByUser(
-        this.userId,
-        this.authenticationService.currentUserValue.id
-      )
-      .subscribe(
-        (result) => {
-          this.posts = result;
-          this.posts.forEach((post) => {
-            post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-            let contents = [];
-            post.contents.forEach((content) => {
-              content = 'https://localhost:44324/' + content;
-              contents.push(content.replace('\\', '/'));
-            });
-            post.contents = contents;
-            contents.forEach((content) => {
-              const value = content.split('.');
-              if (value[value.length - 1] === 'mp4') {
-                this.videos.push(content.replace('\\', '/'));
-              } else {
-                this.images.push(content.replace('\\', '/'));
-              }
-            });
-          });
-
-          this._initGallery();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
     this.friendsService.getFriendsForUser(this.userId).subscribe(
       (result) => {
         this.friends = result;
@@ -159,6 +126,41 @@ export class ProfileComponent implements OnInit {
 
     if (this.isActive('home')) {
       this._initGallery();
+    }
+
+    if (id == 'posts') {
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.posts.forEach((post) => {
+              post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+              let contents = [];
+              post.contents.forEach((content) => {
+                content = 'https://localhost:44324/' + content;
+                contents.push(content.replace('\\', '/'));
+              });
+              post.contents = contents;
+              contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
 
