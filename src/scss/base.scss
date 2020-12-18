@@ -57,6 +57,7 @@ body {
   background-color: darken($background-color, 4%);
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
   @include backlight(
     0,
     25rem,

@@ -9,7 +9,7 @@
     <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
       <div class="newsfeed__header__search-select__item">
         <div class="newsfeed__header__search-select__item__details">
-          <img class='newsfeed__header__search-select__item__img' [src]="item.avatarPath">
+          <img class="newsfeed__header__search-select__item__img"" [src]="item.avatarPath" alt="User profile pic">
           <h4 class="newsfeed__header__search-select__item__username">{{item.username}}</h4>
         </div>
         <a class="btn" *ngIf="checkValidFriendRequest(item.id)" (click)="sendFriendRequest(item.id)">Add friend</a>

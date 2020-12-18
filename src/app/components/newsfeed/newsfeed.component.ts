@@ -43,6 +43,7 @@ export class NewsfeedComponent implements OnInit {
   public possibleUsers: User[] = [];
   public possibleFriends: User[] = [];
   public isClickable = true;
+  public currentGameId = 0;
 
   constructor(
     private _postService: PostService,
@@ -56,7 +57,7 @@ export class NewsfeedComponent implements OnInit {
     private friendsHub: FriendsHubService,
     private swalService: SwalService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -146,6 +147,38 @@ export class NewsfeedComponent implements OnInit {
   // start: Filter Posts
 
   public getPostsForGame(id: number): void {
+    if (this.currentGameId === id) {
+      this._postService.getPostsForUser(this.user.id).subscribe(
+        (result) => {
+          this.posts = result;
+          this.posts.forEach((post) => {
+            post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+            let contents = [];
+            post.contents.forEach((content) => {
+              content = 'https://localhost:44324/' + content;
+              contents.push(content);
+            });
+            post.contents = contents;
+            let comments = [];
+            post.comments.forEach((content) => {
+              content.user.avatarPath =
+                'https://localhost:44324/' + content.user.avatarPath;
+              comments.push(content);
+            });
+            post.comments = comments;
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+      this.currentGameId = -1;
+      
+      document.getElementsByClassName('active')[0].classList.remove('active');
+      
+      return;
+    }
+
     if (
       document.getElementsByClassName('active') !== null &&
       document.getElementsByClassName('active') !== undefined
@@ -155,7 +188,7 @@ export class NewsfeedComponent implements OnInit {
       }
     }
     document.getElementById('game' + id).classList.add('active');
-
+    this.currentGameId = id;
     this._postService.getPostsForGame(id, this.user.id).subscribe(
       (result) => {
         this.posts = result;
@@ -361,6 +394,6 @@ export class NewsfeedComponent implements OnInit {
     this.isClickable = false;
     this._friendsService
       .removeFriendRequest(this.user.id, userId)
-      .subscribe((_) => {});
+      .subscribe((_) => { });
   }
 }

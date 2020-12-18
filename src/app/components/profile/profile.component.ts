@@ -56,7 +56,6 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe((res) => {
           this.friendButtonType = res;
-          console.log(res);
         });
     }
 
@@ -83,7 +82,6 @@ export class ProfileComponent implements OnInit {
       }
     );
 
-    console.log(this.friends);
 
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
