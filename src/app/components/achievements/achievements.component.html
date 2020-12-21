@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Personal achievements</h1>
+  <div class="container__achievements">
+    <ul class="container__achievements__list">
+      <li class="container__achievements__list__li">
+        <app-achievement-item *ngFor="let achievement of achievements" [achievement]="achievements"
+          class="container__achievements__list__li__item">
+        </app-achievement-item>
+      </li>
+    </ul>
+  </div>
+</div>

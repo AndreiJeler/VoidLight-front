@@ -22,6 +22,8 @@ import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AchievementsComponent } from './components/achievements/achievements.component';
+import { AchievementItemComponent } from './components/achievements/achievement-item/achievement-item.component';
 
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -39,6 +41,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ProfileComponent,
     RegisterComponent,
     AccountActivationComponent,
+    AchievementsComponent,
+    AchievementItemComponent
   ],
   imports: [
     AppRoutingModule,

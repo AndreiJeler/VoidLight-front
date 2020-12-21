@@ -7,6 +7,7 @@ import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
+import { AchievementsComponent } from '../app/components/achievements/achievements.component';
 
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account-activation', component: AccountActivationComponent }
+  { path: 'account-activation', component: AccountActivationComponent },
+  { path: 'achievements', component: AchievementsComponent }
 ];
 
 
