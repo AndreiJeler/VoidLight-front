@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'docker build -t voidlight-front:' + env.BRANCH_NAME +  ' .'
+            }
+        }
+        stage('tag') {
+            steps {
+                sh 'docker tag voidlight-front:' + env.BRANCH_NAME +  'voidlight-front: ' + env.BUILD_NUMBER
+            }
+        }
+    }
+}
