@@ -8,4 +8,5 @@ export class User {
   public avatarPath: string;
   public token?: string;
   public role: string;
+  public playedGame: string;
 }

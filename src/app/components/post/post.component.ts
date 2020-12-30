@@ -59,6 +59,7 @@ export class PostComponent implements OnInit {
       'https://localhost:44324/' + this.post.originalUserAvatar;
 
     this.isLiked = this.post.isLiked;
+
     this.postsHubService.startConnection();
     const callback = (data) => {
       this.post.likes = data;
