@@ -1,6 +1,6 @@
 <div class="profile-container">
     <div class="profile-container__info">
-        <img class="profile-container__info__image" [src]="user.avatarPath"/>
+        <img class="profile-container__info__image" [src]="user.avatarPath" alt="profile-pic"/>
         <div class="profile-container__info__data">
             <p class="profile-container__info__data__nickname">{{user.username}}</p>
             <p class="profile-container__info__data__age">21</p>
@@ -14,8 +14,7 @@
         <p class="profile-container__achievements__edit-profile">Edit Profile</p>
         <div class="profile-container__achievements__stars">
         </div>
-        <p class="profile-container__achievements__see-all-achievements">See All Achievements</p>
-        <!-- TODO change from p to a a or idk they are links but this is easily solvable ??!?!?!?!? -->
+        <a routerLink="/achievements" class="profile-container__achievements__see-all-achievements">See All Achievements</a>
     </div>
     <div class="profile-container__posts">
             <p class="profile-container__posts__title">Posts</p>

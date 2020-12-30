@@ -4,5 +4,5 @@ export class Achievement {
     public description: string;
     public unlocked: boolean;
     public dateUnlocked: Date;
-    public percentage: number; //to show what percentage of the users unlocked this achievement
+    public percentage: number; //to show the percentage of the users that unlocked this achievement
 }
