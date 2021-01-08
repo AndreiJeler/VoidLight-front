@@ -8,20 +8,22 @@ import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import { AchievementsComponent } from '../app/components/achievements/achievements.component';
+import {SteamReturnComponent} from "./components/steam-return/steam-return.component";
 
 const routes: Routes = [
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent},
   { path: 'login', component: LoginComponent },
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account-activation', component: AccountActivationComponent },
-  { path: 'achievements', component: AchievementsComponent }
+  { path: 'achievements', component: AchievementsComponent },
+  { path: 'steam-return', component: SteamReturnComponent },
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

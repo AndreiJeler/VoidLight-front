@@ -47,4 +47,9 @@ export class LoginComponent implements OnInit {
   public register() {
     this.router.navigate(['/register']);
   }
+
+  public steamLogin() {
+    window.location.href =
+      'https://localhost:44324/api/authentication/steam-login';
+  }
 }

@@ -34,23 +34,36 @@ export class SwalService {
   public showSuccessNotification(success = 'Success'): void {
     this._swalNotificationCorner.fire({
       icon: 'success',
-      title: success
+      title: success,
     });
   }
 
   public showSuccessResult(title: string, message: string): any {
     return Swal.fire({
-      icon: 'success', title: title, text: message, customClass: {
+      icon: 'success',
+      title: title,
+      text: message,
+      customClass: {
         popup: 'notification-swal',
-      }
+      },
     });
   }
 
   public showErrorResult(title: string, message: string): any {
     return Swal.fire({
-      icon: 'error', title: title, text: message, customClass: {
+      icon: 'error',
+      title: title,
+      text: message,
+      customClass: {
         popup: 'notification-swal',
-      }
+      },
+    });
+  }
+
+  public showFriendNotification(message: string): void {
+    this._swalNotificationCorner.fire({
+      icon: 'info',
+      title: message,
     });
   }
 }

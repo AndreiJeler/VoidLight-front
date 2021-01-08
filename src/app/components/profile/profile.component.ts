@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from '../../services/profile.service';
+import { FriendsService } from '../../services/friends.service';
+import { FriendRequest } from 'src/app/models/friend-request';
 
 @Component({
   selector: 'app-profile',
@@ -14,73 +18,70 @@ import { Game } from 'src/app/models/game';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  galleryId = 'posts';
+  galleryId = 'gallery';
   user: User;
   games: Game[];
   posts: Post[];
+  friends: User[];
   images: string[] = [];
   videos: string[] = [];
+  userId: number;
+  isCurrentUserAccount = false;
+  friendButtonType: number;
 
   constructor(
+    private route: ActivatedRoute,
     private gallery: Gallery,
     private router: Router,
     private authenticationService: AuthenticationService,
     private gameService: GameService,
-    private postService: PostService
+    private postService: PostService,
+    private profileService: ProfileService,
+    private friendsService: FriendsService
   ) {}
 
   ngOnInit(): void {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
     }
+    this.userId = +this.route.snapshot.paramMap.get('id');
 
-    this.authenticationService.currentUser.subscribe(
-      (user) => (this.user = user)
-    );
+    if (this.userId == this.authenticationService.currentUserValue.id) {
+      this.isCurrentUserAccount = true;
+    } else {
+      this.friendsService
+        .getFriendshipStatus(
+          this.authenticationService.currentUserValue.id,
+          this.userId
+        )
+        .subscribe((res) => {
+          this.friendButtonType = res;
+        });
+    }
+
+    this.profileService
+      .getUserById(+this.route.snapshot.paramMap.get('id'))
+      .subscribe((user) => {
+        this.user = user;
+        this.user.avatarPath = 'https://localhost:44324/' + user.avatarPath;
+      });
 
     this.gameService
-      .getFavoriteGamesForUser(this.user.id)
+      .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
 
-    this.postService.getPostsByUser(this.user.id).subscribe(
+    this.friendsService.getFriendsForUser(this.userId).subscribe(
       (result) => {
-        this.posts = result;
-        this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content.replace('\\', '/'));
-          });
-          post.contents = contents;
-          contents.forEach((content) => {
-            const value = content.split('.');
-            if (value[value.length - 1] === 'mp4') {
-              this.videos.push(content.replace('\\', '/'));
-            } else {
-              this.images.push(content.replace('\\', '/'));
-            }
-          });
-        });
-        const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-
-        this.images.forEach((image) => {
-          galleryRef.addImage({
-            src: image,
-            thumb: image,
-          });
-        });
-
-        this.videos.forEach((video) => {
-          galleryRef.addVideo({
-            src: video,
-          });
+        this.friends = result;
+        this.friends.forEach((friend: User) => {
+          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
         });
       },
       (error) => {
         console.log(error);
       }
     );
+
 
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
@@ -98,5 +99,109 @@ export class ProfileComponent implements OnInit {
     galleryRef.addYoutube({
       src: 'NGH5YN2cMRg',
     });
+  }
+
+  _initGallery(): void {
+    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+
+    this.images.forEach((image) => {
+      galleryRef.addImage({
+        src: image,
+        thumb: image,
+      });
+    });
+
+    this.videos.forEach((video) => {
+      galleryRef.addVideo({
+        src: video,
+      });
+    });
+  }
+
+  setActive(id: string): void {
+    document.getElementsByClassName('active')[0]?.classList.remove('active');
+    document.getElementById(id).classList.add('active');
+
+    if (this.isActive('home')) {
+      this._initGallery();
+    }
+
+    if (id == 'posts') {
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.posts.forEach((post) => {
+              post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+              let contents = [];
+              post.contents.forEach((content) => {
+                content = 'https://localhost:44324/' + content;
+                contents.push(content.replace('\\', '/'));
+              });
+              post.contents = contents;
+              contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  }
+
+  isActive(id: string): boolean {
+    return document.getElementById(id).classList.contains('active');
+  }
+
+  gotToFriendProfile(id: number): void {
+    this.router.navigate([`/profile/${id}`]).then(() => location.reload());
+  }
+
+  public sendFriendRequest() {
+    this.friendsService
+      .sendFriendRequest(
+        new FriendRequest(
+          this.authenticationService.currentUserValue.id,
+          this.user.id
+        )
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 2;
+      });
+  }
+
+  public deleteFriend() {
+    this.friendsService
+      .removeFriend(
+        this.authenticationService.currentUserValue.id,
+        this.user.id
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 0;
+      });
+  }
+
+  public deleteFriendRequest() {
+    this.friendsService
+      .removeFriendRequest(
+        this.authenticationService.currentUserValue.id,
+        this.user.id
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 0;
+      });
   }
 }

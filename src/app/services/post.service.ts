@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Constants } from '../shared/utils/constants';
 import { Post } from '../models/post';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { Post } from '../models/post';
 export class PostService {
   private _postUrl = `${Constants.SERVER_URL}/posts`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Returns all the posts for a given user id as an Observable<Post[]>
@@ -26,8 +27,10 @@ export class PostService {
    * Returns all the posts by a given user id as an Observable<Post[]>
    * @param id => the user id
    */
-  public getPostsByUser(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this._postUrl}/user/posted/${id}`);
+  public getPostsByUser(id: number, feedUserId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      `${this._postUrl}/user/posted/${id}/${feedUserId}`
+    );
   }
 
   /**
@@ -55,8 +58,8 @@ export class PostService {
    * Will return all the post filtered by a certain game id as an Observable<Post[]>
    * @param id => the game id
    */
-  public getPostsForGame(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this._postUrl}/game/${id}`);
+  public getPostsForGame(id: number, userId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this._postUrl}/game/${id}/${userId}`);
   }
 
   /**
@@ -65,5 +68,13 @@ export class PostService {
    */
   public getPostsForPublisher(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${this._postUrl}/publisher/${id}`);
+  }
+
+  public postComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${this._postUrl}/comment`, comment);
+  }
+
+  public postShare(postId: number, userId: number): Observable<Post> {
+    return this.http.get<Post>(`${this._postUrl}/share/${postId}/${userId}`);
   }
 }

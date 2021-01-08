@@ -6,12 +6,12 @@ import { User } from '../models/user';
 import { Constants } from '../shared/utils/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private _userUrl = `${Constants.SERVER_URL}/users`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Create a new user account
@@ -26,6 +26,13 @@ export class UserService {
    * @param token => string token for the activation
    */
   public activateUserAccount(token: string): Observable<any> {
-    return this.http.post<any>(`${this._userUrl}/userToken/?token=${token}`, {});
+    return this.http.post<any>(
+      `${this._userUrl}/userToken/?token=${token}`,
+      {}
+    );
+  }
+
+  public getUsersByUsername(username: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this._userUrl}/username/${username}`);
   }
 }
