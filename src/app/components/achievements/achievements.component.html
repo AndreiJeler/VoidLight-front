@@ -2,6 +2,13 @@
   <h1>Personal achievements</h1>
   <div class="container__achievements">
     <ul class="container__achievements__list">
+      <li>
+        <p>Name</p>
+        <p>Description</p>
+        <p>Date unlocked</p>
+        <p>Percentage</p>
+      </li>
+      <hr>
       <li class="container__achievements__list__li">
         <app-achievement-item *ngFor="let achievement of achievements" [achievement]="achievements"
           class="container__achievements__list__li__item">

@@ -14,7 +14,7 @@ export class AchievementService {
 constructor(private http: HttpClient) { }
 
 public getAchievementsForUser(id: number): Observable<Achievement[]> {
-  return this.http.get<Achievement[]>(`${this._achievementUrl}/user/${id}`);
+  return this.http.get<Achievement[]>(`${this._achievementUrl}/user/${id}/game/${id}`);
 }
 
 }
