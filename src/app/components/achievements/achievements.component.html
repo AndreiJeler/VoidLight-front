@@ -1,6 +1,10 @@
 <div class="container">
   <h1>Personal achievements</h1>
   <div class="container__achievements">
+    <ng-select class="games-select custom" (change)="onChange($event)" [editableSearchTerm]="true" [items]="games" bindLabel="name" 
+      [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game" >
+    </ng-select>
+    <button (click)="checkAchievements()">Check for new achievements</button>
     <ul class="container__achievements__list">
       <li>
         <p>Name</p>
@@ -10,7 +14,7 @@
       </li>
       <hr>
       <li class="container__achievements__list__li">
-        <app-achievement-item *ngFor="let achievement of achievements" [achievement]="achievements"
+        <app-achievement-item *ngFor="let achievement of achievements" [achievement]="achievement"
           class="container__achievements__list__li__item">
         </app-achievement-item>
       </li>

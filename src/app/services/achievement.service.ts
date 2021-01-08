@@ -13,8 +13,14 @@ export class AchievementService {
 
 constructor(private http: HttpClient) { }
 
-public getAchievementsForUser(id: number): Observable<Achievement[]> {
-  return this.http.get<Achievement[]>(`${this._achievementUrl}/user/${id}/game/${id}`);
+public getAchievementsForUser(id: number, gameId: number): Observable<Achievement[]> {
+  return this.http.get<Achievement[]>(`${this._achievementUrl}/user/${id}/game/${gameId}`);
+}
+
+public postNewAchievements(userId: number, gameId: number): Observable<Achievement[]> {
+  return this.http.post<Achievement[]>(`${this._achievementUrl}/refresh`, {
+    gameId: gameId, userId: userId
+  });
 }
 
 }

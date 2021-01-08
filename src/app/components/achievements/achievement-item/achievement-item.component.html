@@ -1,8 +1,6 @@
 <div class="achievement-container">
-  <img src="../../../../../assets/1.jpg" alt="achievement-icon" class="achievement-container__icon">
-  <p>{{achievement.name}} Nume</p>
-  <p>{{achievement.description}} Descriere</p>
-  <p *ngIf="achievement.unlocked">{{achievement.dateUnlocked}}</p>
-  <p *ngIf="!achievement.unlocked">Not unlocked yet</p>
-  <p>{{achievement.percentage}}</p>
+  <img [src]="achievement.icon" alt="achievement-icon" class="achievement-container__icon">
+  <p>{{achievement.gameName}}</p>
+  <p>{{achievement.achievementName}}</p>
+  <p>{{achievement.timeAchieved}}</p>
 </div>

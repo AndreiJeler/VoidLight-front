@@ -12,7 +12,7 @@ export class FriendsHubService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44324/friends-hub')
+      .withUrl('https://localhost:5001/friends-hub')
       .build();
 
     this.hubConnection

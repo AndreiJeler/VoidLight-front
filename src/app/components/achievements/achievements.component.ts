@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { Achievement } from '../../models/achievement';
 import { User } from '../../models/user';
+import { Game } from 'src/app/models/game';
 
 import { AchievementService } from '../../services/achievement.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { GameService } from 'src/app/services/game.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-achievements',
@@ -14,10 +17,15 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class AchievementsComponent implements OnInit {
   public user: User;
   public achievements: Achievement[];
+  public isLoading: boolean = true;
+  public selectedGame: Game = null;
+  public games: Game[];
 
   constructor(
     private _achievementService: AchievementService,
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private _gameService: GameService,
+    private _cdr: ChangeDetectorRef
     ) { }
 
   ngOnInit() {
@@ -25,12 +33,29 @@ export class AchievementsComponent implements OnInit {
       (user) => (this.user = user)
     );
 
-    this._achievementService.getAchievementsForUser(this.user.id).subscribe(
+    this._gameService.getGamesForUser(this.user.id).subscribe(
+      (games) => {
+        this.games = games;
+        this.isLoading = false;
+      }
+    )
+  }
+
+  public checkAchievements(): void {
+    this._achievementService.postNewAchievements(this.user.id, this.selectedGame.id).subscribe(
+      (result) => {
+        this.achievements = result.concat(this.achievements);
+        this._cdr.detectChanges();
+      }
+    );
+  }
+
+  public onChange(event): void {
+    console.log(event);
+    this._achievementService.getAchievementsForUser(this.user.id, event.id).subscribe(
       (result) => {
         this.achievements = result;
-      },
-      (error) => {
-        console.log(error);
+        this._cdr.detectChanges();
       }
     );
   }
