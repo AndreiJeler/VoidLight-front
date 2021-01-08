@@ -1,5 +1,7 @@
-
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,6 +28,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -40,6 +43,7 @@ import { CommonModule } from '@angular/common';
     ProfileComponent,
     RegisterComponent,
     AccountActivationComponent,
+    FriendRequestsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -60,4 +64,4 @@ import { CommonModule } from '@angular/common';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

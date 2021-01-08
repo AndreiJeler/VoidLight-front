@@ -1,0 +1,65 @@
+@import "../../../../../styles.scss";
+
+.modal-header {
+  width: 100%;
+  height: 5rem;
+  background-color: $color-newsfeed-buttons;
+  border: none;
+}
+
+.modal-title {
+  margin-top: 2%;
+  margin-left: 35%;
+  font-size: 2rem;
+  color: $color-white;
+}
+
+.modal-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-modal-background;
+  border: none;
+
+  &__request {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1rem;
+    &__profile-pic {
+      height: 4rem;
+      width: 4rem;
+      border-radius: 5px;
+      margin-right: 1rem;
+    }
+
+    &__username {
+      color: $color-white;
+      margin-right: 2rem;
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: $color-black;
+  color: $color-white;
+}
+
+.btn {
+  background-image: linear-gradient(
+    to right,
+    $color-button-top-gradient,
+    $color-button-bottom-gradient
+  );
+  height: 3rem;
+  width: 10rem;
+  border-radius: 5px;
+  border: none;
+  font-size: medium;
+  color: $color-white;
+  margin: 1rem;
+}

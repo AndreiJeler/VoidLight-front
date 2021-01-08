@@ -8,8 +8,9 @@ import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { ActivatedRoute } from '@angular/router';
-import {ProfileService} from '../../services/profile.service';
-import {FriendsService} from '../../services/friends.service';
+import { ProfileService } from '../../services/profile.service';
+import { FriendsService } from '../../services/friends.service';
+import { FriendRequest } from 'src/app/models/friend-request';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit {
   images: string[] = [];
   videos: string[] = [];
   userId: number;
+  isCurrentUserAccount = false;
+  friendButtonType: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +37,7 @@ export class ProfileComponent implements OnInit {
     private gameService: GameService,
     private postService: PostService,
     private profileService: ProfileService,
-    private friendsService: FriendsService,
+    private friendsService: FriendsService
   ) {}
 
   ngOnInit(): void {
@@ -43,44 +46,29 @@ export class ProfileComponent implements OnInit {
     }
     this.userId = +this.route.snapshot.paramMap.get('id');
 
-    this.profileService.getUserById(+this.route.snapshot.paramMap.get('id')).subscribe(
-      (user) => {
+    if (this.userId == this.authenticationService.currentUserValue.id) {
+      this.isCurrentUserAccount = true;
+    } else {
+      this.friendsService
+        .getFriendshipStatus(
+          this.authenticationService.currentUserValue.id,
+          this.userId
+        )
+        .subscribe((res) => {
+          this.friendButtonType = res;
+        });
+    }
+
+    this.profileService
+      .getUserById(+this.route.snapshot.paramMap.get('id'))
+      .subscribe((user) => {
         this.user = user;
         this.user.avatarPath = 'https://localhost:44324/' + user.avatarPath;
-      }
-    );
+      });
 
     this.gameService
       .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
-
-    this.postService.getPostsByUser(this.userId).subscribe(
-      (result) => {
-        this.posts = result;
-        this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content.replace('\\', '/'));
-          });
-          post.contents = contents;
-          contents.forEach((content) => {
-            const value = content.split('.');
-            if (value[value.length - 1] === 'mp4') {
-              this.videos.push(content.replace('\\', '/'));
-            } else {
-              this.images.push(content.replace('\\', '/'));
-            }
-          });
-        });
-
-        this._initGallery();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
 
     this.friendsService.getFriendsForUser(this.userId).subscribe(
       (result) => {
@@ -94,7 +82,6 @@ export class ProfileComponent implements OnInit {
       }
     );
 
-    console.log(this.friends);
 
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
@@ -138,6 +125,41 @@ export class ProfileComponent implements OnInit {
     if (this.isActive('home')) {
       this._initGallery();
     }
+
+    if (id == 'posts') {
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.posts.forEach((post) => {
+              post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+              let contents = [];
+              post.contents.forEach((content) => {
+                content = 'https://localhost:44324/' + content;
+                contents.push(content.replace('\\', '/'));
+              });
+              post.contents = contents;
+              contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   }
 
   isActive(id: string): boolean {
@@ -146,5 +168,40 @@ export class ProfileComponent implements OnInit {
 
   gotToFriendProfile(id: number): void {
     this.router.navigate([`/profile/${id}`]).then(() => location.reload());
+  }
+
+  public sendFriendRequest() {
+    this.friendsService
+      .sendFriendRequest(
+        new FriendRequest(
+          this.authenticationService.currentUserValue.id,
+          this.user.id
+        )
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 2;
+      });
+  }
+
+  public deleteFriend() {
+    this.friendsService
+      .removeFriend(
+        this.authenticationService.currentUserValue.id,
+        this.user.id
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 0;
+      });
+  }
+
+  public deleteFriendRequest() {
+    this.friendsService
+      .removeFriendRequest(
+        this.authenticationService.currentUserValue.id,
+        this.user.id
+      )
+      .subscribe((_) => {
+        this.friendButtonType = 0;
+      });
   }
 }

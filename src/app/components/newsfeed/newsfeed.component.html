@@ -4,7 +4,29 @@
       <img (click)="openProfile()" [src]="user.avatarPath" alt="profile pic">
       <p class="newsfeed__header__profile__username paragraph">{{user.username}}</p>
     </div>
-    <button class="newsfeed__header__logout_button paragraph" (click)="logout()">Logout</button>
+    <ng-select class="newsfeed__header__search-select" [editableSearchTerm]="true" [items]="possibleUsers" bindLabel="username"
+    bindValue="id" (search)="onSearch($event)" (change)="onChange($event)" placeholder="Search user">
+    <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+      <div class="newsfeed__header__search-select__item">
+        <div class="newsfeed__header__search-select__item__details">
+          <img class="newsfeed__header__search-select__item__img" [src]="item.avatarPath" alt="User profile pic">
+          <h4 class="newsfeed__header__search-select__item__username">{{item.username}}</h4>
+        </div>
+        <a class="btn" *ngIf="checkValidFriendRequest(item.id)" (click)="sendFriendRequest(item.id)">Add friend</a>
+        <a class="btn" *ngIf="!checkValidFriendRequest(item.id)" (click)="deleteFriend(item.id)">Remove friend</a>
+      </div>
+    </ng-template>
+    </ng-select>
+    <div class="wrapper">
+      <div class="newsfeed__header__friend-requests">
+        <p class="newsfeed__header__friend-requests__number" *ngIf="numberOfRequests > 0">{{numberOfRequests}}</p>
+        <svg class="newsfeed__header__friend-requests__icon" (click)="openVideoPostModal(friendRequestsModal)">
+          <use xlink:href="../../../assets/logos/sprite.svg#friends"></use>
+        </svg>
+      </div>
+
+      <button class="newsfeed__header__logout_button paragraph" (click)="logout()">Logout</button>
+    </div>
   </div>
 
   <div class="newsfeed__body">
@@ -54,4 +76,8 @@
 <ng-template #createPostModalWithContent>
   <create-post-modal [games]="games" [userId]="user.id" [withContent]="true" [userName]="user.username"
     (close)="closeModal($event)"></create-post-modal>
+</ng-template>
+
+<ng-template #friendRequestsModal>
+  <app-friend-requests [userId]="user.id" (close)="closeFriendRequests($event)"></app-friend-requests>
 </ng-template>

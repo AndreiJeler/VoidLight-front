@@ -1,11 +1,15 @@
 <div class="post">
+  <div *ngIf="post.isShared" class="post__pre">
+    <img class="post__pre__img" [src]="post.avatarPath">
+    <p class="post__pre__text">{{post.username}} shared this post</p>
+  </div>
   <div class="post__header">
     <div class="post__header__user">
       <div class="post__header__user__photo">
-        <img [src]="post.avatarPath" alt="profile picture" />
+        <img [src]="post.originalUserAvatar" alt="profile picture" />
       </div>
       <div class="post__header__user__text">
-        <p class="post__header__user__text__username paragraph">{{post.username}}</p>
+        <p class="post__header__user__text__username paragraph">{{post.originalUser}}</p>
         <p class="post__header__user__text__timestamp paragraph">{{timeString}}</p>
       </div>
     </div>

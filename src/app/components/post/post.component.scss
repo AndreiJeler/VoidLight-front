@@ -6,6 +6,27 @@
   border-radius: 8px;
   margin-bottom: 2rem;
 
+  &__pre {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    margin-left: 1rem;
+    border-bottom: thin solid $color-white;
+
+    &__img {
+      height: 4.5rem;
+      width: 4.5rem;
+    }
+
+    &__text {
+      color: $color-white;
+      font-size: 13px;
+      margin-left: 2rem;
+    }
+  }
+
   &__header {
     &__user {
       display: flex;

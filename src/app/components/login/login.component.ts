@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     protected router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.authenticationService.currentUserValue) {
@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    console.log(this.username);
     this.authenticationService
       .login(this.username, this.password)
       .subscribe((_) => {
