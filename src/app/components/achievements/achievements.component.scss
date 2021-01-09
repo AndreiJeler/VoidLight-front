@@ -22,9 +22,51 @@
       margin-left: 5rem;
       background: $background-color-post;
       border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+
+      &__select {
+        width: 50%;
+        float: left;
+        margin: 2rem;
+        margin-left: 33rem;
+        font-size: 13px;
+      }
+
+      &__refresh-btn {
+        height: 3.3rem;
+        width: 18rem;
+        font-size: 13px;
+        float: right;
+        margin: 2rem;
+        margin-right: 33rem;
+        border-radius: 5px;
+      }
 
       &__list {
         list-style: none;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+
+        &__header {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          color: $color-white;
+          font-size: 20px;
+          margin-left: 2rem;
+          margin-right: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        & > hr {
+          background-color: $color-white;
+          margin: auto;
+          width: 98%;
+          height: 0.1rem;
+          margin-bottom: 1rem;
+        }
 
         &__li {
           display: flex;

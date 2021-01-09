@@ -7,7 +7,6 @@ import { Game } from 'src/app/models/game';
 import { AchievementService } from '../../services/achievement.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { GameService } from 'src/app/services/game.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-achievements',
