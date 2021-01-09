@@ -8,9 +8,11 @@ import { Achievement } from '../../../models/achievement';
 })
 export class AchievementItemComponent implements OnInit {
   @Input() achievement: Achievement;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.achievement);
   }
 
 }
