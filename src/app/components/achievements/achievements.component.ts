@@ -50,7 +50,6 @@ export class AchievementsComponent implements OnInit {
   }
 
   public onChange(event): void {
-    console.log(event);
     this._achievementService.getAchievementsForUser(this.user.id, event.id).subscribe(
       (result) => {
         this.achievements = result;
