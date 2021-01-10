@@ -12,7 +12,6 @@ export class AchievementItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.achievement);
   }
 
 }
