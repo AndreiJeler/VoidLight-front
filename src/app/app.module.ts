@@ -1,12 +1,11 @@
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,17 +18,21 @@ import { AccountActivationComponent } from './components/register/account-activa
 import { CreatePostComponent } from './components/newsfeed/modals/create-post/create-post.component';
 import { FavoriteGameComponent } from './components/profile/favorite-game/favorite-game.component';
 import { FriendComponent } from './components/friend/friend.component';
+import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
+import { LobbyCardComponent } from './components/lobby-games/lobby-card/lobby-card.component';
+import { LobbyChatComponent } from './components/lobby-games/lobby-chat/lobby-chat.component';
+import { LobbyChatMessageComponent } from './components/lobby-games/lobby-chat/lobby-chat-message/lobby-chat-message.component';
+import { LobbyGamesComponent } from './components/lobby-games/lobby-games.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 
+
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,10 @@ import { CommonModule } from '@angular/common';
     RegisterComponent,
     AccountActivationComponent,
     FriendRequestsComponent,
+    LobbyGamesComponent,
+    LobbyChatComponent,
+    LobbyCardComponent,
+    LobbyChatMessageComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -64,4 +71,4 @@ import { CommonModule } from '@angular/common';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

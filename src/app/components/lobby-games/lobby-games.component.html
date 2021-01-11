@@ -1,0 +1,19 @@
+<div class="lobby-container">
+  <div class="lobby-container__chat">
+    <lobby-chat></lobby-chat>
+  </div>
+
+  <div class="lobby-container__games">
+    <ul class="lobby-container__games__list">
+      <li *ngFor="let lobby of lobbies" class="lobby-container__games__list__item">
+        <lobby-card-game [gameInfo]="lobby"></lobby-card-game>
+      </li>
+    </ul>
+    <div class="lobby-container__games__search">
+      <input class="lobby-container__games__search__input" type="text">
+      <svg class="lobby-container__games__search__icon">
+        <use xlink:href="../../../assets/logos/sprite.svg#search"></use>
+      </svg>
+    </div>
+  </div>
+</div>

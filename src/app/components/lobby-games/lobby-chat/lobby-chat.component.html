@@ -1,0 +1,18 @@
+<div class="chat-container">
+  <p class="chat-container__current-lobby"></p>
+  <div class="chat-container__chat">
+    <div class="chat-container__chat__messages">
+      <ul>
+        <li *ngFor="let message of messages">
+          <lobby-chat-message [message]=message></lobby-chat-message>
+        </li>
+      </ul>
+    </div>
+    <div class="chat-container__chat__input">
+      <input type="text" class="chat-container__chat__input__message">
+      <svg class="chat-container__chat__input__icon">
+        <use xlink:href="../../../assets/logos/sprite.svg#send"></use>
+      </svg>
+    </div>
+  </div>
+</div>

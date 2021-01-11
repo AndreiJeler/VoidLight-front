@@ -8,6 +8,7 @@ import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import {SteamReturnComponent} from "./components/steam-return/steam-return.component";
+import {LobbyGamesComponent} from './components/lobby-games/lobby-games.component';
 
 const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'account-activation', component: AccountActivationComponent },
   { path: 'steam-return', component: SteamReturnComponent },
+  { path: 'lobby-games', component: LobbyGamesComponent}
 ];
 
 
