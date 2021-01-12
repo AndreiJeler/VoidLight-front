@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LobbyMessage } from 'src/app/models/lobby-message';
 
 @Component({
   selector: 'lobby-chat',
@@ -7,10 +8,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LobbyChatComponent implements OnInit {
 
-  @Input() messages: string[]=[];
-  constructor() { }
+  @Input() messages: LobbyMessage[] = [
+    {
+      id: 1,
+      text: "Sa moara bibi",
+      username: 'Sully',
+      userIcon: '../../../../assets/Images/buni_pic.jpg'
+    },
+    {
+      id: 2,
+      text: "Sa traasca bibi",
+      username: 'Bibi',
+      userIcon: '../../../../assets/Images/buni_pic.jpg'
+    }
+  ];
 
-  ngOnInit() {
-  }
+  constructor() {  }
+
+  ngOnInit() { }
 
 }

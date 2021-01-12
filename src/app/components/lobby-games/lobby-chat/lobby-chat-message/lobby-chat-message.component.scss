@@ -1,0 +1,51 @@
+.message-container{
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__user-icon{
+        height: 7rem;
+        width: 7rem;
+        border-radius: 7px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    &__text{
+        margin-right: auto;
+        font-size: 6rem;
+        background-color: navajowhite;
+        border-radius: 7px;
+        margin-bottom: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+
+    &__logged-user{
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        align-self: flex-end;
+        align-items: center;
+        margin-left: auto;
+
+        &__user-icon{
+            height: 7rem;
+            width: 7rem;
+            border-radius: 7px;
+            margin: 1rem;
+        }
+    
+        &__text{
+            margin-left: auto;
+            font-size: 6rem;
+            background-color: blue;
+            border-radius: 7px;
+            margin-bottom: 0;
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+}
