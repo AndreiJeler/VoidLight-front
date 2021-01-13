@@ -1,3 +1,4 @@
+import { Constants } from './../../shared/utils/constants';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -95,5 +96,9 @@ export class RegisterComponent implements OnInit {
 
   steamRegister(): void {
     window.location.href = 'https://localhost:44324/api/users/steam-register';
+  }
+
+  discordRegister(): void {
+    window.location.href = Constants.DISCORD_OAUTH_URL;
   }
 }

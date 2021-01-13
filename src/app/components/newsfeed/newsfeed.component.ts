@@ -57,7 +57,7 @@ export class NewsfeedComponent implements OnInit {
     private friendsHub: FriendsHubService,
     private swalService: SwalService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -79,13 +79,13 @@ export class NewsfeedComponent implements OnInit {
             contents.push(content);
           });
           post.contents = contents;
-          let comments = [];
-          post.comments.forEach((content) => {
-            content.user.avatarPath =
-              'https://localhost:44324/' + content.user.avatarPath;
-            comments.push(content);
-          });
-          post.comments = comments;
+          // let comments = [];
+          // post.comments.forEach((content) => {
+          //   content.user.avatarPath =
+          //     'https://localhost:44324/' + content.user.avatarPath;
+          //   comments.push(content);
+          // });
+          // post.comments = comments;
         });
       },
       (error) => {
@@ -173,9 +173,9 @@ export class NewsfeedComponent implements OnInit {
         }
       );
       this.currentGameId = -1;
-      
+
       document.getElementsByClassName('active')[0].classList.remove('active');
-      
+
       return;
     }
 
@@ -393,6 +393,6 @@ export class NewsfeedComponent implements OnInit {
     this.isClickable = false;
     this._friendsService
       .removeFriendRequest(this.user.id, userId)
-      .subscribe((_) => { });
+      .subscribe((_) => {});
   }
 }

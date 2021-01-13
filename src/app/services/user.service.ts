@@ -35,4 +35,8 @@ export class UserService {
   public getUsersByUsername(username: string): Observable<User[]> {
     return this.http.get<User[]>(`${this._userUrl}/username/${username}`);
   }
+
+  public discordAuth(code: string): Observable<number> {
+    return this.http.get<number>(`${this._userUrl}/discord/${code}`);
+  }
 }

@@ -82,7 +82,6 @@ export class ProfileComponent implements OnInit {
       }
     );
 
-
     // CHECK BELOW FOR USAGE
     // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
     const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
@@ -135,6 +134,8 @@ export class ProfileComponent implements OnInit {
         .subscribe(
           (result) => {
             this.posts = result;
+            this.videos = [];
+            this.images = [];
             this.posts.forEach((post) => {
               post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
               let contents = [];

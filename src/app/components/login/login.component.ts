@@ -2,6 +2,7 @@ import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-login',
@@ -51,5 +52,9 @@ export class LoginComponent implements OnInit {
   public steamLogin() {
     window.location.href =
       'https://localhost:44324/api/authentication/steam-login';
+  }
+
+  discordLogin(): void {
+    window.location.href = Constants.DISCORD_OAUTH_URL;
   }
 }

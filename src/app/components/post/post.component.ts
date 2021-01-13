@@ -14,6 +14,7 @@ import {
 
 import { Post } from '../../models/post';
 import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -35,7 +36,8 @@ export class PostComponent implements OnInit {
     private postService: PostService,
     private authenticationService: AuthenticationService,
     private cdr: ChangeDetectorRef,
-    private postsHubService: PostsHubService
+    private postsHubService: PostsHubService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -78,6 +80,18 @@ export class PostComponent implements OnInit {
 
   viewComments() {
     this.areCommentsVisible = !this.areCommentsVisible;
+    if (this.areCommentsVisible) {
+      this.postService.getCommentsForPost(this.post.id).subscribe((res) => {
+        let comments = [];
+        res.forEach((comment) => {
+          comment.user.avatarPath =
+            'https://localhost:44324/' + comment.user.avatarPath;
+          comments.push(comment);
+        });
+        this.post.comments = comments;
+        this.cdr.detectChanges();
+      });
+    }
   }
 
   comment(): void {
@@ -104,5 +118,9 @@ export class PostComponent implements OnInit {
         res.avatarPath = 'https://localhost:44324/' + res.avatarPath;
         this.event.emit(res);
       });
+  }
+
+  openProfile(id: number) {
+    this.router.navigate([`/profile/${id}`]);
   }
 }
