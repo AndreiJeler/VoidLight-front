@@ -31,39 +31,91 @@
         background-color: orchid;
     }
 
-    &__games{
+    &__games {
         display: flex;
         flex-direction: column;
         background-color: orangered;
-        &__list{
+        height: 90vh;
+        &__list {
             height: 95%;
             background-color: palegreen;
+            overflow: scroll;
 
-            &__item{
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            -ms-overflow-style: none;
+            scrollbar-width: none !important;
+
+            &__item {
                 height: 10rem;
-
                 border-radius: 15px;
-                overflow-y: scroll;       
+            }
+
+            &__lobbies{
+                overflow: scroll;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
                 -ms-overflow-style: none;
-                scrollbar-width: none;
+                scrollbar-width: none !important;
+
+                &__lobby{
+                    height: 6rem;
+                    width: 100%;
+                    background-color: orange;
+                    position: relative;
+                    z-index: 1000;
+
+                    display:  flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    &__image{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border-radius: 3px;
+                    }
+
+                    &__name{
+
+                    }
+
+                    &__users{
+
+                    }
+
+                    &__btn{
+
+                    }
+                }
             }
         }
 
-        &__search{
+        &__search {
             display: flex;
             flex-direction: row;
             height: 5%;
 
-            &__input{
+            &__input {
                 width: 100%;
                 border-radius: 3px;
             }
 
-            &__icon{
+            &__icon {
                 height: 4rem;
                 width: 4rem;
                 fill: $color-white;
             }
         }
     }
+}
+
+
+.wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }

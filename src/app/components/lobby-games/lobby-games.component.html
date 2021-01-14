@@ -5,8 +5,18 @@
 
   <div class="lobby-container__games">
     <ul class="lobby-container__games__list">
-      <li *ngFor="let lobby of lobbies" class="lobby-container__games__list__item">
+      <li *ngFor="let lobby of lobbies" class="lobby-container__games__list__item" (click)="getLobbyForGame(lobby)">
         <lobby-card-game [gameInfo]="lobby"></lobby-card-game>
+        <ul *ngIf="gameLobbies" class="lobby-container__games__list__lobbies">
+          <li *ngFor="let gameLobby of gameLobbies" class="lobby-container__games__list__lobbies__lobby">
+            <img [src]=gameLobby.initializer.avatarPicture alt="initiator-picture" class="lobby-container__games__list__lobbies__lobby__image">
+            <div class="wrapper">
+              <span class="lobby-container__games__list__lobbies__lobby__name">{{gameLobby.initializer.username}}'s lobby</span>
+              <span class="lobby-container__games__list__lobbies__lobby__users">{{gameLobby.participantsNr}}</span>
+            </div>
+            <button class="lobby-container__games__list__lobbies__lobby__btn">Join Lobby chat </button>
+          </li>
+        </ul>
       </li>
     </ul>
     <div class="lobby-container__games__search">

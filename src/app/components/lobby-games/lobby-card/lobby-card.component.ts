@@ -9,9 +9,9 @@ import {GameInfo} from '../../../models/game-info';
 export class LobbyCardComponent implements OnInit {
 
   @Input() gameInfo:GameInfo;
+  
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
