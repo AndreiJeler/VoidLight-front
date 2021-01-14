@@ -37,8 +37,8 @@ export class PostService {
    * Creates a new post
    * @param post => the post to be added
    */
-  public createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${this._postUrl}`, post);
+  public createPost(formData: any): Observable<Post> {
+    return this.http.post<Post>(`${this._postUrl}`, formData);
   }
 
   /**

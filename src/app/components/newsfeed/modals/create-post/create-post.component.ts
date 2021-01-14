@@ -14,7 +14,7 @@ const URL = 'https://localhost:44324/';
 })
 export class CreatePostComponent implements OnInit {
   public post: Post;
-  public file: string;
+  public file: File;
   public isLoading: boolean = false;
   public selectedGame: Game = null;
   public labelText: string = 'Upload File';
@@ -24,7 +24,8 @@ export class CreatePostComponent implements OnInit {
   @Input() games: Game[];
   @Output() close = new EventEmitter<Post>();
 
-  constructor(private _postService: PostService) {}
+  constructor(private _postService: PostService) {
+  }
 
   public ngOnInit() {
     this.post = new Post();
@@ -37,11 +38,14 @@ export class CreatePostComponent implements OnInit {
     if (this.selectedGame) {
       this.post.game = this.selectedGame.name;
     }
-    if (this.withContent) {
-      const value = this.file.split('\\');
-      this.post.contents = [value[value.length - 1]];
+
+    const formData = new FormData();
+    formData.append("post", JSON.stringify(this.post));
+    if (this.file) {
+        formData.append(this.file.name, this.file, this.file.name);
     }
-    this._postService.createPost(this.post).subscribe(
+
+    this._postService.createPost(formData).subscribe(
       (res) => {
         this.close.emit(res);
       },
@@ -51,9 +55,10 @@ export class CreatePostComponent implements OnInit {
     );
   }
 
-  public changeLabel(input: any): void {
-    if (this.file) {
-      const value = this.file.split('\\');
+  public changeLabel(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = event.target.files[0];
+      const value = this.file.name.split('\\');
       this.labelText = value[value.length - 1];
     }
   }
