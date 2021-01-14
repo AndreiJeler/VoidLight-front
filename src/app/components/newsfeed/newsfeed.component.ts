@@ -73,12 +73,6 @@ export class NewsfeedComponent implements OnInit {
         this.posts = result;
         this.posts.forEach((post) => {
           post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
           let comments = [];
           post.comments.forEach((content) => {
             content.user.avatarPath =
@@ -153,12 +147,6 @@ export class NewsfeedComponent implements OnInit {
           this.posts = result;
           this.posts.forEach((post) => {
             post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-            let contents = [];
-            post.contents.forEach((content) => {
-              content = 'https://localhost:44324/' + content;
-              contents.push(content);
-            });
-            post.contents = contents;
             let comments = [];
             post.comments.forEach((content) => {
               content.user.avatarPath =
@@ -194,12 +182,6 @@ export class NewsfeedComponent implements OnInit {
         this.posts = result;
         this.posts.forEach((post) => {
           post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
         });
       },
       (error) => {
@@ -224,12 +206,7 @@ export class NewsfeedComponent implements OnInit {
         this.posts = result;
         this.posts.forEach((post) => {
           post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
+          
         });
       },
       (error) => {
@@ -267,12 +244,6 @@ export class NewsfeedComponent implements OnInit {
     this.chosenModal.hide();
     if (post) {
       post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-      let contents = [];
-      post.contents.forEach((content) => {
-        content = 'https://localhost:44324/' + content;
-        contents.push(content);
-      });
-      post.contents = contents;
       this.posts.unshift(post);
       this.cdr.detectChanges();
     }

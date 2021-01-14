@@ -44,7 +44,7 @@ export class PostComponent implements OnInit {
     );
     this.post.contents.forEach((content) => {
       const value = content.split('.');
-      if (value[value.length - 1] === 'mp4') {
+      if (value[value.length - 1].startsWith('mp4')) {
         this.videos.push(content);
       } else {
         this.images.push(content);
