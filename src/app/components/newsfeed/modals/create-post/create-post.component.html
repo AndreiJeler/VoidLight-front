@@ -14,7 +14,7 @@
     [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game" >
     </ng-select>
     <label class="label-file-upload" [style.visibility]="withContent? 'visible': 'hidden'">
-      <input type="file" class="custom-file-upload" id="file" [(ngModel)]="file" (change)="changeLabel($event)">
+      <input type="file" class="custom-file-upload" id="file" (change)="changeLabel($event)">
       {{labelText}}
     </label>
   </div>
