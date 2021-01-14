@@ -1,3 +1,4 @@
+import { Constants } from './../utils/constants';
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 import { SwalService } from './swal.service';
@@ -12,7 +13,7 @@ export class FriendsHubService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/friends-hub')
+      .withUrl(`${Constants.SERVER_BASE_URL}/friends-hub`)
       .build();
 
     this.hubConnection

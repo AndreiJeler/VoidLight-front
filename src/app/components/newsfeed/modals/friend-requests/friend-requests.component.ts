@@ -1,3 +1,4 @@
+import { Constants } from './../../../../shared/utils/constants';
 import { FriendRequest } from './../../../../models/friend-request';
 import { FriendsService } from './../../../../services/friends.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -25,7 +26,8 @@ export class FriendRequestsComponent implements OnInit {
       .subscribe((friends) => {
         friends.forEach(
           (friend) =>
-            (friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath)
+            (friend.avatarPath =
+              `${Constants.SERVER_BASE_URL}/` + friend.avatarPath)
         );
 
         this.friends = friends;

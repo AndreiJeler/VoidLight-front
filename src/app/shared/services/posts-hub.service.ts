@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
+import { Constants } from '../utils/constants';
 import { SwalService } from './swal.service';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class PostsHubService {
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/posts-hub')
+      .withUrl(`${Constants.SERVER_BASE_URL}/posts-hub`)
       .build();
 
     this.hubConnection
