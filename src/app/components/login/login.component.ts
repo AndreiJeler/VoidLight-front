@@ -57,4 +57,10 @@ export class LoginComponent implements OnInit {
   discordLogin(): void {
     window.location.href = Constants.DISCORD_OAUTH_URL;
   }
+
+  facebookLogin(): void {
+    window.open('https://www.facebook.com', '_blank');
+
+    // window.location.href = 'facebook.com';
+  }
 }

@@ -101,4 +101,8 @@ export class RegisterComponent implements OnInit {
   discordRegister(): void {
     window.location.href = Constants.DISCORD_OAUTH_URL;
   }
+
+  swalTest(): void {
+    this.swalService.showSuccessResult('sal', 'sal');
+  }
 }
