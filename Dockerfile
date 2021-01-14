@@ -9,5 +9,5 @@ RUN npm run build --prod
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build-env /usr/src/app/dist/VoidLight-front /usr/share/nginx/html
+COPY --from=build-env /usr/src/app/dist/web-app /usr/share/nginx/html
 EXPOSE 80
