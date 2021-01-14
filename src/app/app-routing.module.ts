@@ -9,16 +9,18 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import {SteamReturnComponent} from "./components/steam-return/steam-return.component";
 import { HomescreenComponent } from './components/homescreen/homescreen.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent},
-  { path: 'login', component: LoginComponent, data: {animation: 'loginPage'} },
+  { path: 'login', component: LoginComponent},
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account-activation', component: AccountActivationComponent },
-  { path: 'steam-return', component: SteamReturnComponent },
-  { path: '', component: HomescreenComponent, data: {animation: 'homePage'}},
+  { path: 'steam-return', component: SteamReturnComponent},
+  { path: '', component: HomescreenComponent},
 ];
 
 

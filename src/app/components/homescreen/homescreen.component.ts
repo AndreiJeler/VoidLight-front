@@ -1,10 +1,11 @@
+import { trigger, transition, style, query, animateChild,group, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-homescreen',
   templateUrl: './homescreen.component.html',
-  styleUrls: ['./homescreen.component.scss'],
+  styleUrls: ['./homescreen.component.scss']
 })
 export class HomescreenComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class HomescreenComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // public fireApp(){
-  //   this.router.navigate(['\login']);
-  // }
+  public fireApp(){
+    this.router.navigate(['\login']);
+  }
 }
