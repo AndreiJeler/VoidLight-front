@@ -36,12 +36,12 @@ export class LobbyGamesComponent implements OnInit {
   }
 
   public getLobbyForGame(lobby: GameInfo) {
-    console.log(lobby);
     if (this.lobbies.length == 1) {
       this.lobbyService.getGameLobbbiesInfo(this.user.id).subscribe(
         (result) => {
           this.lobbies = null;
           this.lobbies = result;
+          this.isSelected = false;
           this.cdr.detectChanges();
         });
     }else{
@@ -50,6 +50,7 @@ export class LobbyGamesComponent implements OnInit {
           this.gameLobbies = result;
           this.lobbies = null;
           this.lobbies = [lobby];
+          this.isSelected = true;
           this.cdr.detectChanges();
           console.log(this.lobbies);
         }
