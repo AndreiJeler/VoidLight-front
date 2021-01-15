@@ -19,12 +19,12 @@
     <ul class="lobby-container__lobbies__list">
       <li class="lobby-container__lobbies__list__item" *ngFor="let gameLobby of gameLobbies">
         <img [src]=gameLobby.initializer.avatarPicture alt="initiator-picture"
-          class="lobby-container__games__list__lobbies__lobby__image">
+          class="lobby-container__lobbies__list__item__image">
         <div class="wrapper">
-          <span class="lobby-container__games__list__lobbies__lobby__name">{{gameLobby.initializer.username}}'slobby</span>
-          <span class="lobby-container__games__list__lobbies__lobby__users">{{gameLobby.participantsNr}}</span>
+          <span class="lobby-container__lobbies__list__item__name">{{gameLobby.initializer.username}}'slobby</span>
+          <span class="lobby-container__lobbies__list__item__users">{{gameLobby.participantsNr}}</span>
         </div>
-        <button class="lobby-container__games__list__lobbies__lobby__btn">Join Lobby chat </button>
+        <button class="lobby-container__lobbies__list__item__btn">Join Lobby chat </button>
       </li>
     </ul>
   </div>
