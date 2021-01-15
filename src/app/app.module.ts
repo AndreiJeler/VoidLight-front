@@ -30,6 +30,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FriendRequestsComponent } from './components/newsfeed/modals/friend-requests/friend-requests.component';
 import { CommonModule } from '@angular/common';
+import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CommonModule } from '@angular/common';
     RegisterComponent,
     AccountActivationComponent,
     FriendRequestsComponent,
+    EditProfileComponent,
   ],
   imports: [
     AppRoutingModule,

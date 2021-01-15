@@ -3,7 +3,7 @@ import { PostService } from './../../services/post.service';
 import { GameService } from './../../services/game.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { FriendsService } from '../../services/friends.service';
 import { FriendRequest } from 'src/app/models/friend-request';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
   userId: number;
   isCurrentUserAccount = false;
   friendButtonType: number;
+  modalRef: BsModalRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +39,8 @@ export class ProfileComponent implements OnInit {
     private gameService: GameService,
     private postService: PostService,
     private profileService: ProfileService,
-    private friendsService: FriendsService
+    private friendsService: FriendsService,
+    private modalService: BsModalService,
   ) {}
 
   ngOnInit(): void {
@@ -203,5 +206,14 @@ export class ProfileComponent implements OnInit {
       .subscribe((_) => {
         this.friendButtonType = 0;
       });
+  }
+
+
+  openEditProfileModal(editProfileModal: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(editProfileModal);
+  }
+
+  closeModal(): void {
+    this.modalRef.hide();
   }
 }

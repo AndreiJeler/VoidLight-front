@@ -9,4 +9,5 @@ export class User {
   public token?: string;
   public role: string;
   public playedGame: string;
+  public age: number;
 }

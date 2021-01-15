@@ -35,4 +35,8 @@ export class UserService {
   public getUsersByUsername(username: string): Observable<User[]> {
     return this.http.get<User[]>(`${this._userUrl}/username/${username}`);
   }
+
+  public updateUser(user: FormData): Observable<any> {
+    return this.http.put(`${this._userUrl}`, user);
+  }
 }

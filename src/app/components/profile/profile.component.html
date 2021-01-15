@@ -16,7 +16,7 @@
 
     </div>
     <div class="profile-container__header__achievements">
-        <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
+        <p class="profile-container__header__achievements__edit-profile" (click)="openEditProfileModal(editProfileModal)">Edit Profile</p>
         <div class="profile-container__header__achievements__stars">
         </div>
         <p class="profile-container__header__achievements__see-all-achievements">See All Achievements</p>
@@ -76,3 +76,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #editProfileModal>
+  <app-edit-profile [user]="user" (close)="closeModal()"></app-edit-profile>
+</ng-template>
