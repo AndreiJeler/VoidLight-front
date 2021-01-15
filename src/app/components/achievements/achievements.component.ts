@@ -29,8 +29,7 @@ export class AchievementsComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private _gameService: GameService,
     private _cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
