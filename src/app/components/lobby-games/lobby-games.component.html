@@ -1,38 +1,31 @@
 <div class="lobby-container">
-  <div class="lobby-container__chat">
-    <lobby-chat></lobby-chat>
-  </div>
 
   <div class="lobby-container__games">
-    <ul class="lobby-container__games__list" *ngIf="!isSelected; else lobbiesTemplate">
+    <ul class="lobby-container__games__list">
       <li *ngFor="let lobby of lobbies" class="lobby-container__games__list__item" (click)="getLobbyForGame(lobby)">
         <lobby-card-game [gameInfo]="lobby"></lobby-card-game>
-        
       </li>
     </ul>
-    <div class="lobby-container__games__search">
+    <div class="lobby-container__games__search" *ngIf="lobbies.length > 1;else createLobbyBtn">
       <input class="lobby-container__games__search__input" type="text">
-      <svg class="lobby-container__games__search__icon">
-        <use xlink:href="../../../assets/logos/sprite.svg#search"></use>
-      </svg>
     </div>
+
+    <ng-template #createLobbyBtn>
+      <btn class="lobby-container__games__create-lobby">Create Lobby</btn>
+    </ng-template>
+  </div>
+
+  <div class="lobby-container__lobbies">
+    <ul class="lobby-container__lobbies__list">
+      <li class="lobby-container__lobbies__list__item" *ngFor="let gameLobby of gameLobbies">
+        <img [src]=gameLobby.initializer.avatarPicture alt="initiator-picture"
+          class="lobby-container__games__list__lobbies__lobby__image">
+        <div class="wrapper">
+          <span class="lobby-container__games__list__lobbies__lobby__name">{{gameLobby.initializer.username}}'slobby</span>
+          <span class="lobby-container__games__list__lobbies__lobby__users">{{gameLobby.participantsNr}}</span>
+        </div>
+        <button class="lobby-container__games__list__lobbies__lobby__btn">Join Lobby chat </button>
+      </li>
+    </ul>
   </div>
 </div>
-
-<ng-template #lobbiesTemplate>
-  
-  <ul *ngIf="gameLobbies" class="lobby-container__games__list__lobbies">
-    <li *ngFor="let lobby of lobbies" class="lobby-container__games__list__item" (click)="getLobbyForGame(lobby)">
-      <lobby-card-game [gameInfo]="lobby"></lobby-card-game>
-      
-    </li>
-    <li *ngFor="let gameLobby of gameLobbies" class="lobby-container__games__list__lobbies__lobby">
-      <img [src]=gameLobby.initializer.avatarPicture alt="initiator-picture" class="lobby-container__games__list__lobbies__lobby__image">
-      <div class="wrapper">
-        <span class="lobby-container__games__list__lobbies__lobby__name">{{gameLobby.initializer.username}}'s lobby</span>
-        <span class="lobby-container__games__list__lobbies__lobby__users">{{gameLobby.participantsNr}}</span>
-      </div>
-      <button class="lobby-container__games__list__lobbies__lobby__btn">Join Lobby chat </button>
-    </li>
-  </ul>
-</ng-template>

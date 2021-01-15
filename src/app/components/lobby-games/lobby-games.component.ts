@@ -44,7 +44,7 @@ export class LobbyGamesComponent implements OnInit {
           this.isSelected = false;
           this.cdr.detectChanges();
         });
-    }else{
+    } else {
       this.lobbyService.getAllLobbiesForGame(lobby.gameId).subscribe(
         (result) => {
           this.gameLobbies = result;
@@ -52,11 +52,10 @@ export class LobbyGamesComponent implements OnInit {
           this.lobbies = [lobby];
           this.isSelected = true;
           this.cdr.detectChanges();
-          console.log(this.lobbies);
         }
       );
     }
-    
+
   }
 
   public toggleIsSelected() {
