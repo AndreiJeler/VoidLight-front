@@ -55,10 +55,13 @@ export class LobbyGamesComponent implements OnInit {
         }
       );
     }
-
   }
 
   public toggleIsSelected() {
     this.isSelected = !this.isSelected;
+  }
+
+  public goBack() {
+    window.history.back();
   }
 }

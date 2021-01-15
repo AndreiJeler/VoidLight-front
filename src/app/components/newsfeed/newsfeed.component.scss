@@ -7,7 +7,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 10%;
+  width: 20%;
 }
 
 .newsfeed {
@@ -52,8 +52,8 @@
     }
 
     &__friend-requests {
-      width: 3rem;
-      height: 3rem;
+      width: 4rem;
+      height: 4rem;
       position: relative;
 
       &__number {

@@ -359,4 +359,8 @@ export class NewsfeedComponent implements OnInit {
       .removeFriendRequest(this.user.id, userId)
       .subscribe((_) => {});
   }
+
+  public openLobbies(){
+    this._router.navigate([`/lobby-games`]);
+  }
 }
