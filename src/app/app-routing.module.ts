@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account-activation', component: AccountActivationComponent },
-  { path: 'achievements', component: AchievementsComponent },
+  { path: 'achievements/:id', component: AchievementsComponent },
   { path: 'steam-return', component: SteamReturnComponent },
   { path: '', component: HomescreenComponent},
 ];

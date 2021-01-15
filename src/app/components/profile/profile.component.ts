@@ -207,4 +207,8 @@ export class ProfileComponent implements OnInit {
         this.friendButtonType = 0;
       });
   }
+
+  public seeAchievements() {
+    this.router.navigate([`/achievements/${this.userId}`]);
+  }
 }
