@@ -93,11 +93,11 @@ body {
         align-self: flex-end;
       }
 
-      &__see-all-achievements {
+      & > a {
         color: $color-white;
+        font-size: 24px;
         margin-top: 0.2rem;
-        margin-right: 1rem;
-        font-size: medium;
+        text-decoration: none;
         cursor: pointer;
       }
     }

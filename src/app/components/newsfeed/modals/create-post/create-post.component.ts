@@ -5,8 +5,6 @@ import { PostService } from 'src/app/services/post.service';
 import { Post } from '../../../../models/post';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-const URL = 'https://localhost:44324/';
-
 @Component({
   selector: 'create-post-modal',
   templateUrl: './create-post.component.html',
@@ -24,8 +22,7 @@ export class CreatePostComponent implements OnInit {
   @Input() games: Game[];
   @Output() close = new EventEmitter<Post>();
 
-  constructor(private _postService: PostService) {
-  }
+  constructor(private _postService: PostService) {}
 
   public ngOnInit() {
     this.post = new Post();
@@ -40,9 +37,9 @@ export class CreatePostComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append("post", JSON.stringify(this.post));
+    formData.append('post', JSON.stringify(this.post));
     if (this.file) {
-        formData.append(this.file.name, this.file, this.file.name);
+      formData.append(this.file.name, this.file, this.file.name);
     }
 
     this._postService.createPost(formData).subscribe(

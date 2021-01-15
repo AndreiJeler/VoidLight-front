@@ -7,6 +7,7 @@ import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
+import { AchievementsComponent } from '../app/components/achievements/achievements.component';
 import {SteamReturnComponent} from "./components/steam-return/steam-return.component";
 import { HomescreenComponent } from './components/homescreen/homescreen.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'post', component: PostComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account-activation', component: AccountActivationComponent },
-  { path: 'steam-return', component: SteamReturnComponent},
+  { path: 'achievements', component: AchievementsComponent },
+  { path: 'steam-return', component: SteamReturnComponent },
   { path: '', component: HomescreenComponent},
 ];
 
