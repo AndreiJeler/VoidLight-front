@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { LobbyGame } from 'src/app/models/lobby-game';
 import { LobbyMessage } from 'src/app/models/lobby-message';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LobbyService } from 'src/app/services/lobby.service';
 
 @Component({
   selector: 'lobby-chat',
@@ -8,6 +14,8 @@ import { LobbyMessage } from 'src/app/models/lobby-message';
 })
 export class LobbyChatComponent implements OnInit {
 
+  gameLobby: LobbyGame;
+  user : User;
   @Input() messages: LobbyMessage[] = [
     {
       id: 1,
@@ -23,8 +31,27 @@ export class LobbyChatComponent implements OnInit {
     }
   ];
 
-  constructor() {  }
+  public goBack() {
+    window.history.back();
+  }
 
-  ngOnInit() { }
+  constructor(
+    private lobbyService: LobbyService,
+    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute
+  ) {  }
+
+  ngOnInit() {
+    this.authenticationService.currentUser.subscribe(
+      (user) => (this.user = user)
+    );
+
+    this.lobbyService.getLobby(this.route.snapshot.params.id).subscribe(
+      (result) => {
+        this.gameLobby = result;
+        console.log(result);
+      }
+    )
+  }
 
 }

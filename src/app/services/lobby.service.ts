@@ -11,13 +11,13 @@ import { Constants } from '../shared/utils/constants';
 export class LobbyService {
   private _lobbyUrl = `${Constants.SERVER_URL}/lobby`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Return all the Game Lobbies as an Observable<GameInfo[]>
    * @param id => the user id
    */
-  public getGameLobbbiesInfo(id: number): Observable<GameInfo[]> {
+  public getGameLobbiesInfo(id: number): Observable<GameInfo[]> {
     return this.http.get<GameInfo[]>(`${this._lobbyUrl}/games/${id}`);
   }
 
@@ -27,6 +27,14 @@ export class LobbyService {
    */
   public getAllLobbiesForGame(id: number): Observable<LobbyGame[]> {
     return this.http.get<LobbyGame[]>(`${this._lobbyUrl}/game/${id}`);
+  }
+
+  /**
+   * Return a LobbyGame by it's id
+   * @param id => the lobby id
+   */
+  public getLobby(id: number): Observable<LobbyGame> {
+    return this.http.get<LobbyGame>(`${this._lobbyUrl}/${id}`);
   }
 
   public joinLobby(lobbyId: number, userId: number): Observable<LobbyGame> {
