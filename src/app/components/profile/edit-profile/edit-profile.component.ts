@@ -1,12 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {User} from '../../../models/user';
-import {UserService} from '../../../services/user.service';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
   @Input() user: User;
@@ -20,9 +27,12 @@ export class EditProfileComponent implements OnInit {
   public avatarPath: string;
   public oldPassword: string;
   public newPassword: string;
+  public file: File;
 
-
-  constructor(private userService: UserService, private modalService: BsModalService) { }
+  constructor(
+    private userService: UserService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.fullName = this.user.fullName;
@@ -43,13 +53,12 @@ export class EditProfileComponent implements OnInit {
     this.user.password = this.password;
 
     formData.append('user', JSON.stringify(this.user));
-    this.userService.updateUser(formData).subscribe();
-    location.reload();
+    this.userService.updateUser(formData).subscribe(() => {
+      location.reload();
+    });
   }
 
-  chooseImage(): void {
-
-  }
+  chooseImage(): void {}
 
   openPasswordModal(changePasswordModal: TemplateRef<any>): void {
     this.passwordModalRef = this.modalService.show(changePasswordModal);
@@ -64,5 +73,13 @@ export class EditProfileComponent implements OnInit {
 
   onClosePasswordModal(): void {
     this.passwordModalRef.hide();
+  }
+
+  public changeLabel(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = event.target.files[0];
+      const value = this.file.name.split('\\');
+      // this.labelText = value[value.length - 1];
+    }
   }
 }
