@@ -97,4 +97,12 @@ export class RegisterComponent implements OnInit {
   steamRegister(): void {
     window.location.href = `${Constants.SERVER_BASE_URL}/api/users/steam-register`;
   }
+
+  discordRegister(): void {
+    window.location.href = Constants.DISCORD_OAUTH_URL;
+  }
+
+  swalTest(): void {
+    this.swalService.showSuccessResult('sal', 'sal');
+  }
 }

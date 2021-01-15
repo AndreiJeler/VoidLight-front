@@ -13,6 +13,7 @@ export class Post {
   public comments: Comment[];
   public originalUser: string;
   public originalUserAvatar: string;
+  public originalUserId: number;
   public isShared: boolean;
   public isLiked: boolean;
 }

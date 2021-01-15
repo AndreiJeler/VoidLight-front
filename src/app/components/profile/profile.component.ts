@@ -137,6 +137,8 @@ export class ProfileComponent implements OnInit {
         .subscribe(
           (result) => {
             this.posts = result;
+            this.videos = [];
+            this.images = [];
             this.posts.forEach((post) => {
               post.avatarPath =
                 `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
