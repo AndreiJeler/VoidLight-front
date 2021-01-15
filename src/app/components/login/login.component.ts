@@ -3,7 +3,6 @@ import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-login',

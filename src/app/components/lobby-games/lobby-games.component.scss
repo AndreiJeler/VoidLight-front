@@ -21,7 +21,7 @@
         left: 0;
         right: 0;
         background: $color-form-card;
-        border-radius: 25px;
+        border-radius: 8px;
         opacity: 0.7;
     }
 
@@ -49,7 +49,7 @@
 
             &__item {
                 height: 10rem;
-                border-radius: 15px;
+                border-radius: 8px;
             }
 
             &__lobbies{
@@ -75,7 +75,7 @@
                     &__image{
                         width: 1.5rem;
                         height: 1.5rem;
-                        border-radius: 3px;
+                        border-radius: 8px;
                     }
 
                     &__name{
@@ -100,7 +100,7 @@
 
             &__input {
                 width: 100%;
-                border-radius: 3px;
+                border-radius: 8px;
             }
 
             &__icon {
