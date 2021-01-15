@@ -8,12 +8,12 @@
           <lobby-card-game [gameInfo]="lobby"></lobby-card-game>
         </li>
       </ul>
-      <div class="lobby-container__games__search" *ngIf="lobbies.length > 1;else createLobbyBtn">
-        <input class="lobby-container__games__search__input" type="text">
+      <div class="lobby-container__games__search" *ngIf="!isSelected;else createLobbyBtn">
+        <input class="lobby-container__games__search__input" type="text" (keyup)="onKey($event)" [(ngModel)]="searchTerm">
       </div>
 
       <ng-template #createLobbyBtn>
-        <btn class="lobby-container__games__create-lobby">Create Lobby</btn>
+        <btn class="lobby-container__games__create-lobby" (click)="createLobby()">Create Lobby</btn>
       </ng-template>
     </div>
 
@@ -26,7 +26,7 @@
             <span class="lobby-container__lobbies__list__item__name">{{gameLobby.initializer.username}}'s lobby</span>
             <span class="lobby-container__lobbies__list__item__users">{{gameLobby.participantsNr}} user(s)</span>
           </div>
-          <button class="lobby-container__lobbies__list__item__btn">Join Lobby chat </button>
+          <button class="lobby-container__lobbies__list__item__btn" (click)="joinLobby(gameLobby)">Join Lobby chat </button>
         </li>
       </ul>
     </div>

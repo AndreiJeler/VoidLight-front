@@ -1,170 +1,171 @@
 @import "../../../styles.scss";
 
 .lobby-container {
-    margin: 1% 7.5%;
-    padding: 1% 3%;
-    height: fit-content;
-    width: 80%;
+  margin: 1% 7.5%;
+  padding: 1% 3%;
+  height: fit-content;
+  width: 80%;
+  height: 90vh;
+  position: relative;
+  z-index: 1;
+  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $color-form-card;
+    border-radius: 8px;
+    opacity: 0.7;
+  }
+
+  &__chat {
+    display: flex;
+    width: 100%;
+    background-color: orchid;
+  }
+
+  &__games {
+    display: flex;
+    flex-direction: column;
     height: 90vh;
-    position: relative;
-    z-index: 1;
-    justify-content: space-evenly;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    &__list {
+      height: 95%;
+      overflow: scroll;
 
-    &::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: $color-form-card;
-        border-radius: 8px;
-        opacity: 0.7;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none !important;
+
+      &__item {
+        height: 13.5rem;
+        margin-bottom: 1rem;
+      }
+
+      &__lobbies {
+        overflow: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        -ms-overflow-style: none;
+        scrollbar-width: none !important;
+      }
     }
 
-    &__chat {
-        display: flex;
+    &__search {
+      display: flex;
+      flex-direction: row;
+      height: 5%;
+
+      &__input {
         width: 100%;
-        background-color: orchid;
+        border-radius: 8px;
+        font-size: 16px;
+      }
     }
 
-    &__games {
+    &__create-lobby {
+      cursor: pointer;
+
+      padding: 5rem;
+      background-color: $color-profile-card;
+      border-radius: 8px;
+
+      text-align: center;
+      text-shadow: 2px 2px 4px #000000;
+      color: $color-white;
+      font-size: 40px;
+    }
+  }
+
+  &__lobbies {
+    &__list {
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none !important;
+
+      &__item {
+        background-color: $color-profile-card;
+
+        height: 13.5rem;
+        width: auto;
+        position: relative;
+        z-index: 1000;
+
         display: flex;
-        flex-direction: column;
-        height: 90vh;
-        &__list {
-            height: 95%;
-            overflow: scroll;
+        flex-direction: row;
+        justify-content: space-between;
 
-            &::-webkit-scrollbar {
-                display: none;
-            }
-            -ms-overflow-style: none;
-            scrollbar-width: none !important;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-left: 1rem;
+        margin-right: 1rem;
 
-            &__item {
-                height: 13.5rem;
-                margin-bottom: 1rem;
-            }
-
-            &__lobbies {
-                overflow: scroll;
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-
-                -ms-overflow-style: none;
-                scrollbar-width: none !important;
-            }
+        &__image {
+          width: auto;
+          height: auto;
+          border-radius: 8px;
+          background-size: cover;
         }
 
-        &__search {
-            display: flex;
-            flex-direction: row;
-            height: 5%;
-
-            &__input {
-                width: 100%;
-                border-radius: 8px;
-            }
+        &__name {
+          height: 50%;
+          text-align: center;
+          font-size: 40px;
+          color: $color-white;
         }
 
-        &__create-lobby {
-            cursor: pointer;
-
-            padding: 5rem;
-            background-color: $color-profile-card;
-            border-radius: 8px;
-
-            text-align: center;
-            text-shadow: 2px 2px 4px #000000;
-            color: $color-white;
-            font-size: 40px;
+        &__users {
+          height: 50%;
+          text-align: center;
+          font-size: 40px;
+          color: $color-white;
         }
+
+        &__btn {
+          height: 100%;
+          width: 10rem;
+
+          font-size: 23px;
+          text-align: center;
+          border: none;
+        }
+      }
     }
-
-    &__lobbies {
-        &__list {
-            overflow: scroll;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-            -ms-overflow-style: none;
-            scrollbar-width: none !important;
-
-            &__item {
-                background-color: $color-profile-card;
-
-                height: 13.5rem;
-                width: auto;
-                position: relative;
-                z-index: 1000;
-
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-
-                border-radius: 8px;
-                overflow: hidden;
-                margin-left: 1rem;
-                margin-right: 1rem;
-
-                &__image {
-                    width: auto;
-                    height: auto;
-                    border-radius: 8px;
-                    background-size: cover;
-                }
-
-                &__name {
-                    height: 50%;
-                    text-align: center;
-                    font-size: 40px;
-                    color: $color-white;
-                }
-
-                &__users {
-                    height: 50%;
-                    text-align: center;
-                    font-size: 40px;
-                    color: $color-white;
-                }
-
-                &__btn {
-                    height: 100%;
-                    width: 10rem;
-
-                    font-size: 23px;
-                    text-align: center;
-                    border: none;
-                }
-            }
-        }
-    }
+  }
 }
 
 .wrapper {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .page {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    &__go-back-btn {
-        background-image: url("../../../assets/Images/back.png");
-        background-size: cover;
-        cursor: pointer;
-        height: 6rem;
-        width: 6rem;
-    }
+  &__go-back-btn {
+    background-image: url("../../../assets/Images/back.png");
+    background-size: cover;
+    cursor: pointer;
+    height: 6rem;
+    width: 6rem;
+  }
 }

@@ -1,3 +1,4 @@
+import { LobbyChatComponent } from './components/lobby-games/lobby-chat/lobby-chat.component';
 import { DiscordReturnComponent } from './components/discord-return/discord-return.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,10 +10,9 @@ import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import { AchievementsComponent } from '../app/components/achievements/achievements.component';
-import { SteamReturnComponent } from "./components/steam-return/steam-return.component";
+import { SteamReturnComponent } from './components/steam-return/steam-return.component';
 import { HomescreenComponent } from './components/homescreen/homescreen.component';
 import { LobbyGamesComponent } from './components/lobby-games/lobby-games.component';
-
 
 const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
@@ -26,12 +26,11 @@ const routes: Routes = [
   { path: 'steam-return', component: SteamReturnComponent },
   { path: 'discord-return', component: DiscordReturnComponent },
   { path: '', component: HomescreenComponent },
+  { path: 'lobby/:id', component: LobbyChatComponent },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
