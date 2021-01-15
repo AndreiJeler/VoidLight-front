@@ -1,6 +1,6 @@
 <div class="page">
   <a class="page__go-back-btn" (click)="goBack()"></a>
-  
+
   <div class="lobby-container">
     <div class="lobby-container__games">
       <ul class="lobby-container__games__list">
@@ -23,8 +23,8 @@
           <img [src]=gameLobby.initializer.avatarPicture alt="initiator-picture"
             class="lobby-container__lobbies__list__item__image">
           <div class="wrapper">
-            <span class="lobby-container__lobbies__list__item__name">{{gameLobby.initializer.username}}'slobby</span>
-            <span class="lobby-container__lobbies__list__item__users">{{gameLobby.participantsNr}}</span>
+            <span class="lobby-container__lobbies__list__item__name">{{gameLobby.initializer.username}}'s lobby</span>
+            <span class="lobby-container__lobbies__list__item__users">{{gameLobby.participantsNr}} user(s)</span>
           </div>
           <button class="lobby-container__lobbies__list__item__btn">Join Lobby chat </button>
         </li>

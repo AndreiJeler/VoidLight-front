@@ -42,6 +42,7 @@ export class LobbyGamesComponent implements OnInit {
           this.lobbies = null;
           this.lobbies = result;
           this.isSelected = false;
+          this.gameLobbies = [];
           this.cdr.detectChanges();
         });
     } else {
