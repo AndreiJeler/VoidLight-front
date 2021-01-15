@@ -95,7 +95,7 @@ export class RegisterComponent implements OnInit {
   }
 
   steamRegister(): void {
-    window.location.href = 'https://localhost:44324/api/users/steam-register';
+    window.location.href = `${Constants.SERVER_BASE_URL}/api/users/steam-register`;
   }
 
   discordRegister(): void {

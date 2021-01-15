@@ -1,3 +1,4 @@
+import { Constants } from './../../shared/utils/constants';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -50,8 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   public steamLogin() {
-    window.location.href =
-      'https://localhost:44324/api/authentication/steam-login';
+    window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-login`;
   }
 
   discordLogin(): void {

@@ -41,7 +41,7 @@
         align-self: flex-start;
         margin-top: 0.3rem;
         margin-left: 0.3rem;
-
+        cursor: pointer;
         & > * {
           border-radius: 4px;
         }
@@ -58,6 +58,8 @@
         &__username {
           font-size: 19px;
           font-weight: 500;
+          cursor: pointer;
+
         }
       }
     }

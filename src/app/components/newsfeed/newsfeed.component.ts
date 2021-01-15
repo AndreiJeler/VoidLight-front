@@ -72,20 +72,7 @@ export class NewsfeedComponent implements OnInit {
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
-          // let comments = [];
-          // post.comments.forEach((content) => {
-          //   content.user.avatarPath =
-          //     'https://localhost:44324/' + content.user.avatarPath;
-          //   comments.push(content);
-          // });
-          // post.comments = comments;
+          post.avatarPath = Constants.SERVER_BASE_URL + '/' + post.avatarPath;
         });
       },
       (error) => {
@@ -133,7 +120,8 @@ export class NewsfeedComponent implements OnInit {
       (result) => {
         this.friends = result;
         this.friends.forEach((friend: User) => {
-          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
+          friend.avatarPath =
+            `${Constants.SERVER_BASE_URL}/` + friend.avatarPath;
         });
       },
       (error) => {
@@ -152,17 +140,11 @@ export class NewsfeedComponent implements OnInit {
         (result) => {
           this.posts = result;
           this.posts.forEach((post) => {
-            post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-            let contents = [];
-            post.contents.forEach((content) => {
-              content = 'https://localhost:44324/' + content;
-              contents.push(content);
-            });
-            post.contents = contents;
+            post.avatarPath = `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
             let comments = [];
             post.comments.forEach((content) => {
               content.user.avatarPath =
-                'https://localhost:44324/' + content.user.avatarPath;
+                `${Constants.SERVER_BASE_URL}/` + content.user.avatarPath;
               comments.push(content);
             });
             post.comments = comments;
@@ -193,13 +175,7 @@ export class NewsfeedComponent implements OnInit {
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
+          post.avatarPath = `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
         });
       },
       (error) => {
@@ -223,13 +199,7 @@ export class NewsfeedComponent implements OnInit {
       (result) => {
         this.posts = result;
         this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
+          post.avatarPath = `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
         });
       },
       (error) => {
@@ -266,13 +236,7 @@ export class NewsfeedComponent implements OnInit {
   public closeModal(post: Post): void {
     this.chosenModal.hide();
     if (post) {
-      post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-      let contents = [];
-      post.contents.forEach((content) => {
-        content = 'https://localhost:44324/' + content;
-        contents.push(content);
-      });
-      post.contents = contents;
+      post.avatarPath = `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
       this.posts.unshift(post);
       this.cdr.detectChanges();
     }
@@ -342,7 +306,7 @@ export class NewsfeedComponent implements OnInit {
     this.userService.getUsersByUsername(username).subscribe((users: User[]) => {
       users.forEach(
         (user) =>
-          (user.avatarPath = 'https://localhost:44324/' + user.avatarPath)
+          (user.avatarPath = `${Constants.SERVER_BASE_URL}/` + user.avatarPath)
       );
       this.possibleUsers = users;
     });

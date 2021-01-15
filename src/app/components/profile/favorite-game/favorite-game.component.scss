@@ -1,3 +1,5 @@
+@import "../../../../styles.scss";
+
 .game-container {
   display: flex;
   flex-direction: row;
@@ -23,6 +25,11 @@
     }
   }
 
+  & > p {
+    font-size: 20px;
+    color: $color-white;
+  }
+  
   &__element {
     width: 25%;
   }
