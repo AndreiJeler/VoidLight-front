@@ -66,4 +66,16 @@ export class SwalService {
       title: message,
     });
   }
+
+  public createLobbyNotification(message) {
+    return Swal.fire({
+      text: message,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    });
+  }
 }

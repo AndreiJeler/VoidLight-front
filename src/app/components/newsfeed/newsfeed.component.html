@@ -18,6 +18,13 @@
     </ng-template>
     </ng-select>
     <div class="wrapper">
+
+      <div class="newsfeed__header__friend-requests" (click)="openLobbies()">
+        <svg class="newsfeed__header__friend-requests__icon">
+          <use xlink:href="../../../assets/logos/sprite.svg#games"></use>
+        </svg>
+      </div>
+
       <div class="newsfeed__header__friend-requests">
         <p class="newsfeed__header__friend-requests__number" *ngIf="numberOfRequests > 0">{{numberOfRequests}}</p>
         <svg class="newsfeed__header__friend-requests__icon" (click)="openVideoPostModal(friendRequestsModal)">

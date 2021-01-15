@@ -209,4 +209,8 @@ export class ProfileComponent implements OnInit {
         this.friendButtonType = 0;
       });
   }
+
+  public goBack() {
+    window.history.back();
+  }
 }

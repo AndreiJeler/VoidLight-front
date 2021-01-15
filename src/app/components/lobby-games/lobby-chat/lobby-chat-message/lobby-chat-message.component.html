@@ -1,0 +1,11 @@
+<div class="message-container" *ngIf="message.username!=loggedUser.username; else isLoggedUser">
+  <img [src]="message.userIcon" alt="user-icon" class="message-container__user-icon">
+  <p class="message-container__text">{{message.text}}</p>
+</div>
+
+<ng-template #isLoggedUser>
+  <div class="message-container__logged-user">
+    <p class="message-container__logged-user__text">{{message.text}}</p>
+    <img [src]="message.userIcon" alt="user-icon" class="message-container__logged-user__user-icon">
+  </div>
+</ng-template>
