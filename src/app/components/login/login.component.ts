@@ -60,7 +60,5 @@ export class LoginComponent implements OnInit {
 
   facebookLogin(): void {
     window.open('https://www.facebook.com', '_blank');
-
-    // window.location.href = 'facebook.com';
   }
 }
