@@ -14,6 +14,7 @@ import {
 
 import { Post } from '../../models/post';
 import { first } from 'rxjs/operators';
+import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-post',
@@ -44,7 +45,7 @@ export class PostComponent implements OnInit {
     );
     this.post.contents.forEach((content) => {
       const value = content.split('.');
-      if (value[value.length - 1] === 'mp4') {
+      if (value[value.length - 1].startsWith('mp4')) {
         this.videos.push(content);
       } else {
         this.images.push(content);
@@ -56,7 +57,7 @@ export class PostComponent implements OnInit {
       .slice(0, 4)
       .join(' ');
     this.post.originalUserAvatar =
-      'https://localhost:44324/' + this.post.originalUserAvatar;
+      `${Constants.SERVER_BASE_URL}/` + this.post.originalUserAvatar;
 
     this.isLiked = this.post.isLiked;
 
@@ -91,7 +92,8 @@ export class PostComponent implements OnInit {
       .postComment(comm)
       .pipe(first())
       .subscribe((res) => {
-        res.user.avatarPath = 'https://localhost:44324/' + res.user.avatarPath;
+        res.user.avatarPath =
+          `${Constants.SERVER_BASE_URL}/` + res.user.avatarPath;
         this.post.comments.unshift(res);
       });
   }
@@ -101,7 +103,7 @@ export class PostComponent implements OnInit {
       .postShare(this.post.id, this.user.id)
       .pipe(first())
       .subscribe((res) => {
-        res.avatarPath = 'https://localhost:44324/' + res.avatarPath;
+        res.avatarPath = `${Constants.SERVER_BASE_URL}/` + res.avatarPath;
         this.event.emit(res);
       });
   }
