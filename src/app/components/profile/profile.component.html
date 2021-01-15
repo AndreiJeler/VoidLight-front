@@ -7,7 +7,8 @@
             <p class="profile-container__header__info__data__age">21</p>
             <p class="profile-container__header__info__data__country">RO</p>
             <div class="profile-container__header__info__data__currently-playing">Currently playing
-                <p class="profile-container__header__info__data__currently-playing__game"> browsing the internet </p>
+                <p *ngIf="user.playedGame==='None'" class="profile-container__header__info__data__currently-playing__game"> browsing the internet </p>
+                <p *ngIf="user.playedGame!=='None'" class="profile-container__header__info__data__currently-playing__game"> {{user.playedGame}} </p>
             </div>
         </div>
         <button *ngIf="!isCurrentUserAccount && friendButtonType==0" (click)="sendFriendRequest()" class="btn">Add friend</button>
@@ -59,9 +60,9 @@
         <p class="profile-container__content__games__title">Favorite Games</p>
         <div class="profile-container__content__games__list">
           <div class="profile-container__content__games__list__heading">
+            <p class="profile-container__content__games__list__heading__name">ICON</p>
             <p class="profile-container__content__games__list__heading__name">NAME</p>
             <p class="profile-container__content__games__list__heading__element">TIME PLAYED</p>
-            <p class="profile-container__content__games__list__heading__element">ACHIEVEMENTS</p>
           </div>
           <hr>
           <ul class="profile-container__content__games__list__ul">

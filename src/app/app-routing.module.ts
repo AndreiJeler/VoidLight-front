@@ -1,3 +1,4 @@
+import { DiscordReturnComponent } from './components/discord-return/discord-return.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -21,9 +22,9 @@ const routes: Routes = [
   { path: 'account-activation', component: AccountActivationComponent },
   { path: 'achievements', component: AchievementsComponent },
   { path: 'steam-return', component: SteamReturnComponent },
+  { path: 'discord-return', component: DiscordReturnComponent },
   { path: '', component: HomescreenComponent},
 ];
-
 
 @NgModule({
   imports: [

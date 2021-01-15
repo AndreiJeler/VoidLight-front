@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/src/sweetalert2.js';
 
 @Injectable({
   providedIn: 'root',
