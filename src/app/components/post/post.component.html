@@ -10,6 +10,7 @@
       </div>
       <div class="post__header__user__text">
         <p (click)="openProfile(post.originalUserId)" class="post__header__user__text__username paragraph">{{post.originalUser}}</p>
+        <p class="post__header__user__text__username paragraph" *ngIf="post.game!=noGame">{{post.game}}</p>
         <p class="post__header__user__text__timestamp paragraph">{{timeString}}</p>
       </div>
     </div>
