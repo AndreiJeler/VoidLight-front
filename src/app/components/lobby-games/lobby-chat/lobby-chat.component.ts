@@ -1,3 +1,4 @@
+import { DiscordUser } from './../../../models/discord-user';
 import { SwalService } from 'src/app/shared/services/swal.service';
 import { LobbyHubService } from './../../../shared/services/lobby-hub.service';
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -17,20 +18,10 @@ import { LobbyService } from 'src/app/services/lobby.service';
 export class LobbyChatComponent implements OnInit {
   gameLobby: LobbyGame;
   user: User;
-  @Input() messages: LobbyMessage[] = [
-    {
-      id: 1,
-      text: 'Sa moara bibi',
-      username: 'Sully',
-      userIcon: '../../../../assets/Images/buni_pic.jpg',
-    },
-    {
-      id: 2,
-      text: 'Sa traasca bibi',
-      username: 'Bibi',
-      userIcon: '../../../../assets/Images/buni_pic.jpg',
-    },
-  ];
+  discordUser: DiscordUser;
+  messageText: string;
+  isLoaded = false;
+  messages: LobbyMessage[] = [];
 
   public goBack() {
     window.history.back();
@@ -55,26 +46,27 @@ export class LobbyChatComponent implements OnInit {
       .getLobby(this.route.snapshot.params.id)
       .subscribe((result) => {
         this.gameLobby = result;
-        console.log(result);
+        this.discordUser = this.gameLobby.users.find(
+          (u) => u.userId == this.user.id
+        );
+        this.lobbyHub.startConnection();
+        this.startMessageListener();
+        this.startJoinListener();
+        this.startLeaveListener();
+        this.startStartListener();
+        this.isLoaded = true;
       });
-
-    this.lobbyHub.startConnection();
-    this.startMessageListener();
-    this.startJoinistener();
-    this.startLeaveListener();
-    this.startStartListener();
   }
 
   public startMessageListener() {
     const callback = (data: LobbyMessage) => {
-      console.log(data);
       this.messages.push(data);
       this.cdr.detectChanges();
     };
     this.lobbyHub.messageListener(this.gameLobby.id, callback);
   }
 
-  public startJoinistener() {
+  public startJoinListener() {
     const callback = (data: LobbyGame) => {
       console.log(data);
       this.gameLobby = data;
@@ -94,6 +86,10 @@ export class LobbyChatComponent implements OnInit {
 
   public startStartListener() {
     const callback = (data: string) => {
+      console.log(typeof data);
+      if (typeof data === typeof LobbyMessage) {
+        return;
+      }
       console.log(data);
       this.swalService.showSuccessResult(
         'Channel opened',
@@ -101,6 +97,25 @@ export class LobbyChatComponent implements OnInit {
       );
       this.cdr.detectChanges();
     };
-    this.lobbyHub.messageListener(this.gameLobby.id, callback);
+    this.lobbyHub.startListener(this.gameLobby.id, callback);
+  }
+
+  public sendMessage() {
+    const message = new LobbyMessage();
+    message.id = this.gameLobby.id;
+    message.userIcon = this.discordUser.avatarPicture;
+    message.text = this.messageText;
+    message.userId = this.discordUser.userId;
+    message.username = this.discordUser.username;
+    this.messageText = '';
+    this.lobbyService.sendMessage(message).subscribe();
+  }
+
+  public startLobby() {
+    this.lobbyService.startLobby(this.gameLobby.id).subscribe();
+  }
+
+  public leaveLobby() {
+    this.lobbyService.leavelobby(this.gameLobby.id, this.user.id).subscribe();
   }
 }

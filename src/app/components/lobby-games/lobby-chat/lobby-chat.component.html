@@ -1,4 +1,4 @@
-<div class="page">
+<div *ngIf="isLoaded" class="page">
   <a class="page__go-back-btn" (click)="goBack()"></a>
 
   <div class="chat-container">
@@ -6,13 +6,13 @@
       <div class="chat-container__chat__messages">
         <ul class="chat-container__chat__messages__list">
           <li *ngFor="let message of messages" class="chat-container__chat__messages__list__item">
-            <lobby-chat-message [message]=message></lobby-chat-message>
+            <lobby-chat-message [message]=message [user]=user></lobby-chat-message>
           </li>
         </ul>
       </div>
       <div class="chat-container__chat__input">
-        <input type="text" class="chat-container__chat__input__message">
-        <svg class="chat-container__chat__input__icon">
+        <input type="text" class="chat-container__chat__input__message" [(ngModel)]="messageText">
+        <svg class="chat-container__chat__input__icon" (click)="sendMessage()">
           <use xlink:href="../../../assets/logos/sprite.svg#send"></use>
         </svg>
       </div>
@@ -26,7 +26,7 @@
         </li>
       </ul>
 
-      <button class="chat-container__members__start-lobby" *ngIf="gameLobby.initializer.userId==user.id; else leaveBtn">
+      <button class="chat-container__members__start-lobby" *ngIf="gameLobby.initializer.userId==user.id; else leaveBtn" (click)="startLobby()">
         Start Discord Lobby
       </button>
 

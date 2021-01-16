@@ -1,3 +1,4 @@
+import { LobbyMessage } from 'src/app/models/lobby-message';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ import { Constants } from '../shared/utils/constants';
 export class LobbyService {
   private _lobbyUrl = `${Constants.SERVER_URL}/lobby`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Return all the Game Lobbies as an Observable<GameInfo[]>
@@ -48,5 +49,17 @@ export class LobbyService {
       userId: userId,
       gameId: gameId,
     });
+  }
+
+  public sendMessage(message: LobbyMessage): Observable<any> {
+    return this.http.post<any>(`${this._lobbyUrl}/message`, message);
+  }
+
+  public startLobby(lobbyId: number): Observable<any> {
+    return this.http.get<any>(`${this._lobbyUrl}/start/${lobbyId}`);
+  }
+
+  public leavelobby(lobbyId: number, userId: number): Observable<any> {
+    return this.http.get<any>(`${this._lobbyUrl}/leave/${lobbyId}/${userId}`);
   }
 }

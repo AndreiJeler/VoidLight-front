@@ -24,12 +24,12 @@ export class DiscordReturnComponent implements OnInit {
     );
     this.route.queryParams.subscribe((params) =>
       this.userService.discordAuth(params.code).subscribe((res) => {
-        if (user) {
-          this.swalService
-            .showSuccessResult('Success', 'You connected with Discord.')
-            .then(() => {
-              this.router.navigate([`/profile/${user.id}`]);
-            });
+        if (res == -1) {
+          // this.swalService
+          //   .showSuccessResult('Success', 'You connected with Discord.')
+          //   .then(() => {
+          //     this.router.navigate([`/profile/${user.id}`]);
+          // });
         } else {
           this.authenticationService.authenticateId(res).subscribe((_) => {
             this.swalService

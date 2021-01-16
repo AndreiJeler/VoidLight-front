@@ -39,4 +39,14 @@ export class UserService {
   public discordAuth(code: string): Observable<number> {
     return this.http.get<number>(`${this._userUrl}/discord/${code}`);
   }
+
+  public steamSync(
+    userId: number,
+    steamId: number,
+    username: string
+  ): Observable<User> {
+    return this.http.get<User>(
+      `${this._userUrl}/steam-con/${userId}/${steamId}/${username}`
+    );
+  }
 }
