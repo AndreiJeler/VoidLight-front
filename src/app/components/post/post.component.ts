@@ -32,7 +32,7 @@ export class PostComponent implements OnInit {
   public commentText: string;
   public areCommentsVisible: boolean = false;
   public isLiked: boolean;
-  public noGame: string = "No game";
+  public noGame: string = 'No game';
 
   constructor(
     private postService: PostService,
@@ -59,8 +59,6 @@ export class PostComponent implements OnInit {
       .split(' ')
       .slice(0, 4)
       .join(' ');
-    this.post.originalUserAvatar =
-      `${Constants.SERVER_BASE_URL}/` + this.post.originalUserAvatar;
 
     this.isLiked = this.post.isLiked;
 
@@ -84,13 +82,7 @@ export class PostComponent implements OnInit {
     this.areCommentsVisible = !this.areCommentsVisible;
     if (this.areCommentsVisible) {
       this.postService.getCommentsForPost(this.post.id).subscribe((res) => {
-        let comments = [];
-        res.forEach((comment) => {
-          comment.user.avatarPath =
-            `${Constants.SERVER_BASE_URL}/` + comment.user.avatarPath;
-          comments.push(comment);
-        });
-        this.post.comments = comments;
+        this.post.comments = res;
         this.cdr.detectChanges();
       });
     }
@@ -107,8 +99,6 @@ export class PostComponent implements OnInit {
       .postComment(comm)
       .pipe(first())
       .subscribe((res) => {
-        res.user.avatarPath =
-          `${Constants.SERVER_BASE_URL}/` + res.user.avatarPath;
         this.post.comments.unshift(res);
       });
   }
@@ -118,7 +108,6 @@ export class PostComponent implements OnInit {
       .postShare(this.post.id, this.user.id)
       .pipe(first())
       .subscribe((res) => {
-        res.avatarPath = `${Constants.SERVER_BASE_URL}/` + res.avatarPath;
         this.event.emit(res);
       });
   }

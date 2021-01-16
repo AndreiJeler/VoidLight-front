@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { FriendsService } from '../../services/friends.service';
 import { FriendRequest } from 'src/app/models/friend-request';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
   isCurrentUserAccount = false;
   friendButtonType: number;
   isLoaded: boolean = false;
+  protected chosenModal: BsModalRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +41,8 @@ export class ProfileComponent implements OnInit {
     private gameService: GameService,
     private postService: PostService,
     private profileService: ProfileService,
-    private friendsService: FriendsService
+    private friendsService: FriendsService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +68,6 @@ export class ProfileComponent implements OnInit {
       .getUserById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((user) => {
         this.user = user;
-        this.user.avatarPath = `${Constants.SERVER_BASE_URL}/` + user.avatarPath;
         this.isLoaded = true;
       });
 
@@ -76,10 +78,6 @@ export class ProfileComponent implements OnInit {
     this.friendsService.getFriendsForUser(this.userId).subscribe(
       (result) => {
         this.friends = result;
-        this.friends.forEach((friend: User) => {
-          friend.avatarPath =
-            `${Constants.SERVER_BASE_URL}/` + friend.avatarPath;
-        });
       },
       (error) => {
         console.log(error);
@@ -141,15 +139,7 @@ export class ProfileComponent implements OnInit {
             this.videos = [];
             this.images = [];
             this.posts.forEach((post) => {
-              post.avatarPath =
-                `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
-              let contents = [];
               post.contents.forEach((content) => {
-                content = `${Constants.SERVER_BASE_URL}/` + content;
-                contents.push(content.replace('\\', '/'));
-              });
-              post.contents = contents;
-              contents.forEach((content) => {
                 const value = content.split('.');
                 if (value[value.length - 1] === 'mp4') {
                   this.videos.push(content.replace('\\', '/'));
@@ -214,8 +204,21 @@ export class ProfileComponent implements OnInit {
   public goBack() {
     window.history.back();
   }
-  
+
   public seeAchievements() {
     this.router.navigate([`/achievements/${this.userId}`]);
+  }
+
+  public closeListModal(event) {
+    this.chosenModal.hide();
+    this.gameService
+      .getFavoriteGamesForUser(this.userId)
+      .subscribe((favouriteGames: Game[]) => {
+        this.games = favouriteGames;
+      });
+  }
+
+  public openModal(selectedModal) {
+    this.chosenModal = this.modalService.show(selectedModal);
   }
 }

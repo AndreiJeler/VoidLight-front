@@ -68,6 +68,7 @@
         </span>
       </div>
       <div class="profile-container__content__games paragraph">
+        <button class="profile-container__header__achievements__see-all-achievements" (click)="openModal(gamesListModal)">All Games</button>
         <p class="profile-container__content__games__title">Favorite Games</p>
         <div class="profile-container__content__games__list">
           <div class="profile-container__content__games__list__heading">
@@ -87,3 +88,9 @@
       </div>
     </div>
   </div>
+
+
+
+  <ng-template #gamesListModal>
+    <app-games-list [user]="user" (close)="closeListModal($event)"></app-games-list>
+  </ng-template>
