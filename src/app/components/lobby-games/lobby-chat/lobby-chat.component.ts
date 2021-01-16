@@ -2,7 +2,7 @@ import { DiscordUser } from './../../../models/discord-user';
 import { SwalService } from 'src/app/shared/services/swal.service';
 import { LobbyHubService } from './../../../shared/services/lobby-hub.service';
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LobbyGame } from 'src/app/models/lobby-game';
 import { LobbyMessage } from 'src/app/models/lobby-message';
@@ -34,7 +34,8 @@ export class LobbyChatComponent implements OnInit {
     private route: ActivatedRoute,
     private lobbyHub: LobbyHubService,
     private cdr: ChangeDetectorRef,
-    private swalService: SwalService
+    private swalService: SwalService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -68,7 +69,6 @@ export class LobbyChatComponent implements OnInit {
 
   public startJoinListener() {
     const callback = (data: LobbyGame) => {
-      console.log(data);
       this.gameLobby = data;
       this.cdr.detectChanges();
     };
@@ -77,7 +77,6 @@ export class LobbyChatComponent implements OnInit {
 
   public startLeaveListener() {
     const callback = (data: LobbyGame) => {
-      console.log(data);
       this.gameLobby = data;
       this.cdr.detectChanges();
     };
@@ -86,7 +85,6 @@ export class LobbyChatComponent implements OnInit {
 
   public startStartListener() {
     const callback = (data: string) => {
-      console.log(typeof data);
       if (typeof data === typeof LobbyMessage) {
         return;
       }
@@ -116,6 +114,8 @@ export class LobbyChatComponent implements OnInit {
   }
 
   public leaveLobby() {
-    this.lobbyService.leavelobby(this.gameLobby.id, this.user.id).subscribe();
+    this.lobbyService
+      .leavelobby(this.gameLobby.id, this.user.id)
+      .subscribe(() => this.router.navigate([`/lobby-games`]));
   }
 }
