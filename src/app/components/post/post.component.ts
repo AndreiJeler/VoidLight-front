@@ -32,6 +32,7 @@ export class PostComponent implements OnInit {
   public commentText: string;
   public areCommentsVisible: boolean = false;
   public isLiked: boolean;
+  public noGame: string = "No game";
 
   constructor(
     private postService: PostService,
