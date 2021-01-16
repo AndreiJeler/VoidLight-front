@@ -24,12 +24,6 @@ export class FriendRequestsComponent implements OnInit {
     this.friendsService
       .getFriendRequestsForUser(this.userId)
       .subscribe((friends) => {
-        friends.forEach(
-          (friend) =>
-            (friend.avatarPath =
-              `${Constants.SERVER_BASE_URL}/` + friend.avatarPath)
-        );
-
         this.friends = friends;
       });
   }

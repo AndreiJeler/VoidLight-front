@@ -36,6 +36,7 @@ import { HomescreenComponent } from './components/homescreen/homescreen.componen
 import { GalleryModule } from 'ng-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { GamesListComponent } from './components/profile/games-list/games-list.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     LobbyCardComponent,
     LobbyChatMessageComponent,
     HomescreenComponent,
+    GamesListComponent,
   ],
   imports: [
     BrowserModule,

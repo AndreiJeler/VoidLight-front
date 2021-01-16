@@ -24,8 +24,10 @@
       </div>
       <div class="profile-container__header__achievements">
         <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
-        <button (click)="seeAchievements()" class="profile-container__header__achievements__see-all-achievements">See
-          All Achievements</button>
+        <div class="wrapper">
+          <button (click)="seeAchievements()" class="profile-container__header__achievements__see-all-achievements">See All Achievements</button>
+          <button (click)="openModal(gamesListModal)" class="profile-container__header__achievements__see-all-achievements">All Games</button>
+        </div>
       </div>
     </div>
     <div class="profile-container__content">
@@ -44,7 +46,7 @@
           </gallery>
           <!-- Add custom template to image items -->
           <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
-            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
+            <span *ngIf="type === 'image' && index === currIndex" class="item-text">
               {{data?.title}}
             </span>
           </ng-template>
@@ -87,3 +89,9 @@
       </div>
     </div>
   </div>
+
+
+
+  <ng-template #gamesListModal>
+    <app-games-list [user]="user" (close)="closeListModal($event)"></app-games-list>
+  </ng-template>
