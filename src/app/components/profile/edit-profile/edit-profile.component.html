@@ -42,23 +42,26 @@
     <div class="col-8 connect-with__item">
       <img src="../../../assets/logos/steam.svg" alt="facebook logo" class="connect-with__item__icon">
     </div>
-    <div class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+    <div *ngIf="steamKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+    <div *ngIf="steamKnown!=='-'" class="col-3"><span class="connect-with__item__button paragraph">{{steamKnown}}</span></div>
+
   </div>
 
   <div class="row connect-with">
     <div class="col-8 connect-with__item">
       <img src="../../../assets/logos/discord.svg" alt="facebook logo" class="connect-with__item__icon">
     </div>
-    <div class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+    <div *ngIf="discordKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+    <div *ngIf="discordKnown!=='-'" class="col-3"><span class="connect-with__item__button paragraph">{{discordKnown}}</span></div>
   </div>
 
-  <div class="row connect-with">
+  <!-- <div class="row connect-with">
     <div class="col-8 connect-with__item">
       <img src="../../../assets/logos/google.svg" alt="facebook logo" class="connect-with__item__icon">
     </div>
     <div class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
   </div>
-</div>
+</div> -->
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default button-modal submit-button"

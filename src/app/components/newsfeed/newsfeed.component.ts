@@ -333,7 +333,16 @@ export class NewsfeedComponent implements OnInit {
   }
 
   public openLobbies() {
-    this._router.navigate([`/lobby-games`]);
+    this.userService.checkDiscordConnected(this.user.id).subscribe((res) => {
+      if (res.knownAs === '-') {
+        this.swalService.showErrorResult(
+          'Denied',
+          'You need to be connected with Discord'
+        );
+      } else {
+        this._router.navigate([`/lobby-games`]);
+      }
+    });
   }
 
   public openModal(selectedModal: TemplateRef<any>) {

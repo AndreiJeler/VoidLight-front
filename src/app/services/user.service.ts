@@ -56,4 +56,12 @@ export class UserService {
   public refreshGames(userId: number): Observable<any> {
     return this.http.get<any>(`${this._userUrl}/refresh-games/${userId}`);
   }
+
+  public checkSteamConnected(userId: number): Observable<any> {
+    return this.http.get<any>(`${this._userUrl}/steam-connected/${userId}`);
+  }
+
+  public checkDiscordConnected(userId: number): Observable<any> {
+    return this.http.get<any>(`${this._userUrl}/discord-connected/${userId}`);
+  }
 }

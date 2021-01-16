@@ -1,10 +1,12 @@
+import { SwalService } from './../../shared/services/swal.service';
+import { UserService } from 'src/app/services/user.service';
 import { Constants } from './../../shared/utils/constants';
 import { Post } from './../../models/post';
 import { PostService } from './../../services/post.service';
 import { GameService } from './../../services/game.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
@@ -12,8 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { FriendsService } from '../../services/friends.service';
 import { FriendRequest } from 'src/app/models/friend-request';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-profile',
@@ -45,6 +46,8 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private friendsService: FriendsService,
     private modalService: BsModalService,
+    private userService: UserService,
+    private swalService: SwalService
   ) {}
 
   ngOnInit(): void {
@@ -74,33 +77,33 @@ export class ProfileComponent implements OnInit {
         this.isLoaded = true;
       });
 
-      this.postService
-        .getPostsByUser(
-          this.userId,
-          this.authenticationService.currentUserValue.id
-        )
-        .subscribe(
-          (result) => {
-            this.posts = result;
-            this.videos = [];
-            this.images = [];
-            this.posts.forEach((post) => {
-              post.contents.forEach((content) => {
-                const value = content.split('.');
-                if (value[value.length - 1] === 'mp4') {
-                  this.videos.push(content.replace('\\', '/'));
-                } else {
-                  this.images.push(content.replace('\\', '/'));
-                }
-              });
+    this.postService
+      .getPostsByUser(
+        this.userId,
+        this.authenticationService.currentUserValue.id
+      )
+      .subscribe(
+        (result) => {
+          this.posts = result;
+          this.videos = [];
+          this.images = [];
+          this.posts.forEach((post) => {
+            post.contents.forEach((content) => {
+              const value = content.split('.');
+              if (value[value.length - 1] === 'mp4') {
+                this.videos.push(content.replace('\\', '/'));
+              } else {
+                this.images.push(content.replace('\\', '/'));
+              }
             });
+          });
 
-            this._initGallery();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+          this._initGallery();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
     this.gameService
       .getFavoriteGamesForUser(this.userId)
@@ -117,23 +120,6 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     );
-
-    // CHECK BELOW FOR USAGE
-    // // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
-    // const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-    // galleryRef.addImage({
-    //   src: '../../../assets/1.jpg',
-    //   thumb: '../../../assets/1.jpg',
-    // });
-
-    // // galleryRef.addVideo({
-    // //   src: 'VIDEO_URL',
-    // //   thumb: '(OPTIONAL)VIDEO_THUMBNAIL_URL',
-    // //   poster: '(OPTIONAL)VIDEO_POSTER_URL'
-    // // });
-    // galleryRef.addYoutube({
-    //   src: 'NGH5YN2cMRg',
-    // });
   }
 
   _initGallery(): void {
@@ -194,7 +180,6 @@ export class ProfileComponent implements OnInit {
             console.log(error);
           }
         );
-
     }
   }
 
@@ -256,7 +241,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([`/achievements/${this.userId}`]);
   }
 
-
   public closeListModal(event) {
     this.chosenModal.hide();
     this.gameService
@@ -268,5 +252,18 @@ export class ProfileComponent implements OnInit {
 
   public openModal(selectedModal) {
     this.chosenModal = this.modalService.show(selectedModal);
+  }
+
+  public isSteamConnected(selectedModal) {
+    this.userService.checkSteamConnected(this.userId).subscribe((res) => {
+      if (res.knownAs === '-') {
+        this.swalService.showErrorResult(
+          'Denied',
+          'This account is not connected to steam'
+        );
+      } else {
+        this.chosenModal = this.modalService.show(selectedModal);
+      }
+    });
   }
 }

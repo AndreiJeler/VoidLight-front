@@ -9,7 +9,7 @@ import {
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-profile',
@@ -31,6 +31,8 @@ export class EditProfileComponent implements OnInit {
   public confirmPassword: string;
   public age: number;
   public file: File;
+  public steamKnown: string;
+  public discordKnown: string;
 
   constructor(
     private userService: UserService,
@@ -43,6 +45,7 @@ export class EditProfileComponent implements OnInit {
     this.password = this.user.password;
     this.avatarPath = this.user.avatarPath;
     this.age = this.user.age;
+    this.isConnected();
   }
 
   onCancel(): void {
@@ -56,7 +59,6 @@ export class EditProfileComponent implements OnInit {
     this.user.email = this.email;
     this.user.password = this.password;
     this.user.age = this.age;
-
 
     // if (this.file) {
     //   f
@@ -78,11 +80,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSavePassword(): void {
-    if (this.oldPassword === this.password && this.newPassword === this.confirmPassword) {
+    if (
+      this.oldPassword === this.password &&
+      this.newPassword === this.confirmPassword
+    ) {
       this.password = this.newPassword;
       this.passwordModalRef.hide();
-    }
-    else {
+    } else {
       Swal.fire('Passwords do not match');
     }
   }
@@ -99,6 +103,16 @@ export class EditProfileComponent implements OnInit {
       document.getElementById('selected-file').innerHTML = this.file.name;
       // this.labelText = value[value.length - 1];
     }
+  }
+
+  public isConnected() {
+    this.userService
+      .checkSteamConnected(this.user.id)
+      .subscribe((res) => (this.steamKnown = res.knownAs));
+    this.userService.checkDiscordConnected(this.user.id).subscribe((res) => {
+      this.discordKnown = res.knownAs;
+      console.log(res);
+    });
   }
   //
   // uploadImage(event: any): void {

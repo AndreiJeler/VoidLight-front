@@ -14,8 +14,8 @@
     <div *ngFor="let game of games" class="modal-body__game">
         <img [src]="game.icon" class="modal-body__game__icon">
         <p class="modal-body__game__text">{{game.name}}</p>
-        <button *ngIf="isFavorite(game)" class="btn-success modal-body__game__btn" (click)="updateFavorite(game)">Add</button>
-        <button *ngIf="!isFavorite(game)" class="btn-danger modal-body__game__btn" (click)="updateFavorite(game)">Remove</button>
+        <button *ngIf="loggedUser.id==user.id && isFavorite(game)" class="btn-success modal-body__game__btn" (click)="updateFavorite(game)">Add</button>
+        <button *ngIf="loggedUser.id==user.id && !isFavorite(game)" class="btn-danger modal-body__game__btn" (click)="updateFavorite(game)">Remove</button>
 
     </div>
   </div>

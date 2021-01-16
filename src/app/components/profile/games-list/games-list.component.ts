@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 import { GameService } from './../../../services/game.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -16,13 +17,17 @@ export class GamesListComponent implements OnInit {
   public favouriteGames: Game[] = [];
   games: Game[];
   originalGames: Game[];
+  loggedUser: User;
 
   constructor(
     private gameService: GameService,
-    private userService: UserService
+    private userService: UserService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
+    this.loggedUser = this.authenticationService.currentUserValue;
+
     this.gameService.getGamesForUser(this.user.id).subscribe((res) => {
       this.games = res;
       this.originalGames = this.games;

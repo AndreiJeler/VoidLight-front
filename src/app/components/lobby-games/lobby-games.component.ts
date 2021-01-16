@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { SwalService } from 'src/app/shared/services/swal.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { GameInfo } from 'src/app/models/game-info';
@@ -25,13 +26,24 @@ export class LobbyGamesComponent implements OnInit {
     private lobbyService: LobbyService,
     private authenticationService: AuthenticationService,
     private swalService: SwalService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.authenticationService.currentUser.subscribe(
       (user) => (this.user = user)
     );
+
+    this.userService.checkDiscordConnected(this.user.id).subscribe((res) => {
+      if (res.knownAs === '-') {
+        this.swalService.showErrorResult(
+          'Denied',
+          'You need to be connected with Discord'
+        );
+        this.router.navigate([`/newsfeed`]);
+      }
+    });
 
     this.lobbyService.getGameLobbiesInfo(this.user.id).subscribe((result) => {
       this.lobbies = result;
