@@ -37,7 +37,6 @@ export class LobbyService {
   public getLobby(id: number): Observable<LobbyGame> {
     return this.http.get<LobbyGame>(`${this._lobbyUrl}/${id}`);
   }
-
   public joinLobby(lobbyId: number, userId: number): Observable<LobbyGame> {
     return this.http.get<LobbyGame>(
       `${this._lobbyUrl}/join/${lobbyId}/${userId}`

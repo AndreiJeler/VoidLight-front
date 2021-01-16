@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
     window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-login`;
   }
 
-  discordLogin(): void {
+  public discordLogin(): void {
     window.location.href = Constants.DISCORD_OAUTH_URL;
   }
 
-  facebookLogin(): void {
+  public facebookLogin(): void {
     window.open('https://www.facebook.com', '_blank');
   }
 }
