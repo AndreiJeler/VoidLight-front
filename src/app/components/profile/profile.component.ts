@@ -247,6 +247,7 @@ export class ProfileComponent implements OnInit {
 
   closeModal(): void {
     this.modalRef.hide();
+  }
   public goBack() {
     window.history.back();
   }
