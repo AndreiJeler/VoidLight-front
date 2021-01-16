@@ -69,4 +69,9 @@ export class AchievementsComponent implements OnInit {
       }
     );
   }
+
+  public goBack() {
+    window.history.back();
+  }
+  
 }
