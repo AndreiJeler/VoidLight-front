@@ -4,7 +4,7 @@ import { PostService } from './../../services/post.service';
 import { GameService } from './../../services/game.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import { Gallery, GalleryRef } from 'ng-gallery';
 import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
@@ -12,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
 import { FriendsService } from '../../services/friends.service';
 import { FriendRequest } from 'src/app/models/friend-request';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
   userId: number;
   isCurrentUserAccount = false;
   friendButtonType: number;
+  modalRef: BsModalRef;
   isLoaded: boolean = false;
   protected chosenModal: BsModalRef;
 
@@ -42,7 +44,7 @@ export class ProfileComponent implements OnInit {
     private postService: PostService,
     private profileService: ProfileService,
     private friendsService: FriendsService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +70,7 @@ export class ProfileComponent implements OnInit {
       .getUserById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((user) => {
         this.user = user;
+        this.user.avatarPath = user.avatarPath;
         this.isLoaded = true;
       });
 
@@ -106,6 +109,9 @@ export class ProfileComponent implements OnInit {
     this.friendsService.getFriendsForUser(this.userId).subscribe(
       (result) => {
         this.friends = result;
+        this.friends.forEach((friend: User) => {
+          friend.avatarPath = friend.avatarPath;
+        });
       },
       (error) => {
         console.log(error);
@@ -156,7 +162,39 @@ export class ProfileComponent implements OnInit {
     }
 
     if (id == 'posts') {
-      
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.posts.forEach((post) => {
+              post.avatarPath = post.avatarPath;
+              let contents = [];
+              post.contents.forEach((content) => {
+                content = content;
+                contents.push(content.replace('\\', '/'));
+              });
+              post.contents = contents;
+              contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
     }
   }
 
@@ -203,6 +241,12 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  openEditProfileModal(editProfileModal: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(editProfileModal);
+  }
+
+  closeModal(): void {
+    this.modalRef.hide();
   public goBack() {
     window.history.back();
   }

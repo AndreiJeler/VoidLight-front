@@ -36,6 +36,9 @@ export class UserService {
     return this.http.get<User[]>(`${this._userUrl}/username/${username}`);
   }
 
+  public updateUser(user: FormData): Observable<any> {
+    return this.http.put(`${this._userUrl}`, user);
+  }
   public discordAuth(code: string): Observable<number> {
     return this.http.get<number>(`${this._userUrl}/discord/${code}`);
   }
