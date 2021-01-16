@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
       .getUserById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((user) => {
         this.user = user;
-        this.user.avatarPath = 'https://localhost:44324/' + user.avatarPath;
+        this.user.avatarPath = user.avatarPath;
       });
 
     this.gameService
@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit {
       (result) => {
         this.friends = result;
         this.friends.forEach((friend: User) => {
-          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
+          friend.avatarPath = friend.avatarPath;
         });
       },
       (error) => {
@@ -139,10 +139,10 @@ export class ProfileComponent implements OnInit {
           (result) => {
             this.posts = result;
             this.posts.forEach((post) => {
-              post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
+              post.avatarPath = post.avatarPath;
               let contents = [];
               post.contents.forEach((content) => {
-                content = 'https://localhost:44324/' + content;
+                content = content;
                 contents.push(content.replace('\\', '/'));
               });
               post.contents = contents;
