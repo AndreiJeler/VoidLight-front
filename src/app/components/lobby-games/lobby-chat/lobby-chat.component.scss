@@ -1,0 +1,37 @@
+@import '../../../../styles.scss';
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__current-lobby {
+        font-size: medium;
+    }
+
+    &__chat {
+        height: 100%;
+        background-color: saddlebrown;
+        &__messages{
+            height: 95%;
+            width: 102.5rem;
+        }
+
+        &__input{
+            height: 5%;
+            width: 100%;
+
+            &__message{
+                height: 100%;
+                width: 97.5rem;
+                border-radius: 8px;
+            }
+
+            &__icon{
+                fill: $color-white;
+                height: 4rem;
+                width: 4rem;
+            }
+        }
+    }
+}

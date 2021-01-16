@@ -137,6 +137,8 @@ export class ProfileComponent implements OnInit {
         .subscribe(
           (result) => {
             this.posts = result;
+            this.videos = [];
+            this.images = [];
             this.posts.forEach((post) => {
               post.avatarPath =
                 `${Constants.SERVER_BASE_URL}/` + post.avatarPath;
@@ -206,5 +208,9 @@ export class ProfileComponent implements OnInit {
       .subscribe((_) => {
         this.friendButtonType = 0;
       });
+  }
+
+  public goBack() {
+    window.history.back();
   }
 }

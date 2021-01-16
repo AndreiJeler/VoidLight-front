@@ -23,7 +23,7 @@
   &::before {
     transform: translateX(-2rem) translateY(-2.5rem);
     border: 0.6rem solid $color-button-top-gradient;
-    border-radius: 2.5rem;
+    border-radius: 8px;
   }
   &::after {
     z-index: -2;
@@ -39,7 +39,7 @@
       font-family: inherit;
       color: inherit;
       padding: 1.5rem 2rem;
-      border-radius: 2px;
+      border-radius: 8px;
       background-color: rgba($color-white, 0.5);
       border: none;
       border-bottom: 3px solid transparent;
@@ -88,7 +88,7 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    border-radius: 2.5rem;
+    border-radius: 8px;
     background-color: $color-form-card;
     & > * {
       margin: 0.5rem;
@@ -142,7 +142,7 @@
         background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
         width: 16rem;
         height: 5rem;
-        border-radius: 5rem;
+        border-radius: 8px;
         border: none;
         font-weight: 500;
         font-size: 2rem;
@@ -169,7 +169,7 @@
         background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
         width: 16rem;
         height: 5rem;
-        border-radius: 5rem;
+        border-radius: 8px;
         border: none;
         font-weight: 500;
         font-size: 2rem;

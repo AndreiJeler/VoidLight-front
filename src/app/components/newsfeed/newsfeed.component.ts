@@ -73,13 +73,6 @@ export class NewsfeedComponent implements OnInit {
         this.posts = result;
         this.posts.forEach((post) => {
           post.avatarPath = Constants.SERVER_BASE_URL + '/' + post.avatarPath;
-          let comments = [];
-          post.comments.forEach((content) => {
-            content.user.avatarPath =
-              Constants.SERVER_BASE_URL + '/' + content.user.avatarPath;
-            comments.push(content);
-          });
-          post.comments = comments;
         });
       },
       (error) => {
@@ -365,5 +358,9 @@ export class NewsfeedComponent implements OnInit {
     this._friendsService
       .removeFriendRequest(this.user.id, userId)
       .subscribe((_) => {});
+  }
+
+  public openLobbies(){
+    this._router.navigate([`/lobby-games`]);
   }
 }

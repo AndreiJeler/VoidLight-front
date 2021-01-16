@@ -1,78 +1,84 @@
-<div class="profile-container">
-  <div class="profile-container__header">
-    <div class="profile-container__header__info">
-        <img class="profile-container__header__info__image" [src]="user.avatarPath" alt="User profile picture"/>
+<div class="page">
+  <a class="page__go-back-btn" (click)="goBack()"></a>
+  <div class="profile-container">
+    <div class="profile-container__header">
+      <div class="profile-container__header__info">
+        <img class="profile-container__header__info__image" [src]="user.avatarPath" alt="User profile picture" />
         <div class="profile-container__header__info__data paragraph">
-            <p class="profile-container__header__info__data__nickname">{{user.username}}</p>
-            <p class="profile-container__header__info__data__age">21</p>
-            <p class="profile-container__header__info__data__country">RO</p>
-            <div class="profile-container__header__info__data__currently-playing">Currently playing
-                <p class="profile-container__header__info__data__currently-playing__game"> browsing the internet </p>
-            </div>
+          <p class="profile-container__header__info__data__nickname">{{user.username}}</p>
+          <p class="profile-container__header__info__data__age">21</p>
+          <p class="profile-container__header__info__data__country">RO</p>
+          <div class="profile-container__header__info__data__currently-playing">Currently playing
+            <p *ngIf="user.playedGame==='None'" class="profile-container__header__info__data__currently-playing__game">
+              browsing the internet </p>
+            <p *ngIf="user.playedGame!=='None'" class="profile-container__header__info__data__currently-playing__game">
+              {{user.playedGame}} </p>
+          </div>
         </div>
         <button *ngIf="!isCurrentUserAccount && friendButtonType==0" (click)="sendFriendRequest()" class="btn">Add friend</button>
         <button *ngIf="!isCurrentUserAccount && friendButtonType==1" (click)="deleteFriend()" class="btn">Delete friend</button>
         <button *ngIf="!isCurrentUserAccount && friendButtonType==2" (click)="deleteFriendRequest()" class="btn">Delete Request</button>
-
-    </div>
-    <div class="profile-container__header__achievements">
+      </div>
+      <div class="profile-container__header__achievements">
         <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
         <div class="profile-container__header__achievements__stars">
         </div>
         <a routerLink="/achievements" class="profile-container__achievements__see-all-achievements">See All Achievements</a>
+      </div>
     </div>
-  </div>
-  <div class="profile-container__content">
-    <div class="profile-container__content__posts">
+    <div class="profile-container__content">
+      <div class="profile-container__content__posts">
 
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" (click)="setActive('home')" id="home">Home</li>
-          <li class="breadcrumb-item" (click)="setActive('posts')" id="posts">Posts</li>
-          <li class="breadcrumb-item" (click)="setActive('friends')" id="friends">Friends</li>
-        </ol>
-      </nav>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" (click)="setActive('home')" id="home">Home</li>
+            <li class="breadcrumb-item" (click)="setActive('posts')" id="posts">Posts</li>
+            <li class="breadcrumb-item" (click)="setActive('friends')" id="friends">Friends</li>
+          </ol>
+        </nav>
 
-      <span *ngIf="isActive('home')">
-        <gallery id="gallery" class="profile-container__content__posts__gallery" [itemTemplate]="itemTemplate"></gallery>
-        <!-- Add custom template to image items -->
-        <ng-template #itemTemplate
-                    let-index="index"
-                    let-type="type"
-                    let-data="data"
-                    let-currIndex="currIndex">
-        <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
-            {{data?.title}}
+        <span *ngIf="isActive('home')">
+          <gallery id="gallery" class="profile-container__content__posts__gallery" [itemTemplate]="itemTemplate">
+          </gallery>
+          <!-- Add custom template to image items -->
+          <ng-template #itemTemplate let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+            <span *ngIf="type === 'image' && index === currIndex" [@slideAnimation] class="item-text">
+              {{data?.title}}
+            </span>
+          </ng-template>
         </span>
-        </ng-template>
-      </span>
 
-      <span *ngIf="isActive('posts')" ><app-post *ngFor="let post of this.posts" [post]="post"></app-post></span>
+        <span *ngIf="isActive('posts')">
+          <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
+        </span>
 
-      <span *ngIf="isActive('friends')" ><ul class="paragraph profile-container__content__posts__friends">
-        <li *ngFor="let friend of this.friends" (click)="gotToFriendProfile(friend.id)"><app-friend [friend]="friend">
-        </app-friend>
-        </li>
-      </ul></span>
-    </div>
-
-    <div class="profile-container__content__games paragraph">
+        <span *ngIf="isActive('friends')">
+          <ul class="paragraph profile-container__content__posts__friends">
+            <li *ngFor="let friend of this.friends" (click)="gotToFriendProfile(friend.id)">
+              <app-friend [friend]="friend">
+              </app-friend>
+            </li>
+          </ul>
+        </span>
+      </div>
+      <div class="profile-container__content__games paragraph">
         <p class="profile-container__content__games__title">Favorite Games</p>
         <div class="profile-container__content__games__list">
           <div class="profile-container__content__games__list__heading">
+            <p class="profile-container__content__games__list__heading__name">ICON</p>
             <p class="profile-container__content__games__list__heading__name">NAME</p>
             <p class="profile-container__content__games__list__heading__element">TIME PLAYED</p>
-            <p class="profile-container__content__games__list__heading__element">ACHIEVEMENTS</p>
           </div>
           <hr>
           <ul class="profile-container__content__games__list__ul">
-              <li class="profile-container__content__games__list__ul__li">
-                  <favorite-game *ngFor="let game of games" [game]="game" class="profile-container__games__list__ul__li__item">
-                  </favorite-game>
-              </li>
+            <li class="profile-container__content__games__list__ul__li">
+              <favorite-game *ngFor="let game of games" [game]="game"
+                class="profile-container__games__list__ul__li__item">
+              </favorite-game>
+            </li>
           </ul>
         </div>
-
+      </div>
     </div>
   </div>
 </div>

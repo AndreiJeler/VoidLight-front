@@ -77,4 +77,8 @@ export class PostService {
   public postShare(postId: number, userId: number): Observable<Post> {
     return this.http.get<Post>(`${this._postUrl}/share/${postId}/${userId}`);
   }
+
+  public getCommentsForPost(id: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${this._postUrl}/comment/${id}`);
+  }
 }
