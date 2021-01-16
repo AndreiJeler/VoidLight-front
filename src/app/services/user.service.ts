@@ -48,6 +48,7 @@ export class UserService {
     return this.http.get<User>(
       `${this._userUrl}/steam-con/${userId}/${steamId}/${username}`
     );
+  }
 
   public refreshGames(userId: number): Observable<any> {
     return this.http.get<any>(`${this._userUrl}/refresh-games/${userId}`);

@@ -71,6 +71,34 @@ export class ProfileComponent implements OnInit {
         this.isLoaded = true;
       });
 
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.videos = [];
+            this.images = [];
+            this.posts.forEach((post) => {
+              post.contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
     this.gameService
       .getFavoriteGamesForUser(this.userId)
       .subscribe((favouriteGames: Game[]) => (this.games = favouriteGames));
@@ -85,21 +113,21 @@ export class ProfileComponent implements OnInit {
     );
 
     // CHECK BELOW FOR USAGE
-    // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
-    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-    galleryRef.addImage({
-      src: '../../../assets/1.jpg',
-      thumb: '../../../assets/1.jpg',
-    });
-
-    // galleryRef.addVideo({
-    //   src: 'VIDEO_URL',
-    //   thumb: '(OPTIONAL)VIDEO_THUMBNAIL_URL',
-    //   poster: '(OPTIONAL)VIDEO_POSTER_URL'
+    // // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
+    // const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+    // galleryRef.addImage({
+    //   src: '../../../assets/1.jpg',
+    //   thumb: '../../../assets/1.jpg',
     // });
-    galleryRef.addYoutube({
-      src: 'NGH5YN2cMRg',
-    });
+
+    // // galleryRef.addVideo({
+    // //   src: 'VIDEO_URL',
+    // //   thumb: '(OPTIONAL)VIDEO_THUMBNAIL_URL',
+    // //   poster: '(OPTIONAL)VIDEO_POSTER_URL'
+    // // });
+    // galleryRef.addYoutube({
+    //   src: 'NGH5YN2cMRg',
+    // });
   }
 
   _initGallery(): void {
@@ -128,33 +156,7 @@ export class ProfileComponent implements OnInit {
     }
 
     if (id == 'posts') {
-      this.postService
-        .getPostsByUser(
-          this.userId,
-          this.authenticationService.currentUserValue.id
-        )
-        .subscribe(
-          (result) => {
-            this.posts = result;
-            this.videos = [];
-            this.images = [];
-            this.posts.forEach((post) => {
-              post.contents.forEach((content) => {
-                const value = content.split('.');
-                if (value[value.length - 1] === 'mp4') {
-                  this.videos.push(content.replace('\\', '/'));
-                } else {
-                  this.images.push(content.replace('\\', '/'));
-                }
-              });
-            });
-
-            this._initGallery();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      
     }
   }
 

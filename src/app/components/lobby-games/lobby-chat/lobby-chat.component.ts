@@ -9,7 +9,6 @@ import { LobbyMessage } from 'src/app/models/lobby-message';
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LobbyService } from 'src/app/services/lobby.service';
-import { LobbyMessage } from 'src/app/models/lobby-message';
 
 @Component({
   selector: 'lobby-chat',
