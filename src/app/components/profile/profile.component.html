@@ -24,8 +24,10 @@
       </div>
       <div class="profile-container__header__achievements">
         <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
-        <button (click)="seeAchievements()" class="profile-container__header__achievements__see-all-achievements">See
-          All Achievements</button>
+        <div class="wrapper">
+          <button (click)="seeAchievements()" class="profile-container__header__achievements__see-all-achievements">See All Achievements</button>
+          <button (click)="openModal(gamesListModal)" class="profile-container__header__achievements__see-all-achievements">All Games</button>
+        </div>
       </div>
     </div>
     <div class="profile-container__content">
@@ -68,7 +70,6 @@
         </span>
       </div>
       <div class="profile-container__content__games paragraph">
-        <button class="profile-container__header__achievements__see-all-achievements" (click)="openModal(gamesListModal)">All Games</button>
         <p class="profile-container__content__games__title">Favorite Games</p>
         <div class="profile-container__content__games__list">
           <div class="profile-container__content__games__list__heading">
