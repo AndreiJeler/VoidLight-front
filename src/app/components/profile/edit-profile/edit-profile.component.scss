@@ -4,19 +4,14 @@
   width: auto;
   height: 5rem;
   background-color:  $color-newsfeed-buttons;
-  //background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
   border: none;
 
   .modal-title{
     margin-top: 1%;
     margin-left: 35%;
-    //color: $color-white;
 
     display: flex;
     flex-direction: row;
-    //align-items: center;
-    //justify-content: space-between;
-    //transition: 0.2s all ease-in-out;
 
     &__username {
       display: flex;
@@ -63,7 +58,6 @@
       padding: 0 1rem;
       background: transparent;
       transition: border-color 0.2s;
-      //margin-left: 3rem;
     }
 
     &__label {
@@ -74,13 +68,30 @@
   }
 
   .option {
-    //background-color: $color-newsfeed-buttons;
-    //width: 30%;
     margin-left: 2rem;
     padding: .5rem 1.5rem;
     margin-top: 1rem;
     font-size: medium;
     cursor: pointer;
+
+    &__upload-button {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &__upload-button + label {
+      padding: 0 1rem;
+      display: inline-block;
+      cursor: pointer;
+      background-color: $color-newsfeed-buttons;
+    }
+    &__selected-file {
+      display: inline-block;
+    }
   }
 
   .connect-with {

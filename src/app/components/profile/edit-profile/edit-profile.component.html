@@ -18,12 +18,20 @@
 
   <div class="form-row row paragraph col-12">
     <div class="col-3"><label for="emailInput" class="form-row__label">Email: </label></div>
-    <div class="col-7"><input id="emailInput" class="form-control form-row__input" value="{{user.email}}" type="email" [(ngModel)]="email"></div>
+    <div class="col-7"><input id="emailInput" class="form-control form-row__input" value="{{user.email}}" type="email" [(ngModel)]="email" readonly></div>
   </div>
 
-  <div class="paragraph option" (click)="chooseImage()">
-<!--    <button class="paragraph change-pic-btn" (click)="chooseImage()">Change profile pic</button>-->
-    Change profile pic
+  <div class="form-row row paragraph col-12">
+    <div class="col-3"><label for="ageInput" class="form-row__label">Age: </label></div>
+    <div class="col-7"><input id="ageInput" class="form-control form-row__input" value="{{user.age}}" [(ngModel)]="age" type="number"></div>
+  </div>
+
+  <div class="paragraph option">
+    <input type="file" id="file" (change)="uploadImage($event)" class="option__upload-button">
+    <label for="file">Change profile pic</label>
+
+    <label class="option__selected-file" id="selected-file"></label>
+<!--    Change profile pic-->
   </div>
 
   <div class="paragraph option" (click)="openPasswordModal(changePasswordModal)">
@@ -75,6 +83,11 @@
     <div class="form-row row paragraph">
       <div class="col-3"><label for="newPasswordInput" class="form-row__label">New: </label></div>
       <div class="col-7"><input id="newPasswordInput" class="form-control form-row__input" type="password" [(ngModel)]="newPassword"></div>
+    </div>
+
+    <div class="form-row row paragraph">
+      <div class="col-3"><label for="confirmPasswordInput" class="form-row__label">Confirm: </label></div>
+      <div class="col-7"><input id="confirmPasswordInput" class="form-control form-row__input" type="password" [(ngModel)]="confirmPassword"></div>
     </div>
   </div>
 

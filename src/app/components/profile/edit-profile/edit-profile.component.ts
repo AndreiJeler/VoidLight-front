@@ -9,6 +9,7 @@ import {
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-edit-profile',
@@ -27,6 +28,8 @@ export class EditProfileComponent implements OnInit {
   public avatarPath: string;
   public oldPassword: string;
   public newPassword: string;
+  public confirmPassword: string;
+  public age: number;
   public file: File;
 
   constructor(
@@ -39,6 +42,7 @@ export class EditProfileComponent implements OnInit {
     this.email = this.user.email;
     this.password = this.user.password;
     this.avatarPath = this.user.avatarPath;
+    this.age = this.user.age;
   }
 
   onCancel(): void {
@@ -51,6 +55,17 @@ export class EditProfileComponent implements OnInit {
     this.user.fullName = this.fullName;
     this.user.email = this.email;
     this.user.password = this.password;
+    this.user.age = this.age;
+
+
+    // if (this.file) {
+    //   f
+    // }
+    if (this.file) {
+      formData.append(this.file.name, this.file, this.file.name);
+
+      // this.user.avatarPath = this.file.name;
+    }
 
     formData.append('user', JSON.stringify(this.user));
     this.userService.updateUser(formData).subscribe(() => {
@@ -58,28 +73,36 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  chooseImage(): void {}
-
   openPasswordModal(changePasswordModal: TemplateRef<any>): void {
     this.passwordModalRef = this.modalService.show(changePasswordModal);
   }
 
   onSavePassword(): void {
-    if (this.oldPassword === this.password) {
+    if (this.oldPassword === this.password && this.newPassword === this.confirmPassword) {
       this.password = this.newPassword;
+      this.passwordModalRef.hide();
     }
-    this.passwordModalRef.hide();
+    else {
+      Swal.fire('Passwords do not match');
+    }
   }
 
   onClosePasswordModal(): void {
     this.passwordModalRef.hide();
   }
 
-  public changeLabel(event: any): void {
+  public uploadImage(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
       const value = this.file.name.split('\\');
+      // console.log(this.file);
+      document.getElementById('selected-file').innerHTML = this.file.name;
       // this.labelText = value[value.length - 1];
     }
   }
+  //
+  // uploadImage(event: any): void {
+  //   this.file = event.target.files[0];
+  //   document.getElementById('selected-file').innerHTML = this.file.name;
+  // }
 }
