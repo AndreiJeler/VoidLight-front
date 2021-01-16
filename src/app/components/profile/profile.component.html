@@ -1,6 +1,6 @@
 <div class="page">
   <a class="page__go-back-btn" (click)="goBack()"></a>
-  <div class="profile-container">
+  <div class="profile-container" *ngIf="isLoaded;">
     <div class="profile-container__header">
       <div class="profile-container__header__info">
         <img class="profile-container__header__info__image" [src]="user.avatarPath" alt="User profile picture" />
@@ -15,16 +15,17 @@
               {{user.playedGame}} </p>
           </div>
         </div>
-        <button *ngIf="!isCurrentUserAccount && friendButtonType==0" (click)="sendFriendRequest()" class="btn">Add friend</button>
-        <button *ngIf="!isCurrentUserAccount && friendButtonType==1" (click)="deleteFriend()" class="btn">Delete friend</button>
-        <button *ngIf="!isCurrentUserAccount && friendButtonType==2" (click)="deleteFriendRequest()" class="btn">Delete Request</button>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==0" (click)="sendFriendRequest()" class="btn">Add
+          friend</button>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==1" (click)="deleteFriend()" class="btn">Delete
+          friend</button>
+        <button *ngIf="!isCurrentUserAccount && friendButtonType==2" (click)="deleteFriendRequest()" class="btn">Delete
+          Request</button>
       </div>
       <div class="profile-container__header__achievements">
         <p class="profile-container__header__achievements__edit-profile">Edit Profile</p>
-        <div class="profile-container__header__achievements__stars">
-        </div>
-        <a routerLink="/achievements" class="profile-container__achievements__see-all-achievements">See All
-          Achievements</a>
+        <button (click)="seeAchievements()" class="profile-container__header__achievements__see-all-achievements">See
+          All Achievements</button>
       </div>
     </div>
     <div class="profile-container__content">
@@ -50,7 +51,11 @@
         </span>
 
         <span *ngIf="isActive('posts')">
-          <app-post *ngFor="let post of this.posts" [post]="post"></app-post>
+          <ul class="profile-container__content__posts__list">
+            <li class="profile-container__content__posts__list__item" *ngFor="let post of this.posts">
+              <app-post [post]="post"></app-post>
+            </li>
+          </ul>
         </span>
 
         <span *ngIf="isActive('friends')">
@@ -82,4 +87,3 @@
       </div>
     </div>
   </div>
-</div>

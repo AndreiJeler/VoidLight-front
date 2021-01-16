@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   userId: number;
   isCurrentUserAccount = false;
   friendButtonType: number;
+  isLoaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -64,8 +65,8 @@ export class ProfileComponent implements OnInit {
       .getUserById(+this.route.snapshot.paramMap.get('id'))
       .subscribe((user) => {
         this.user = user;
-        this.user.avatarPath =
-          `${Constants.SERVER_BASE_URL}/` + user.avatarPath;
+        this.user.avatarPath = `${Constants.SERVER_BASE_URL}/` + user.avatarPath;
+        this.isLoaded = true;
       });
 
     this.gameService
@@ -212,5 +213,9 @@ export class ProfileComponent implements OnInit {
 
   public goBack() {
     window.history.back();
+  }
+  
+  public seeAchievements() {
+    this.router.navigate([`/achievements/${this.userId}`]);
   }
 }
