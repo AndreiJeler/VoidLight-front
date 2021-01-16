@@ -5,7 +5,7 @@
       <ng-select class="container__achievements__select" (change)="onChange($event)" [editableSearchTerm]="true" [items]="games" bindLabel="name" 
         [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game" >
       </ng-select>
-      <button (click)="checkAchievements()" class="container__achievements__refresh-btn">Check for new achievements</button>
+      <button (click)="checkAchievements()" class="container__achievements__check-btn">Check for new achievements</button>
     </div>
     <ul class="container__achievements__list">
       <li class="container__achievements__list__header">

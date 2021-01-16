@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Achievement } from '../../models/achievement';
 import { User } from '../../models/user';
@@ -19,20 +21,30 @@ export class AchievementsComponent implements OnInit {
   public isLoading: boolean = true;
   public selectedGame: Game = null;
   public games: Game[];
+  userId: number;
+  isCurrentUserAccount = false;
 
   constructor(
     private _achievementService: AchievementService,
     private _authenticationService: AuthenticationService,
     private _gameService: GameService,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
-    this._authenticationService.currentUser.subscribe(
-      (user) => (this.user = user)
-    );
+    this.userId = +this.route.snapshot.paramMap.get('id');
 
-    this._gameService.getGamesForUser(this.user.id).subscribe(
+    if (this.userId == this._authenticationService.currentUserValue.id) {
+      this.isCurrentUserAccount = true;
+    }
+    else {
+      this._authenticationService.currentUser.subscribe(
+        (user) => (this.user = user)
+      );
+    }
+
+    this._gameService.getGamesForUser(this.userId).subscribe(
       (games) => {
         this.games = games;
         this.isLoading = false;
@@ -41,7 +53,7 @@ export class AchievementsComponent implements OnInit {
   }
 
   public checkAchievements(): void {
-    this._achievementService.postNewAchievements(this.user.id, this.selectedGame.id).subscribe(
+    this._achievementService.postNewAchievements(this.userId, this.selectedGame.id).subscribe(
       (result) => {
         this.achievements = result.concat(this.achievements);
         this._cdr.detectChanges();
@@ -50,12 +62,11 @@ export class AchievementsComponent implements OnInit {
   }
 
   public onChange(event): void {
-    this._achievementService.getAchievementsForUser(this.user.id, event.id).subscribe(
+    this._achievementService.getAchievementsForUser(this.userId, event.id).subscribe(
       (result) => {
         this.achievements = result;
         this._cdr.detectChanges();
       }
     );
   }
-
 }

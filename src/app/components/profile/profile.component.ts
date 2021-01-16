@@ -213,4 +213,8 @@ export class ProfileComponent implements OnInit {
   public goBack() {
     window.history.back();
   }
+  
+  public seeAchievements() {
+    this.router.navigate([`/achievements/${this.userId}`]);
+  }
 }
