@@ -37,8 +37,8 @@ export class PostService {
    * Creates a new post
    * @param post => the post to be added
    */
-  public createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${this._postUrl}`, post);
+  public createPost(formData: any): Observable<Post> {
+    return this.http.post<Post>(`${this._postUrl}`, formData);
   }
 
   /**
@@ -76,5 +76,9 @@ export class PostService {
 
   public postShare(postId: number, userId: number): Observable<Post> {
     return this.http.get<Post>(`${this._postUrl}/share/${postId}/${userId}`);
+  }
+
+  public getCommentsForPost(id: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${this._postUrl}/comment/${id}`);
   }
 }

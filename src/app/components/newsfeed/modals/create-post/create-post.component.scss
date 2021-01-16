@@ -97,7 +97,7 @@ input[type="file"] {
   padding: 0.5rem;
   padding-top: 0;
   margin-top: rem;
-  border-radius: 0.5rem;
+  border-radius: 8px;
 }
 
 .label-file-upload:focus, .label-file-upload:hover  {
@@ -121,7 +121,7 @@ input[type="file"] {
     background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
     width: 10rem;
     height: 4rem;
-    border-radius: 5rem;
+    border-radius: 8px;
     border: none;
     font-size: 2rem;
     color: $color-white;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/src/sweetalert2.js';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +64,18 @@ export class SwalService {
     this._swalNotificationCorner.fire({
       icon: 'info',
       title: message,
+    });
+  }
+
+  public createLobbyNotification(message) {
+    return Swal.fire({
+      text: message,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
     });
   }
 }

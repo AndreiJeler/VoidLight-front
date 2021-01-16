@@ -1,0 +1,136 @@
+@import "../../../../styles.scss";
+
+.chat-container {
+  margin: 1% 7.5%;
+  padding: 1% 3%;
+  height: fit-content;
+  width: 80%;
+  height: 90vh;
+  position: relative;
+  z-index: 1;
+  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $color-form-card;
+    border-radius: 8px;
+    opacity: 0.7;
+  }
+
+  &__chat {
+    background-color: $color-profile-card;
+    height: 100%;
+    border-radius: 8px;
+
+    &__messages {
+      height: 95%;
+      width: 102.5rem;
+    }
+
+    &__input {
+      height: 5%;
+      width: 100%;
+
+      &__message {
+        height: 100%;
+        width: 97.5rem;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      &__icon {
+        fill: $color-white;
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
+
+  &__members {
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
+
+    &__list {
+      overflow: scroll;
+      margin-left: 0.5rem;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none !important;
+
+      &__item {
+        background-color: $color-profile-card;
+
+        height: 13.5rem;
+        width: auto;
+        position: relative;
+        z-index: 1000;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        border-radius: 8px;
+        overflow: hidden;
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        &__image {
+          width: auto;
+          height: auto;
+          border-radius: 8px;
+          background-size: cover;
+        }
+
+        &__name {
+          height: 50%;
+          text-align: center;
+          font-size: 40px;
+          color: $color-white;
+        }
+      }
+    }
+
+    &__start-lobby {
+      margin-top: auto;
+      margin-left: 0.5rem;
+      height: 4rem;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      background-color: green;
+      color: $color-white;
+      font-size: 25px;
+
+      &--leave {
+        background-color: red;
+      }
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__go-back-btn {
+    background-image: url("../../../../assets/Images/back.png");
+    background-size: cover;
+    cursor: pointer;
+    height: 6rem;
+    width: 6rem;
+  }
+}

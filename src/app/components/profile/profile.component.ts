@@ -1,3 +1,4 @@
+import { Constants } from './../../shared/utils/constants';
 import { Post } from './../../models/post';
 import { PostService } from './../../services/post.service';
 import { GameService } from './../../services/game.service';
@@ -12,6 +13,7 @@ import { ProfileService } from '../../services/profile.service';
 import { FriendsService } from '../../services/friends.service';
 import { FriendRequest } from 'src/app/models/friend-request';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-profile',
@@ -30,6 +32,8 @@ export class ProfileComponent implements OnInit {
   isCurrentUserAccount = false;
   friendButtonType: number;
   modalRef: BsModalRef;
+  isLoaded: boolean = false;
+  protected chosenModal: BsModalRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,7 +71,36 @@ export class ProfileComponent implements OnInit {
       .subscribe((user) => {
         this.user = user;
         this.user.avatarPath = user.avatarPath;
+        this.isLoaded = true;
       });
+
+      this.postService
+        .getPostsByUser(
+          this.userId,
+          this.authenticationService.currentUserValue.id
+        )
+        .subscribe(
+          (result) => {
+            this.posts = result;
+            this.videos = [];
+            this.images = [];
+            this.posts.forEach((post) => {
+              post.contents.forEach((content) => {
+                const value = content.split('.');
+                if (value[value.length - 1] === 'mp4') {
+                  this.videos.push(content.replace('\\', '/'));
+                } else {
+                  this.images.push(content.replace('\\', '/'));
+                }
+              });
+            });
+
+            this._initGallery();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
 
     this.gameService
       .getFavoriteGamesForUser(this.userId)
@@ -85,23 +118,22 @@ export class ProfileComponent implements OnInit {
       }
     );
 
-
     // CHECK BELOW FOR USAGE
-    // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
-    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-    galleryRef.addImage({
-      src: '../../../assets/1.jpg',
-      thumb: '../../../assets/1.jpg',
-    });
-
-    // galleryRef.addVideo({
-    //   src: 'VIDEO_URL',
-    //   thumb: '(OPTIONAL)VIDEO_THUMBNAIL_URL',
-    //   poster: '(OPTIONAL)VIDEO_POSTER_URL'
+    // // TODO: https://github.com/MurhafSousli/ngx-gallery/wiki/Mixed-Content-Usage
+    // const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+    // galleryRef.addImage({
+    //   src: '../../../assets/1.jpg',
+    //   thumb: '../../../assets/1.jpg',
     // });
-    galleryRef.addYoutube({
-      src: 'NGH5YN2cMRg',
-    });
+
+    // // galleryRef.addVideo({
+    // //   src: 'VIDEO_URL',
+    // //   thumb: '(OPTIONAL)VIDEO_THUMBNAIL_URL',
+    // //   poster: '(OPTIONAL)VIDEO_POSTER_URL'
+    // // });
+    // galleryRef.addYoutube({
+    //   src: 'NGH5YN2cMRg',
+    // });
   }
 
   _initGallery(): void {
@@ -162,6 +194,7 @@ export class ProfileComponent implements OnInit {
             console.log(error);
           }
         );
+
     }
   }
 
@@ -208,12 +241,31 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-
   openEditProfileModal(editProfileModal: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(editProfileModal);
   }
 
   closeModal(): void {
     this.modalRef.hide();
+  public goBack() {
+    window.history.back();
+  }
+
+  public seeAchievements() {
+    this.router.navigate([`/achievements/${this.userId}`]);
+  }
+
+
+  public closeListModal(event) {
+    this.chosenModal.hide();
+    this.gameService
+      .getFavoriteGamesForUser(this.userId)
+      .subscribe((favouriteGames: Game[]) => {
+        this.games = favouriteGames;
+      });
+  }
+
+  public openModal(selectedModal) {
+    this.chosenModal = this.modalService.show(selectedModal);
   }
 }

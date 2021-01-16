@@ -57,7 +57,7 @@ export class NewsfeedComponent implements OnInit {
     private friendsHub: FriendsHubService,
     private swalService: SwalService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (!this._authenticationService.currentUserValue) {
@@ -71,22 +71,6 @@ export class NewsfeedComponent implements OnInit {
     this._postService.getPostsForUser(this.user.id).subscribe(
       (result) => {
         this.posts = result;
-        this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
-          let comments = [];
-          post.comments.forEach((content) => {
-            content.user.avatarPath =
-              'https://localhost:44324/' + content.user.avatarPath;
-            comments.push(content);
-          });
-          post.comments = comments;
-        });
       },
       (error) => {
         console.log(error);
@@ -132,9 +116,6 @@ export class NewsfeedComponent implements OnInit {
     this._friendsService.getFriendsForUser(this.user.id).subscribe(
       (result) => {
         this.friends = result;
-        this.friends.forEach((friend: User) => {
-          friend.avatarPath = 'https://localhost:44324/' + friend.avatarPath;
-        });
       },
       (error) => {
         console.log(error);
@@ -151,31 +132,15 @@ export class NewsfeedComponent implements OnInit {
       this._postService.getPostsForUser(this.user.id).subscribe(
         (result) => {
           this.posts = result;
-          this.posts.forEach((post) => {
-            post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-            let contents = [];
-            post.contents.forEach((content) => {
-              content = 'https://localhost:44324/' + content;
-              contents.push(content);
-            });
-            post.contents = contents;
-            let comments = [];
-            post.comments.forEach((content) => {
-              content.user.avatarPath =
-                'https://localhost:44324/' + content.user.avatarPath;
-              comments.push(content);
-            });
-            post.comments = comments;
-          });
         },
         (error) => {
           console.log(error);
         }
       );
       this.currentGameId = -1;
-      
+
       document.getElementsByClassName('active')[0].classList.remove('active');
-      
+
       return;
     }
 
@@ -192,15 +157,6 @@ export class NewsfeedComponent implements OnInit {
     this._postService.getPostsForGame(id, this.user.id).subscribe(
       (result) => {
         this.posts = result;
-        this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
-        });
       },
       (error) => {
         console.log(error);
@@ -222,15 +178,6 @@ export class NewsfeedComponent implements OnInit {
     this._postService.getPostsForPublisher(id).subscribe(
       (result) => {
         this.posts = result;
-        this.posts.forEach((post) => {
-          post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-          let contents = [];
-          post.contents.forEach((content) => {
-            content = 'https://localhost:44324/' + content;
-            contents.push(content);
-          });
-          post.contents = contents;
-        });
       },
       (error) => {
         console.log(error);
@@ -266,13 +213,6 @@ export class NewsfeedComponent implements OnInit {
   public closeModal(post: Post): void {
     this.chosenModal.hide();
     if (post) {
-      post.avatarPath = 'https://localhost:44324/' + post.avatarPath;
-      let contents = [];
-      post.contents.forEach((content) => {
-        content = 'https://localhost:44324/' + content;
-        contents.push(content);
-      });
-      post.contents = contents;
       this.posts.unshift(post);
       this.cdr.detectChanges();
     }
@@ -340,10 +280,6 @@ export class NewsfeedComponent implements OnInit {
 
   public getUsersByUsername(username: string): void {
     this.userService.getUsersByUsername(username).subscribe((users: User[]) => {
-      users.forEach(
-        (user) =>
-          (user.avatarPath = 'https://localhost:44324/' + user.avatarPath)
-      );
       this.possibleUsers = users;
     });
   }
@@ -393,6 +329,14 @@ export class NewsfeedComponent implements OnInit {
     this.isClickable = false;
     this._friendsService
       .removeFriendRequest(this.user.id, userId)
-      .subscribe((_) => { });
+      .subscribe((_) => {});
+  }
+
+  public openLobbies() {
+    this._router.navigate([`/lobby-games`]);
+  }
+
+  public openModal(selectedModal: TemplateRef<any>) {
+    this.chosenModal = this._modalService.show(selectedModal);
   }
 }

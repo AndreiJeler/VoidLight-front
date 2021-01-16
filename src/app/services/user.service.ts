@@ -39,4 +39,21 @@ export class UserService {
   public updateUser(user: FormData): Observable<any> {
     return this.http.put(`${this._userUrl}`, user);
   }
+  public discordAuth(code: string): Observable<number> {
+    return this.http.get<number>(`${this._userUrl}/discord/${code}`);
+  }
+
+  public steamSync(
+    userId: number,
+    steamId: number,
+    username: string
+  ): Observable<User> {
+    return this.http.get<User>(
+      `${this._userUrl}/steam-con/${userId}/${steamId}/${username}`
+    );
+  }
+
+  public refreshGames(userId: number): Observable<any> {
+    return this.http.get<any>(`${this._userUrl}/refresh-games/${userId}`);
+  }
 }

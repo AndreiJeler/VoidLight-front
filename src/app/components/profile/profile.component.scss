@@ -6,7 +6,7 @@ body {
 .profile-container {
   margin: 1% 7.5%;
   padding: 1% 3%;
-  height: fit-content;
+  height: 92vh;
   width: 79%;
   position: relative;
   z-index: 1;
@@ -21,7 +21,7 @@ body {
     left: 0;
     right: 0;
     background: $color-form-card;
-    border-radius: 25px;
+    border-radius: 8px;
     opacity: 0.7;
   }
 
@@ -38,7 +38,7 @@ body {
 
       &__image {
         width: 10rem;
-        border-radius: 50%;
+        border-radius: 8px;
         margin-right: 1rem;
         margin-bottom: 4rem;
       }
@@ -82,23 +82,36 @@ body {
         font-size: 24px;
         line-height: 2.8rem;
         margin-right: 1rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 2rem;
         cursor: pointer;
       }
 
       &__stars {
         height: 7rem;
         background: $color-profile-card;
-        border-radius: 50px;
+        border-radius: 8px;
         align-self: flex-end;
       }
 
-      &__see-all-achievements {
+      & > a {
         color: $color-white;
+        font-size: 24px;
         margin-top: 0.2rem;
-        margin-right: 1rem;
-        font-size: medium;
+        text-decoration: none;
         cursor: pointer;
+      }
+
+      &__see-all-achievements {
+        min-width: fit-content;
+        width: 15rem;
+        margin-right: 1rem;
+        padding: 0rem 1rem;
+        height: 4rem;
+        font-size: 24px;
+        background-color: $color-newsfeed-buttons;
+        border: 0;
+        border-radius: 5px;
+        margin-bottom: 2rem;
       }
     }
   }
@@ -109,11 +122,12 @@ body {
 
     &__posts {
       align-items: center;
-      align-self: center;
       width: 100rem;
       margin-top: 2rem;
-      height: 73rem;
       overflow-y: scroll;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
 
       &::-webkit-scrollbar {
         display: none;
@@ -154,16 +168,29 @@ body {
       }
 
       &__gallery {
-        border-radius: 25px;
+        border-radius: 8px;
         background-color: $color-form-card;
         width: 100%;
-        height: 65rem;
+        height: 58rem;
       }
 
       &__friends {
         & > li {
           cursor: pointer;
         }
+      }
+
+      &__list{
+        height: 61rem;
+        overflow-y: scroll;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+  
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
       }
     }
 
@@ -172,6 +199,7 @@ body {
       height: 74rem;
       display: flex;
       flex-direction: column;
+      margin-top: -3.1rem;
 
       &__title {
         font-size: xx-large;
@@ -183,8 +211,8 @@ body {
       &__list {
         padding: 2rem;
         background: $color-profile-card;
-        border-radius: 25px;
-        height: 100%;
+        border-radius: 8px;
+        height: 61.5rem;
 
         &__heading {
           margin: 1rem;
@@ -235,8 +263,7 @@ body {
     $color-button-bottom-gradient
   );
   height: 5rem;
-  width: 13rem;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 18px;
   min-width: fit-content;
   min-height: fit-content;
@@ -245,4 +272,23 @@ body {
   color: $color-white;
   margin-left: 30rem;
   margin-top: -5rem;
+}
+
+
+.page{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__go-back-btn{
+    background-image: url('../../../assets/Images/back.png');
+    background-size: cover;
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
 }

@@ -1,0 +1,30 @@
+  <div class="modal-content modal-lg">
+  <div class="modal-header header-modal-container">
+    <h1 class="modal-title">Your games</h1>
+    <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="modal-body-container">
+      <ng-select class="games-select games" (change)="onChange($event)" [editableSearchTerm]="true"
+          [items]="games" bindLabel="name" [(ngModel)]="selectedGame" placeholder="Select Game">
+        </ng-select>
+    <div *ngFor="let game of games" class="modal-body__game">
+        <img [src]="game.icon" class="modal-body__game__icon">
+        <p class="modal-body__game__text">{{game.name}}</p>
+        <button *ngIf="isFavorite(game)" class="btn-success modal-body__game__btn" (click)="updateFavorite(game)">Add</button>
+        <button *ngIf="!isFavorite(game)" class="btn-danger modal-body__game__btn" (click)="updateFavorite(game)">Remove</button>
+
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default submit-button"
+     (click)="refresh()"><span>Refresh</span></button>
+  </div>
+</div>
+
+
+

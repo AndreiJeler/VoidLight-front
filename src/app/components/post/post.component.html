@@ -1,15 +1,16 @@
 <div class="post">
   <div *ngIf="post.isShared" class="post__pre">
-    <img class="post__pre__img" [src]="post.avatarPath">
-    <p class="post__pre__text">{{post.username}} shared this post</p>
+    <img (click)="openProfile(post.userId)" class="post__pre__img" [src]="post.avatarPath">
+    <p (click)="openProfile(post.userId)" class="post__pre__text">{{post.username}} shared this post</p>
   </div>
   <div class="post__header">
     <div class="post__header__user">
       <div class="post__header__user__photo">
-        <img [src]="post.originalUserAvatar" alt="profile picture" />
+        <img (click)="openProfile(post.originalUserId)" [src]="post.originalUserAvatar" alt="profile picture" />
       </div>
       <div class="post__header__user__text">
-        <p class="post__header__user__text__username paragraph">{{post.originalUser}}</p>
+        <p (click)="openProfile(post.originalUserId)" class="post__header__user__text__username paragraph">{{post.originalUser}}</p>
+        <p class="post__header__user__text__username paragraph" *ngIf="post.game!=noGame">{{post.game}}</p>
         <p class="post__header__user__text__timestamp paragraph">{{timeString}}</p>
       </div>
     </div>

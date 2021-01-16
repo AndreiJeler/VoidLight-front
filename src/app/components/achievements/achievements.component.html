@@ -1,0 +1,28 @@
+<div class="page">
+  <a class="page__go-back-btn" (click)="goBack()"></a>
+  <div class="container">
+    <h1>Personal achievements</h1>
+    <div class="container__achievements">
+      <div>
+        <ng-select class="container__achievements__select" (change)="onChange($event)" [editableSearchTerm]="true"
+          [items]="games" bindLabel="name" [loading]="isLoading" [(ngModel)]="selectedGame" placeholder="Select Game">
+        </ng-select>
+        <button (click)="checkAchievements()" class="container__achievements__check-btn">Check for new
+          achievements</button>
+      </div>
+      <ul class="container__achievements__list">
+        <li class="container__achievements__list__header">
+          <p></p>
+          <p>Achievement title</p>
+        </li>
+        <hr>
+        <li class="container__achievements__list__li">
+          <app-achievement-item *ngFor="let achievement of achievements" [achievement]="achievement"
+            class="container__achievements__list__li__item">
+          </app-achievement-item>
+        </li>
+        <hr>
+      </ul>
+    </div>
+  </div>
+</div>

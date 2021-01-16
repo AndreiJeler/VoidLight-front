@@ -7,7 +7,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 10%;
+  width: 20%;
 }
 
 .newsfeed {
@@ -45,15 +45,15 @@
         &__img {
           height: 3.5rem;
           width: 3.5rem;
-          border-radius: 3px;
+          border-radius: 8px;
           margin-right: 1.5rem;
         }
       }
     }
 
     &__friend-requests {
-      width: 3rem;
-      height: 3rem;
+      width: 4rem;
+      height: 4rem;
       position: relative;
 
       &__number {
@@ -63,7 +63,7 @@
         background-color: red;
         font-size: 12px;
         text-align: center;
-        border-radius: 50%;
+        border-radius: 8px;
         right: -1.5rem;
         top: -1rem;
       }
@@ -83,11 +83,13 @@
       flex-wrap: wrap;
       align-content: space-between;
       align-items: center;
-
+      
       img {
         height: 100%;
+        border-radius: 8px;
         object-fit: contain;
         vertical-align: middle;
+        cursor: pointer;
       }
 
       &__username {
@@ -104,7 +106,7 @@
         $color-newsfeed-background 20%,
         $color-button-top-gradient
       );
-      border-radius: 5px;
+      border-radius: 8px;
       border: none;
       font-size: medium;
     }
@@ -141,7 +143,7 @@
           $background-color-post,
           $color-card-gradient-grey
         );
-        border-radius: 25px;
+        border-radius: 8px;
         opacity: 0.5;
       }
     }
@@ -153,7 +155,7 @@
         $background-color-post,
         $color-card-gradient-grey
       );
-      border-radius: 15px;
+      border-radius: 8px;
       overflow-y: scroll;
 
       -ms-overflow-style: none;
@@ -237,7 +239,7 @@
           background-repeat: no-repeat;
           background-size: 5rem;
           border: 0;
-          border-radius: 5px;
+          border-radius: 8px;
         }
 
         &__image {
@@ -283,7 +285,7 @@
   );
   height: 3rem;
   width: 10rem;
-  border-radius: 5px;
+  border-radius: 8px;
   min-width: fit-content;
   min-height: fit-content;
   padding: 0.5rem;
