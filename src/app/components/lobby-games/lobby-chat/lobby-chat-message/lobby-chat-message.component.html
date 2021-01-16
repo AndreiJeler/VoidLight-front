@@ -1,4 +1,4 @@
-<div class="message-container" *ngIf="message.username!=loggedUser.username; else isLoggedUser">
+<div class="message-container" *ngIf="message.userId!=user.id; else isLoggedUser">
   <img [src]="message.userIcon" alt="user-icon" class="message-container__user-icon">
   <p class="message-container__text">{{message.text}}</p>
 </div>

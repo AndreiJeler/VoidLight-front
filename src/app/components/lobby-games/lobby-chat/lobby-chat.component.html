@@ -1,18 +1,42 @@
-<div class="chat-container">
-  <p class="chat-container__current-lobby"></p>
-  <div class="chat-container__chat">
-    <div class="chat-container__chat__messages">
-      <ul>
-        <li *ngFor="let message of messages">
-          <lobby-chat-message [message]=message></lobby-chat-message>
+<div *ngIf="isLoaded" class="page">
+  <a class="page__go-back-btn" (click)="goBack()"></a>
+
+  <div class="chat-container">
+    <div class="chat-container__chat">
+      <div class="chat-container__chat__messages">
+        <ul class="chat-container__chat__messages__list">
+          <li *ngFor="let message of messages" class="chat-container__chat__messages__list__item">
+            <lobby-chat-message [message]=message [user]=user></lobby-chat-message>
+          </li>
+        </ul>
+      </div>
+      <div class="chat-container__chat__input">
+        <input type="text" class="chat-container__chat__input__message" [(ngModel)]="messageText">
+        <svg class="chat-container__chat__input__icon" (click)="sendMessage()">
+          <use xlink:href="../../../assets/logos/sprite.svg#send"></use>
+        </svg>
+      </div>
+    </div>
+
+    <div class="chat-container__members">
+      <ul class="chat-container__members__list">
+        <li class="chat-container__members__list__item" *ngFor="let member of gameLobby.users">
+          <img class="chat-container__members__list__item__image" [src]=member.avatarPicture alt="user-image">
+          <span class="chat-container__members__list__item__name">{{member.username}}</span>
         </li>
       </ul>
-    </div>
-    <div class="chat-container__chat__input">
-      <input type="text" class="chat-container__chat__input__message">
-      <svg class="chat-container__chat__input__icon">
-        <use xlink:href="../../../assets/logos/sprite.svg#send"></use>
-      </svg>
+
+      <button class="chat-container__members__start-lobby" *ngIf="gameLobby.initializer.userId==user.id; else leaveBtn" (click)="startLobby()">
+        Start Discord Lobby
+      </button>
+
+      <ng-template #leaveBtn>
+        <button class="chat-container__members__start-lobby chat-container__members__start-lobby--leave" (click)="leaveLobby()">
+          Leave Lobby
+        </button>
+      </ng-template>
     </div>
   </div>
+
 </div>
+

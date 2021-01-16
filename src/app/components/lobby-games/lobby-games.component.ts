@@ -33,7 +33,7 @@ export class LobbyGamesComponent implements OnInit {
       (user) => (this.user = user)
     );
 
-    this.lobbyService.getGameLobbbiesInfo(this.user.id).subscribe((result) => {
+    this.lobbyService.getGameLobbiesInfo(this.user.id).subscribe((result) => {
       this.lobbies = result;
       this.originalLobbies = this.lobbies;
     });
@@ -41,16 +41,14 @@ export class LobbyGamesComponent implements OnInit {
 
   public getLobbyForGame(lobby: GameInfo) {
     if (this.isSelected) {
-      this.lobbyService
-        .getGameLobbbiesInfo(this.user.id)
-        .subscribe((result) => {
-          this.lobbies = null;
-          this.lobbies = result;
-          this.isSelected = false;
-          this.gameLobbies = [];
-          this.lobbies = this.originalLobbies;
-          this.cdr.detectChanges();
-        });
+      this.lobbyService.getGameLobbiesInfo(this.user.id).subscribe((result) => {
+        this.lobbies = null;
+        this.lobbies = result;
+        this.isSelected = false;
+        this.gameLobbies = [];
+        this.lobbies = this.originalLobbies;
+        this.cdr.detectChanges();
+      });
     } else {
       this.lobbyService
         .getAllLobbiesForGame(lobby.gameId)

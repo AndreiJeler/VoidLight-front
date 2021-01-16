@@ -33,6 +33,15 @@
       font-size: 13px;
     }
 
+    &__achievements {
+      width: 180rem;
+      height: 80rem;
+      margin-left: 5rem;
+      background: $background-color-post;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      
     &__check-btn {
       height: 3.5rem;
       width: 18rem;
@@ -62,12 +71,22 @@
         margin-bottom: 1rem;
       }
 
+      &__refresh-btn {
+        height: 3.3rem;
+        width: 18rem;
+        font-size: 13px;
+        float: right;
+        margin: 2rem;
+        margin-right: 51rem;
+        border-radius: 8px;
+        
       & > hr {
         background-color: $color-white;
         margin: auto;
         width: 98%;
         height: 0.1rem;
-      }
+
+       }
 
       &__li {
         display: flex;

@@ -1,3 +1,4 @@
+import { LobbyMessage } from 'src/app/models/lobby-message';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -17,7 +18,7 @@ export class LobbyService {
    * Return all the Game Lobbies as an Observable<GameInfo[]>
    * @param id => the user id
    */
-  public getGameLobbbiesInfo(id: number): Observable<GameInfo[]> {
+  public getGameLobbiesInfo(id: number): Observable<GameInfo[]> {
     return this.http.get<GameInfo[]>(`${this._lobbyUrl}/games/${id}`);
   }
 
@@ -29,6 +30,13 @@ export class LobbyService {
     return this.http.get<LobbyGame[]>(`${this._lobbyUrl}/game/${id}`);
   }
 
+  /**
+   * Return a LobbyGame by it's id
+   * @param id => the lobby id
+   */
+  public getLobby(id: number): Observable<LobbyGame> {
+    return this.http.get<LobbyGame>(`${this._lobbyUrl}/${id}`);
+  }
   public joinLobby(lobbyId: number, userId: number): Observable<LobbyGame> {
     return this.http.get<LobbyGame>(
       `${this._lobbyUrl}/join/${lobbyId}/${userId}`
@@ -40,5 +48,17 @@ export class LobbyService {
       userId: userId,
       gameId: gameId,
     });
+  }
+
+  public sendMessage(message: LobbyMessage): Observable<any> {
+    return this.http.post<any>(`${this._lobbyUrl}/message`, message);
+  }
+
+  public startLobby(lobbyId: number): Observable<any> {
+    return this.http.get<any>(`${this._lobbyUrl}/start/${lobbyId}`);
+  }
+
+  public leavelobby(lobbyId: number, userId: number): Observable<any> {
+    return this.http.get<any>(`${this._lobbyUrl}/leave/${lobbyId}/${userId}`);
   }
 }

@@ -209,6 +209,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([`/achievements/${this.userId}`]);
   }
 
+
   public closeListModal(event) {
     this.chosenModal.hide();
     this.gameService
