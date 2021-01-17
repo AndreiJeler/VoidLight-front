@@ -51,7 +51,7 @@
     <div class="col-8 connect-with__item">
       <img src="../../../assets/logos/discord.svg" alt="facebook logo" class="connect-with__item__icon">
     </div>
-    <div *ngIf="discordKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+    <div *ngIf="discordKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph" (click)="discordConnect()">Connect</button></div>
     <div *ngIf="discordKnown!=='-'" class="col-3"><span  class="connect-with__item__span">{{discordKnown}}</span></div>
   </div>
 

@@ -126,6 +126,10 @@ export class EditProfileComponent implements OnInit {
   public steamConnect() {
     window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-sync`;
   }
+
+  public discordConnect() {
+    window.location.href = Constants.DISCORD_OAUTH_URL;
+  }
   //
   // uploadImage(event: any): void {
   //   this.file = event.target.files[0];
