@@ -1,3 +1,4 @@
+import { SwalService } from './../../../shared/services/swal.service';
 import {
   Component,
   EventEmitter,
@@ -10,6 +11,7 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { Constants } from 'src/app/shared/utils/constants';
 
 @Component({
   selector: 'app-edit-profile',
@@ -36,7 +38,8 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private swalService: SwalService
   ) {}
 
   ngOnInit(): void {
@@ -80,14 +83,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSavePassword(): void {
-    if (
-      this.oldPassword === this.password &&
-      this.newPassword === this.confirmPassword
-    ) {
-      this.password = this.newPassword;
-      this.passwordModalRef.hide();
+    if (this.newPassword != this.confirmPassword) {
+      this.swalService.showErrorResult('Error', 'Passwords do not match');
     } else {
-      Swal.fire('Passwords do not match');
+      this.userService
+        .resetPassword(
+          this.user.email,
+          this.oldPassword,
+          this.newPassword,
+          false
+        )
+        .subscribe((res) =>
+          this.swalService.showSuccessResult('Success', 'Password changed')
+        );
     }
   }
 
@@ -113,6 +121,10 @@ export class EditProfileComponent implements OnInit {
       this.discordKnown = res.knownAs;
       console.log(res);
     });
+  }
+
+  public steamConnect() {
+    window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-login`;
   }
   //
   // uploadImage(event: any): void {

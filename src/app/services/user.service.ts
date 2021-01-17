@@ -64,4 +64,16 @@ export class UserService {
   public checkDiscordConnected(userId: number): Observable<any> {
     return this.http.get<any>(`${this._userUrl}/discord-connected/${userId}`);
   }
+
+  public resetPassword(
+    email: string,
+    password: string,
+    newPassword: string,
+    isForgotten: boolean
+  ): Observable<any> {
+    return this.http.put(
+      `${this._userUrl}/resetPassword?email=${email}&password=${password}&newPassword=${newPassword}&isForgotten=${isForgotten}`,
+      {}
+    );
+  }
 }
