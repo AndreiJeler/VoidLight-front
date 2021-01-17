@@ -19,7 +19,7 @@ pipeline {
         }
         stage('deploy'){
             steps {
-                sh 'docker run -dit --name voidlight-front -p 80:80 voidlight-front:' + env.BRANCH_NAME
+                sh 'docker run -dit --network=voidlight-network --name voidlight-front -p 80:80 voidlight-front:' + env.BRANCH_NAME
             }
         }
     }
