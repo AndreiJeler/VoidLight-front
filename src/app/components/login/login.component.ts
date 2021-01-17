@@ -1,8 +1,11 @@
+import { SwalService } from './../../shared/services/swal.service';
+import { UserService } from 'src/app/services/user.service';
 import { Constants } from './../../shared/utils/constants';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
-    protected router: Router
+    protected router: Router,
+    private userService: UserService,
+    private swalService: SwalService
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +64,16 @@ export class LoginComponent implements OnInit {
 
   public facebookLogin(): void {
     window.open('https://www.facebook.com', '_blank');
+  }
+
+  public forgotPassword(): void {
+    this.swalService.resetPassword().then((res) => {
+      this.userService.resetPassword(res.value, '', '', true).subscribe(() => {
+        this.swalService.showSuccessResult(
+          'Success',
+          'Your new password was sent to your email'
+        );
+      });
+    });
   }
 }

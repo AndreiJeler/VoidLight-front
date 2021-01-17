@@ -124,7 +124,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   public steamConnect() {
-    window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-login`;
+    window.location.href = `${Constants.SERVER_BASE_URL}/api/authentication/steam-sync`;
   }
   //
   // uploadImage(event: any): void {

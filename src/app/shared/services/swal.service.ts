@@ -78,4 +78,17 @@ export class SwalService {
       cancelButtonText: 'No',
     });
   }
+
+  public resetPassword() {
+    return Swal.fire({
+      title: 'Enter your email',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Reset',
+      showLoaderOnConfirm: true,
+    });
+  }
 }

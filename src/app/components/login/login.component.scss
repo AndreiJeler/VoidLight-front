@@ -1,6 +1,5 @@
 @import "../../../styles.scss";
 
-
 .card {
   position: absolute;
   top: 50%;
@@ -30,6 +29,13 @@
     transform: translateX(-2.5rem) translateY(-1.5rem);
   }
   &__form {
+    &__link {
+      color: red;
+      display: flex;
+      justify-content: center;
+      font-size: 16px;
+    }
+
     &__group:not(:last-child) {
       margin-bottom: 2rem;
     }
@@ -100,7 +106,9 @@
       width: 20%;
       background: none;
       &__logo {
-        -webkit-filter: drop-shadow(0.6rem 0.7rem 1rem $color-button-top-gradient);
+        -webkit-filter: drop-shadow(
+          0.6rem 0.7rem 1rem $color-button-top-gradient
+        );
         filter: drop-shadow(0.6rem 0.7rem 1rem $color-button-top-gradient);
         margin-top: 5rem;
       }
@@ -139,7 +147,11 @@
       }
 
       &__button {
-        background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+        background-image: linear-gradient(
+          to right,
+          $color-button-top-gradient,
+          $color-button-bottom-gradient
+        );
         width: 16rem;
         height: 5rem;
         border-radius: 8px;
@@ -166,7 +178,11 @@
       align-items: center;
       &__login-btn,
       &__register-btn {
-        background-image: linear-gradient(to right, $color-button-top-gradient, $color-button-bottom-gradient);
+        background-image: linear-gradient(
+          to right,
+          $color-button-top-gradient,
+          $color-button-bottom-gradient
+        );
         width: 16rem;
         height: 5rem;
         border-radius: 8px;
