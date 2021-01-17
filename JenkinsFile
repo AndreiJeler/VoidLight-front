@@ -17,5 +17,10 @@ pipeline {
                 sh 'docker tag voidlight-front:' + env.BRANCH_NAME +  ' voidlight-front:' + env.BUILD_NUMBER
             }
         }
+        stage('deploy'){
+            steps {
+                sh 'docker run -dit --name voidlight-front -p 80:80 voidlight-front:' + env.BRANCH_NAME +
+            }
+        }
     }
 }
