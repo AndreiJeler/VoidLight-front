@@ -1,0 +1,19 @@
+<div class="modal-content">
+  <div class="modal-header header-modal-container">
+    <h1 class="modal-title">Your friend requests</h1>
+    <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  
+  <div class="modal-body">
+    <div *ngFor="let friend of friends" class="modal-body__request">
+      <img [src]="friend.avatarPath" alt="user profile" class="modal-body__request__profile-pic">
+      <h2 class="modal-body__request__username">{{friend.username}}</h2>
+      <button class="btn" (click)="confirm(friend.id)">Accept</button>
+      <button class="btn" (click)="decline(friend.id)">Decline</button>
+    </div>
+  </div>
+  
+</div>
+

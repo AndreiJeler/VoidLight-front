@@ -1,0 +1,151 @@
+@import "../../../../styles";
+
+.modal-header {
+  width: auto;
+  height: 5rem;
+  background-color: $color-newsfeed-buttons;
+  border: none;
+
+  .modal-title {
+    margin-top: 1%;
+    margin-left: 35%;
+
+    display: flex;
+    flex-direction: row;
+
+    &__username {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 2rem;
+    }
+
+    &__picture {
+      height: 3.8rem;
+      width: 3.8rem;
+      border-radius: 50%;
+      margin-right: 1.5rem;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: $color-black;
+    color: $color-white;
+  }
+}
+
+.modal-body {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-form-card;
+  border: none;
+  padding: 2rem 0;
+  font-size: 2rem;
+
+  .form-row {
+    margin-bottom: 1.5rem;
+    &__input {
+      outline: 0;
+      font-size: 1.7rem;
+      color: $color-white;
+      padding: 0 1rem;
+      background: transparent;
+      transition: border-color 0.2s;
+    }
+
+    &__label {
+      margin-left: 3rem;
+      transition: 0.2s;
+      font-size: 2rem;
+    }
+  }
+
+  .option {
+    margin-left: 2rem;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    font-size: medium;
+    cursor: pointer;
+
+    &__upload-button {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &__upload-button + label {
+      padding: 0 1rem;
+      display: inline-block;
+      cursor: pointer;
+      background-color: $color-newsfeed-buttons;
+    }
+    &__selected-file {
+      display: inline-block;
+    }
+  }
+
+  .connect-with {
+    padding: 0 3rem;
+    &__item {
+      margin-top: 1rem;
+      &__icon {
+        width: 3.5rem;
+      }
+      &__button {
+        background-color: $background-color-post;
+        padding: 0.5rem 3rem;
+        border: none;
+        border-radius: 25px;
+        font-size: medium;
+      }
+      &__span {
+        background-color: $background-color-post;
+        padding: 0.5rem 0rem;
+        margin-right: 100rem;
+        border: none;
+        border-radius: 25px;
+        font-size: medium;
+        color: white;
+      }
+
+      &__button:hover {
+        background-color: $color-modal-background;
+      }
+    }
+  }
+}
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: auto;
+  height: 5rem;
+  background-color: $color-form-card;
+  border: none;
+  z-index: 5;
+
+  .button-modal {
+    background-image: linear-gradient(
+      to right,
+      $color-button-top-gradient,
+      $color-button-bottom-gradient
+    );
+    width: 10rem;
+    height: 4rem;
+    border-radius: 5rem;
+    border: none;
+    font-size: 2rem;
+    color: $color-white;
+    transition: all 0.5s;
+  }
+}

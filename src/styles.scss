@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "./scss/variables.scss";
+@import "./scss/base.scss";
+@import "./scss/typography.scss";
+
+@import "~@sweetalert2/theme-dark/dark.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.modalAddPost {
+  background: $color-newsfeed-background !important;
+  & > * {
+    color: $color-white !important;
+
+    option {
+      background-color: $color-newsfeed-background !important;
+    }
+
+    textarea {
+      resize: none;
+      height: 100px !important;
+      font-size: 15px;
+    }
+  }
+}
+
+

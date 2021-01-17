@@ -1,0 +1,103 @@
+<div class="modal-header paragraph">
+<!--  <h4 class="modal-title">{{user.username}} Details</h4>-->
+<!--  <button type="button" class="close" aria-label="Close" (click)="onCancel()">-->
+<!--    <span aria-hidden="true">X</span>-->
+<!--  </button>-->
+
+  <div class="modal-title">
+    <img class="modal-title__picture" [src]="user.avatarPath" alt="User profile pic">
+    <h4 class="modal-title__username">{{user.username}} Details</h4>
+  </div>
+</div>
+
+<div class="modal-body">
+  <div class="form-row row paragraph col-12">
+    <div class="col-3"><label for="fullNameInput" class="form-row__label">FullName: </label></div>
+    <div class="col-7"><input id="fullNameInput" class="form-control form-row__input" value="{{user.fullName}}" [(ngModel)]="fullName"></div>
+  </div>
+
+  <div class="form-row row paragraph col-12">
+    <div class="col-3"><label for="emailInput" class="form-row__label">Email: </label></div>
+    <div class="col-7"><input id="emailInput" class="form-control form-row__input" value="{{user.email}}" type="email" [(ngModel)]="email" readonly></div>
+  </div>
+
+  <div class="form-row row paragraph col-12">
+    <div class="col-3"><label for="ageInput" class="form-row__label">Age: </label></div>
+    <div class="col-7"><input id="ageInput" class="form-control form-row__input" value="{{user.age}}" [(ngModel)]="age" type="number"></div>
+  </div>
+
+  <div class="paragraph option">
+    <input type="file" id="file" (change)="uploadImage($event)" class="option__upload-button">
+    <label for="file">Change profile pic</label>
+
+    <label class="option__selected-file" id="selected-file"></label>
+<!--    Change profile pic-->
+  </div>
+
+  <div class="paragraph option" (click)="openPasswordModal(changePasswordModal)">
+    Change password
+  </div>
+
+  <div class="row connect-with">
+    <div class="col-8 connect-with__item">
+      <img src="../../../assets/logos/steam.svg" alt="facebook logo" class="connect-with__item__icon">
+    </div>
+    <div *ngIf="steamKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph" (click)="steamConnect()">Connect</button></div>
+    <div *ngIf="steamKnown!=='-'" class="col-3"><span class="connect-with__item__span">{{steamKnown}}</span></div>
+
+  </div>
+
+  <div class="row connect-with">
+    <div class="col-8 connect-with__item">
+      <img src="../../../assets/logos/discord.svg" alt="facebook logo" class="connect-with__item__icon">
+    </div>
+    <div *ngIf="discordKnown==='-'" class="col-3"><button class="connect-with__item__button paragraph" (click)="discordConnect()">Connect</button></div>
+    <div *ngIf="discordKnown!=='-'" class="col-3"><span  class="connect-with__item__span">{{discordKnown}}</span></div>
+  </div>
+
+  <!-- <div class="row connect-with">
+    <div class="col-8 connect-with__item">
+      <img src="../../../assets/logos/google.svg" alt="facebook logo" class="connect-with__item__icon">
+    </div>
+    <div class="col-3"><button class="connect-with__item__button paragraph">Connect</button></div>
+  </div>
+</div> -->
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default button-modal submit-button"
+          (click)="onSave()"><span>Save</span></button>
+  <button type="button" class="btn btn-default button-modal submit-button"
+          (click)="onCancel()"><span>Cancel</span></button>
+</div>
+
+<ng-template #changePasswordModal>
+  <div class="modal-header paragraph">
+    <div class="modal-title">
+      <h4 class="modal-title__username">Change Password</h4>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-row row paragraph">
+      <div class="col-3"><label for="oldPasswordInput" class="form-row__label">Old: </label></div>
+      <div class="col-7"><input id="oldPasswordInput" class="form-control form-row__input" type="password" [(ngModel)]="oldPassword"></div>
+    </div>
+
+    <div class="form-row row paragraph">
+      <div class="col-3"><label for="newPasswordInput" class="form-row__label">New: </label></div>
+      <div class="col-7"><input id="newPasswordInput" class="form-control form-row__input" type="password" [(ngModel)]="newPassword"></div>
+    </div>
+
+    <div class="form-row row paragraph">
+      <div class="col-3"><label for="confirmPasswordInput" class="form-row__label">Confirm: </label></div>
+      <div class="col-7"><input id="confirmPasswordInput" class="form-control form-row__input" type="password" [(ngModel)]="confirmPassword"></div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default button-modal submit-button"
+            (click)="onSavePassword()"><span>Save</span></button>
+    <button type="button" class="btn btn-default button-modal submit-button"
+            (click)="onClosePasswordModal()"><span>Cancel</span></button>
+  </div>
+</ng-template>

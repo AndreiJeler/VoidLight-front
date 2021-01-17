@@ -1,0 +1,294 @@
+@import "../../../styles.scss";
+
+body {
+  align-items: center;
+}
+.profile-container {
+  margin: 1% 7.5%;
+  padding: 1% 3%;
+  height: 92vh;
+  width: 79%;
+  position: relative;
+  z-index: 1;
+  justify-content: space-evenly;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $color-form-card;
+    border-radius: 8px;
+    opacity: 0.7;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    &__info {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      display: flex;
+
+      &__image {
+        width: 10rem;
+        border-radius: 8px;
+        margin-right: 1rem;
+        margin-bottom: 4rem;
+      }
+
+      &__data {
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        color: $color-white;
+        margin-bottom: 4.5rem;
+
+        &__nickname {
+          font-size: x-large;
+          font-weight: bold;
+        }
+
+        &__age {
+          font-size: medium;
+        }
+
+        &__country {
+          font-size: medium;
+        }
+
+        &__currently-playing {
+          font-size: medium;
+
+          &__game {
+            margin: 0;
+            display: inline;
+          }
+        }
+      }
+    }
+    &__achievements {
+      width: 45rem;
+
+      &__edit-profile {
+        color: $color-white;
+        font-size: 24px;
+        line-height: 2.8rem;
+        margin-right: 1rem;
+        margin-bottom: 2rem;
+        cursor: pointer;
+      }
+
+      &__stars {
+        height: 7rem;
+        background: $color-profile-card;
+        border-radius: 8px;
+        align-self: flex-end;
+      }
+
+      & > a {
+        color: $color-white;
+        font-size: 24px;
+        margin-top: 0.2rem;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      &__see-all-achievements {
+        min-width: fit-content;
+        width: 15rem;
+        margin-right: 1rem;
+        padding: 0rem 1rem;
+        height: 4rem;
+        font-size: 24px;
+        background-color: $color-newsfeed-buttons;
+        border: 0;
+        border-radius: 5px;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+
+    &__posts {
+      align-items: center;
+      width: 100rem;
+      margin-top: 2rem;
+      overflow-y: scroll;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .breadcrumb {
+        margin-bottom: 2rem;
+        background-color: $color-profile-card;
+        font-size: x-large;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        color: $color-inactive;
+
+        .breadcrumb-item::before {
+          content: " ";
+        }
+
+        & > li {
+          padding: 1rem 2rem;
+          height: 100%;
+        }
+
+        & > li:hover {
+          cursor: pointer;
+          background-color: $color-list-element-hover;
+        }
+
+        .active {
+          color: $color-white;
+        }
+      }
+
+      &__title {
+        font-size: larger;
+        line-height: 4.2rem;
+        font-weight: bold;
+        margin-left: 6rem;
+      }
+
+      &__gallery {
+        border-radius: 8px;
+        background-color: $color-form-card;
+        width: 100%;
+        height: 58rem;
+      }
+
+      &__friends {
+        & > li {
+          cursor: pointer;
+        }
+      }
+
+      &__list{
+        height: 61rem;
+        overflow-y: scroll;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+  
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+      }
+    }
+
+    &__games {
+      width: 45rem;
+      height: 74rem;
+      display: flex;
+      flex-direction: column;
+      margin-top: -3.1rem;
+
+      &__title {
+        font-size: xx-large;
+        color: $color-white;
+        font-weight: bold;
+        margin-bottom: 0.3rem;
+      }
+
+      &__list {
+        padding: 2rem;
+        background: $color-profile-card;
+        border-radius: 8px;
+        height: 61.5rem;
+
+        &__heading {
+          margin: 1rem;
+          display: flex;
+          font-size: medium;
+          font-weight: bold;
+          justify-content: space-between;
+
+          &__name {
+            width: 40%;
+          }
+
+          &__element {
+            width: 30%;
+            align-self: center;
+          }
+        }
+
+        & > hr {
+          border-color: $color-white;
+          padding: 0;
+        }
+
+        &__ul {
+          list-style: none;
+
+          &__li {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+
+            &__item {
+              width: 100%;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  background-image: linear-gradient(
+    to right,
+    $color-button-top-gradient,
+    $color-button-bottom-gradient
+  );
+  height: 5rem;
+  border-radius: 8px;
+  font-size: 18px;
+  min-width: fit-content;
+  min-height: fit-content;
+  padding: 0.5rem;
+  border: none;
+  color: $color-white;
+  margin-left: 30rem;
+  margin-top: -5rem;
+}
+
+
+.page{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__go-back-btn{
+    background-image: url('../../../assets/Images/back.png');
+    background-size: cover;
+    height: 6rem;
+    width: 6rem;
+  }
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: row;
+}
